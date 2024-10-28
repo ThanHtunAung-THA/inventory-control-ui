@@ -808,4 +808,29 @@ html:not([dir="rtl"]) .page-item .page-link {
   background:#ebeee6 !important;
 }
 
+//================>> home page
+.nav-link {
+  color: #000000a1 !important;
+  margin-right: 10px;
+  padding: 10px 15px; /* Add padding for better touch targets */
+  // transition: #017abf;
+}
+.nav-link:hover {
+  color: #fff !important;
+  border-radius: 5px;
+  background: #007bff;
+}
 
+/* Base styles for the image */
+.styled-image {
+  max-width: 100%;
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
+
+/* Hover effect */
+.styled-image:hover, .styled-header:hover {
+  transform: scale(1.05); /* Slightly enlarge the image */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Darker shadow on hover */
+}
