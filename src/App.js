@@ -18,6 +18,7 @@ const SupportsPage = React.lazy(() => import('./views/home/supports/SupportsPage
 const ContactPage = React.lazy(() => import('./views/home/contact/ContactPage'));
 const AboutUsPage = React.lazy(() => import('./views/home/AboutUsPage'));
 const TrialRegister = React.lazy(() => import('./views/home/products/TrialRegister'));
+const PaymentMethods = React.lazy(() => import('./views/home/products/PaymentPage'));
 
 const LoginIndex = React.lazy(() => import("./views/login/LoginIndex"));
 const Logout = React.lazy(() => import("./views/logout/LogoutIndex"));
@@ -48,6 +49,12 @@ class App extends Component {
               path="/trial-register"
               name="Trial Register Page"
               render={(props) => <TrialRegister {...props} />}
+            />
+            <Route
+              exact
+              path="/payment-methods"
+              name="Payment methods Selection Page"
+              render={(props) => <PaymentMethods {...props} />}
             />
             <Route
               exact

@@ -6,18 +6,37 @@ import { useHistory } from 'react-router-dom';  // Use useHistory instead of use
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const ProductsPage = () => {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen1, setModalOpen1] = useState(false);
+  const [modalOpen2, setModalOpen2] = useState(false);
+  const [modalOpen3, setModalOpen3] = useState(false);
   const history = useHistory();  // Initialize history
 
   // Toggle the modal visibility
-  const toggleModal = () => setModalOpen(!modalOpen);
+  const toggleModal1 = () => setModalOpen1(!modalOpen1);
+  const toggleModal2 = () => setModalOpen2(!modalOpen2);
+  const toggleModal3 = () => setModalOpen3(!modalOpen3);
 
   // Handle confirm to redirect to trial registration page
-  const handleConfirm = () => {
-    setModalOpen(false); // Close modal
+  const handleConfirm1 = () => {
+    setModalOpen1(false); // Close modal
     history.push('/trial-register'); // Redirect to registration page
   };
-
+  const handleConfirm2 = () => {
+    setModalOpen2(false); // Close modal
+    history.push('/payment-methods', {
+      plan: 'Standard Plan',
+      price: 49,
+    }); // Redirect to payment page with state
+  };
+  
+  const handleConfirm3 = () => {
+    setModalOpen3(false); // Close modal
+    history.push('/payment-methods', {
+      plan: 'Premium Plan',
+      price: 99,
+    }); // Redirect to payment page with state
+  };
+  
   return (
     <div className="container-fluid" style={{ fontFamily: "'Roboto', sans-serif", backgroundColor: '#ffffff', margin: 0, padding: 0 }}>
       <Navbar />
@@ -39,7 +58,7 @@ const ProductsPage = () => {
                 </ul>
               </div>
               <button
-                onClick={toggleModal}
+                onClick={toggleModal1}
                 className="btn btn-info mt-3 w-100 m2y2-hover"
                 style={{ borderRadius: '5px', fontWeight: 'bold' }}
               >
@@ -61,7 +80,13 @@ const ProductsPage = () => {
                   <li>Email Support</li>
                 </ul>
               </div>
-              <button className="btn btn-info mt-3 w-100 m2y2-hover" style={{ borderRadius: '5px', fontWeight: 'bold' }}>Buy Now</button>
+              <button
+                onClick={toggleModal2}
+                className="btn btn-info mt-3 w-100 m2y2-hover" 
+                style={{ borderRadius: '5px', fontWeight: 'bold' }}
+              >
+                Buy Now
+              </button>
             </div>
           </div>
 
@@ -78,20 +103,50 @@ const ProductsPage = () => {
                   <li>Dedicated Support</li>
                 </ul>
               </div>
-              <button className="btn btn-info mt-3 w-100 m2y2-hover" style={{ borderRadius: '5px', fontWeight: 'bold' }}>Buy Now</button>
+              <button
+                onClick={toggleModal3}
+                className="btn btn-info mt-3 w-100 m2y2-hover" 
+                style={{ borderRadius: '5px', fontWeight: 'bold' }}
+              >
+                Buy Now
+              </button>
             </div>
           </div>
         </div>
 
         {/* Modal for Free Trial Confirmation */}
-        <Modal isOpen={modalOpen} toggle={toggleModal}>
+        <Modal isOpen={modalOpen1} toggle={toggleModal1}>
           <ModalBody>
             <h5>Start Your Free Trial</h5>
             <p>Would you like to start a 7-day free trial for the Basic Plan?</p>
           </ModalBody>
           <ModalFooter>
-            <button className="btn btn-info" onClick={handleConfirm}>Confirm</button>
-            <button className="btn btn-secondary" onClick={toggleModal}>Cancel</button>
+            <button className="btn btn-info" onClick={handleConfirm1}>Confirm</button>
+            <button className="btn btn-secondary" onClick={toggleModal1}>Cancel</button>
+          </ModalFooter>
+        </Modal>
+
+        {/* Modal for Standard Plan */}
+        <Modal isOpen={modalOpen2} toggle={toggleModal2}>
+          <ModalBody>
+            <h5>Start Your Standard Plan</h5>
+            <p>Would you like to buy for the Standard Plan?</p>
+          </ModalBody>
+          <ModalFooter>
+            <button className="btn btn-info" onClick={handleConfirm2}>Confirm</button>
+            <button className="btn btn-secondary" onClick={toggleModal2}>Cancel</button>
+          </ModalFooter>
+        </Modal>
+
+        {/* Modal for Premium Plan */}
+        <Modal isOpen={modalOpen3} toggle={toggleModal3}>
+          <ModalBody>
+            <h5>Start Your Premium Plan</h5>
+            <p>Would you like to buy for the Premium Plan?</p>
+          </ModalBody>
+          <ModalFooter>
+            <button className="btn btn-info" onClick={handleConfirm3}>Confirm</button>
+            <button className="btn btn-secondary" onClick={toggleModal3}>Cancel</button>
           </ModalFooter>
         </Modal>
 
