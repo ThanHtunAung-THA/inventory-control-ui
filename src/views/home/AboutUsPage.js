@@ -2,7 +2,7 @@ import React from 'react';
 import { CImg, CButton } from '@coreui/react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const IndexPage = (props) => {
+const AboutUsPage = (props) => {
   const { success, error } = props;
 
   return (
@@ -53,33 +53,10 @@ const IndexPage = (props) => {
         </div>
       </nav>
       <div className="d-flex align-items-center justify-content-between p-5">
-        <div className="text-content" style={{ maxWidth: '500px', color: '#017abf' }}>
-          <h1 className="display-5 mb-4">
-            INVENTORY-STOCK MANAGEMENT
-          </h1>
-          <p className="mb-4" style={{color: '#000000a1'}}>
-          Optimize your inventory with ease!
-          Our Inventory-Stock Management system lets you track, manage, 
-          and organize your stock in real-time. Reduce costs, prevent stockouts, 
-          and streamline operations with automated tools designed to keep your business running smoothly. 
-          Simplify your inventory process and focus on growth!
-          </p>
-          <CButton href="/buy" className="btn btn-outline-primary">
-            GET STARTED
-          </CButton>
-        </div>
-        <div className="image-content">
-          <CImg
-            alt="Iven Inventory Management"
-            height="400"
-            src="/image/Inven.jpg"
-            width="600"
-            className="styled-image"
-          />
-        </div>
+        Buy page
       </div>
     </div>
   );
 };
 
-export default IndexPage;
+export default AboutUsPage;

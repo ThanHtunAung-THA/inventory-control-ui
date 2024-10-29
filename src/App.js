@@ -13,6 +13,10 @@ const TheLayout = React.lazy(() => import("./containers/TheLayout"));
 
 // Pages
 const IndexPage = React.lazy(() => import("./views/home/IndexPage"));
+const BuyPage = React.lazy(() => import('./views/home/BuyPage'));
+const ServicesPage = React.lazy(() => import('./views/home/ServicesPage'));
+const SupportsPage = React.lazy(() => import('./views/home/SupportsPage'));
+const AboutUsPage = React.lazy(() => import('./views/home/AboutUsPage'));
 
 const LoginIndex = React.lazy(() => import("./views/login/LoginIndex"));
 const Logout = React.lazy(() => import("./views/logout/LogoutIndex"));
@@ -31,6 +35,30 @@ class App extends Component {
               path="/"
               name="Home Page"
               render={(props) => <IndexPage {...props} />}
+            />
+            <Route
+              exact
+              path="/buy"
+              name="Buy Page"
+              render={(props) => <BuyPage {...props} />}
+            />
+            <Route
+              exact
+              path="/services"
+              name="Services Page"
+              render={(props) => <ServicesPage {...props} />}
+            />
+            <Route
+              exact
+              path="/supports"
+              name="Supports Page"
+              render={(props) => <SupportsPage {...props} />}
+            />
+            <Route
+              exact
+              path="/about"
+              name="About Page"
+              render={(props) => <AboutUsPage {...props} />}
             />
             <Route
               exact
