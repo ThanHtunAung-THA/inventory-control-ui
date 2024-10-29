@@ -13,10 +13,11 @@ const TheLayout = React.lazy(() => import("./containers/TheLayout"));
 
 // Pages
 const IndexPage = React.lazy(() => import("./views/home/IndexPage"));
-const BuyPage = React.lazy(() => import('./views/home/BuyPage'));
-const ServicesPage = React.lazy(() => import('./views/home/ServicesPage'));
-const SupportsPage = React.lazy(() => import('./views/home/SupportsPage'));
+const ProductsPage = React.lazy(() => import('./views/home/products/ProductsPage'));
+const SupportsPage = React.lazy(() => import('./views/home/supports/SupportsPage'));
+const ContactPage = React.lazy(() => import('./views/home/contact/ContactPage'));
 const AboutUsPage = React.lazy(() => import('./views/home/AboutUsPage'));
+const TrialRegister = React.lazy(() => import('./views/home/products/TrialRegister'));
 
 const LoginIndex = React.lazy(() => import("./views/login/LoginIndex"));
 const Logout = React.lazy(() => import("./views/logout/LogoutIndex"));
@@ -38,21 +39,27 @@ class App extends Component {
             />
             <Route
               exact
-              path="/buy"
-              name="Buy Page"
-              render={(props) => <BuyPage {...props} />}
+              path="/products"
+              name="Products Page"
+              render={(props) => <ProductsPage {...props} />}
             />
             <Route
               exact
-              path="/services"
-              name="Services Page"
-              render={(props) => <ServicesPage {...props} />}
+              path="/trial-register"
+              name="Trial Register Page"
+              render={(props) => <TrialRegister {...props} />}
             />
             <Route
               exact
               path="/supports"
               name="Supports Page"
               render={(props) => <SupportsPage {...props} />}
+            />
+            <Route
+              exact
+              path="/contact-us"
+              name="Contact Us Page"
+              render={(props) => <ContactPage {...props} />}
             />
             <Route
               exact

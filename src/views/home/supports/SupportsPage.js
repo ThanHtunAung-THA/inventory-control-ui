@@ -1,9 +1,9 @@
 import React from 'react';
-import Navbar from '../../containers/_nav@home';
+import Navbar from '../../../containers/_nav@home';
 import { CImg, CButton } from '@coreui/react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const AboutUsPage = (props) => {
+const SupportsPage = (props) => {
   const { success, error } = props;
 
   return (
@@ -17,4 +17,4 @@ const AboutUsPage = (props) => {
   );
 };
 
-export default AboutUsPage;
+export default SupportsPage;
