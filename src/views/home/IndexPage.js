@@ -31,8 +31,10 @@ const IndexPage = (props) => {
             alt="Iven Inventory Management"
             height="400"
             src="/image/Inven.jpg"
-            width="600"
+            width="500"
             className="styled-image"
+            style={{ borderRadius: '50%' }}
+
           />
         </div>
       </div>

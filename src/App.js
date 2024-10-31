@@ -32,6 +32,8 @@ class App extends Component {
       <BrowserRouter>
         <React.Suspense fallback={loading}>
           <Switch>
+
+            {/* landing pages */}
             <Route
               exact
               path="/"
@@ -74,6 +76,10 @@ class App extends Component {
               name="About Page"
               render={(props) => <AboutUsPage {...props} />}
             />
+
+            {/* others */}
+
+            {/* Auth */}
             <Route
               exact
               path="/login"

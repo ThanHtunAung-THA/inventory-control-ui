@@ -12,8 +12,8 @@ const Navbar = () => {
           src="/image/Inven.jpg"
           height="50"
           width="50"
-          style={{ borderRadius: '50%', marginRight: '10px', marginLeft: '5px' }}
-          className="styled-image"
+          style={{ borderRadius: '50%' }}
+          className="styled-image2 mx-3"
         />
         <span style={{ color: '#017abf' }}>IVEN - Inventory Control Management System</span>
       </a>

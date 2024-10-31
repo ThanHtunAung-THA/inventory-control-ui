@@ -105,7 +105,7 @@ const PaymentPage = ({ location }) => {
           </p>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={toggleModal}>Close</Button>
+          <Button color="info" onClick={toggleModal}>Close</Button>
         </ModalFooter>
       </Modal>
     </div>

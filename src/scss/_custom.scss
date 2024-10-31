@@ -809,16 +809,39 @@ html:not([dir="rtl"]) .page-item .page-link {
 }
 
 //================>> home page
+.glow-text {
+  font-size: 4em;
+  color: #ffffff;
+  font-weight: bold;
+  text-shadow: 
+      0 0 10px #00aaff, 
+      0 0 20px #00aaff, 
+      0 0 30px #00aaff,
+      0 0 40px #00aaff,
+      0 0 50px #00aaff,
+      0 0 60px #00aaff,
+      0 0 70px #00aaff;
+}
+
 .nav-link {
   color: #000000a1 !important;
   margin-right: 10px;
   padding: 10px 15px; /* Add padding for better touch targets */
   // transition: #017abf;
 }
-.nav-link:hover {
+.nav-link:hover, .glow:hover {
   color: #fff !important;
   border-radius: 5px;
-  background: #007bff;
+  background: #fff;
+  text-shadow: 
+    0 0 15px #0066ff, 
+    0 0 15px #0066ff, 
+    0 0 15px #0066ff,
+    0 0 15px #0066ff,
+    0 0 15px #0066ff,
+    0 0 15px #0066ff,
+    0 0 15px #0066ff;
+
 }
 
 /* Base styles for the image */
@@ -830,8 +853,13 @@ html:not([dir="rtl"]) .page-item .page-link {
 }
 
 /* Hover effect */
-.styled-image:hover, .styled-header:hover {
+.styled-image:hover {
   transform: scale(1.05); /* Slightly enlarge the image */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Darker shadow on hover */
+}
+
+.styled-image2:hover {
+  transform: scale(1.3); /* Slightly enlarge the image */
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Darker shadow on hover */
 }
 
@@ -841,7 +869,7 @@ html:not([dir="rtl"]) .page-item .page-link {
   color: #007bff !important;
   background: #fff !important;
 }
-//================>> Buy page
+//================>> product page
 .card {
   flex: 1;
   display: flex;

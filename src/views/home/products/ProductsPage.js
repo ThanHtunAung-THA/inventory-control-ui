@@ -46,9 +46,9 @@ const ProductsPage = () => {
 
         <div className="row">
           {/* Basic Plan */}
-          <div className="card shadow mr-2 mb-4">
-            <div className="card border-0">
-              <div className="card-body text-center">
+          <div className="card product shadow mr-2 mb-4">
+            <div className="card product border-0">
+              <div className="card-body product text-center">
                 <h5 className="card-title text-uppercase font-weight-bold">Basic Plan</h5>
                 <h6 className="card-price display-4 mb-3" style={{ color: '#017abf' }}>$19<span className="text-muted" style={{ fontSize: '1rem' }}> / mo</span></h6>
                 <ul className="list-unstyled">
@@ -59,7 +59,7 @@ const ProductsPage = () => {
               </div>
               <button
                 onClick={toggleModal1}
-                className="btn btn-info mt-3 w-100 m2y2-hover"
+                className="btn btn-primary mt-3 w-100 m2y2-hover"
                 style={{ borderRadius: '5px', fontWeight: 'bold' }}
               >
                 Start Free Trial
@@ -68,9 +68,9 @@ const ProductsPage = () => {
           </div>
 
           {/* Standard Plan */}
-          <div className="card shadow mr-2 mb-4">
-            <div className="card border-0">
-              <div className="card-body text-center">
+          <div className="card product shadow mr-2 mb-4">
+            <div className="card product border-0">
+              <div className="card-body product text-center">
                 <h5 className="card-title text-uppercase font-weight-bold">Standard Plan</h5>
                 <h6 className="card-price display-4 mb-3" style={{ color: '#017abf' }}>$49<span className="text-muted" style={{ fontSize: '1rem' }}> / mo</span></h6>
                 <ul className="list-unstyled">
@@ -82,7 +82,7 @@ const ProductsPage = () => {
               </div>
               <button
                 onClick={toggleModal2}
-                className="btn btn-info mt-3 w-100 m2y2-hover" 
+                className="btn btn-primary mt-3 w-100 m2y2-hover" 
                 style={{ borderRadius: '5px', fontWeight: 'bold' }}
               >
                 Buy Now
@@ -91,9 +91,9 @@ const ProductsPage = () => {
           </div>
 
           {/* Premium Plan */}
-          <div className="card shadow mr-2 mb-4">
-            <div className="card border-0">
-              <div className="card-body text-center">
+          <div className="card product shadow mr-2 mb-4">
+            <div className="card product border-0">
+              <div className="card-body product text-center">
                 <h5 className="card-title text-uppercase font-weight-bold">Premium Plan</h5>
                 <h6 className="card-price display-4 mb-3" style={{ color: '#017abf' }}>$99<span className="text-muted" style={{ fontSize: '1rem' }}> / mo</span></h6>
                 <ul className="list-unstyled">
@@ -105,7 +105,7 @@ const ProductsPage = () => {
               </div>
               <button
                 onClick={toggleModal3}
-                className="btn btn-info mt-3 w-100 m2y2-hover" 
+                className="btn btn-primary mt-3 w-100 m2y2-hover" 
                 style={{ borderRadius: '5px', fontWeight: 'bold' }}
               >
                 Buy Now
@@ -121,7 +121,7 @@ const ProductsPage = () => {
             <p>Would you like to start a 7-day free trial for the Basic Plan?</p>
           </ModalBody>
           <ModalFooter>
-            <button className="btn btn-info" onClick={handleConfirm1}>Confirm</button>
+            <button className="btn btn-primary" onClick={handleConfirm1}>Confirm</button>
             <button className="btn btn-secondary" onClick={toggleModal1}>Cancel</button>
           </ModalFooter>
         </Modal>
@@ -133,7 +133,7 @@ const ProductsPage = () => {
             <p>Would you like to buy for the Standard Plan?</p>
           </ModalBody>
           <ModalFooter>
-            <button className="btn btn-info" onClick={handleConfirm2}>Confirm</button>
+            <button className="btn btn-primary" onClick={handleConfirm2}>Confirm</button>
             <button className="btn btn-secondary" onClick={toggleModal2}>Cancel</button>
           </ModalFooter>
         </Modal>
@@ -145,13 +145,13 @@ const ProductsPage = () => {
             <p>Would you like to buy for the Premium Plan?</p>
           </ModalBody>
           <ModalFooter>
-            <button className="btn btn-info" onClick={handleConfirm3}>Confirm</button>
+            <button className="btn btn-primary" onClick={handleConfirm3}>Confirm</button>
             <button className="btn btn-secondary" onClick={toggleModal3}>Cancel</button>
           </ModalFooter>
         </Modal>
 
         <div className="text-center mt-4">
-          <a href="#" className="text-info" style={{ textDecoration: 'underline' }}>Compare Plans</a>
+          <a href="#" className="text-primary" style={{ textDecoration: 'underline' }}>Compare Plans</a>
         </div>
       </div>
     </div>
