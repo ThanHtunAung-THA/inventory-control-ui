@@ -15,7 +15,7 @@ const Navbar = () => {
           style={{ borderRadius: '50%' }}
           className="styled-image2 mx-3"
         />
-        <span style={{ color: '#017abf' }}>IVEN - Inventory Control Management System</span>
+        <span style={{ color: '#017abf' }}>IVEN - Stock Management System</span>
       </a>
       <button
         className="navbar-toggler"
@@ -31,22 +31,22 @@ const Navbar = () => {
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">
-            <a className="nav-link" href="/">Home</a>
+            <a className="nav-link m2y2-hover" href="/">Home</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/products">Products</a>
+            <a className="nav-link m2y2-hover" href="/products">Products</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/supports">Supports</a>
+            <a className="nav-link m2y2-hover" href="/supports">Supports</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/contact-us">Contact Us</a>
+            <a className="nav-link m2y2-hover" href="/contact">Contact</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/about">About Us</a>
+            <a className="nav-link m2y2-hover" href="/about">About</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/login">LogIn</a>
+            <a className="nav-link m2y2-hover" href="/login">LogIn</a>
           </li>
         </ul>
         <div className="icons ml-3">

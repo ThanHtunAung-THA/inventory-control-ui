@@ -7,38 +7,39 @@ const IndexPage = (props) => {
   const { success, error } = props;
 
   return (
-    <div className="container-fluid" style={{ fontFamily: "'Roboto', sans-serif", backgroundColor: '#ffffff', margin: 0, padding: 0 }}>
-      <Navbar />
-      <div className="d-flex align-items-center justify-content-between px-5  py-3">
+<>
+<Navbar />
+  <div className="container-fluid">
+    <div className="d-flex align-items-center justify-content-between px-5  py-3">
+      <div className="text-content" style={{ maxWidth: '500px', color: '#017abf' }}>
+        <h1 className=" mb-4">
+          INVENTORY & STOCK MANAGEMENT SYSTEM
+        </h1>
+        <p className="mb-4" style={{color: '#000000a1'}}>
+        Optimize your inventory with ease!
+        Our Inventory-Stock Management system lets you track, manage, 
+        and organize your stock in real-time. Reduce costs, prevent stockouts, 
+        and streamline operations with automated tools designed to keep your business running smoothly. 
+        Simplify your inventory process and focus on growth!
+        </p>
+        <CButton href="/products" className="btn btn-primary m2y2-hover">
+          GET STARTED
+        </CButton>
+      </div>
+      <div className="image-content">
+        <CImg
+          alt="Iven Inventory Management"
+          height="400"
+          src="/image/Inven.jpg"
+          width="500"
+          className="styled-image"
+          style={{ borderRadius: '50%' }}
 
-        <div className="text-content" style={{ maxWidth: '500px', color: '#017abf' }}>
-          <h1 className="display-5 mb-4">
-            INVENTORY-STOCK MANAGEMENT
-          </h1>
-          <p className="mb-4" style={{color: '#000000a1'}}>
-          Optimize your inventory with ease!
-          Our Inventory-Stock Management system lets you track, manage, 
-          and organize your stock in real-time. Reduce costs, prevent stockouts, 
-          and streamline operations with automated tools designed to keep your business running smoothly. 
-          Simplify your inventory process and focus on growth!
-          </p>
-          <CButton href="/products" className="btn btn-outline-primary">
-            GET STARTED
-          </CButton>
-        </div>
-        <div className="image-content">
-          <CImg
-            alt="Iven Inventory Management"
-            height="400"
-            src="/image/Inven.jpg"
-            width="500"
-            className="styled-image"
-            style={{ borderRadius: '50%' }}
-
-          />
-        </div>
+        />
       </div>
     </div>
+  </div>
+</>
   );
 };
 

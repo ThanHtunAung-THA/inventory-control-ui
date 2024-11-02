@@ -25,14 +25,14 @@
 
   
   body {
-    font-family: "Titillium Web", sans-serif;
+    font-family: "Roboto", sans-serif;
     // background: #f5f6fa;
     background: transparent !important;
     margin: 0 auto;
   }
   
   * {
-    font-family: "Titillium Web", sans-serif;
+    font-family: "Roboto", sans-serif;
   }
   .container {
     color: #333333 !important;
@@ -809,6 +809,7 @@ html:not([dir="rtl"]) .page-item .page-link {
 }
 
 //================>> home page
+//bluish glow shadow circle
 .glow-text {
   font-size: 4em;
   color: #ffffff;
@@ -823,25 +824,19 @@ html:not([dir="rtl"]) .page-item .page-link {
       0 0 70px #00aaff;
 }
 
+.navbar {
+  border-bottom: 1px solid #0056b3 !important;
+}
 .nav-link {
-  color: #000000a1 !important;
+  color: #0056b3 !important;
   margin-right: 10px;
-  padding: 10px 15px; /* Add padding for better touch targets */
-  // transition: #017abf;
+  border: 1px solid transparent !important;
+  border-radius: 5px;
 }
 .nav-link:hover, .glow:hover {
-  color: #fff !important;
+  background-color: #0056b3; /* Darker shade of primary color on hover */
+  border: 1px solid #0056b3 !important;
   border-radius: 5px;
-  background: #fff;
-  text-shadow: 
-    0 0 15px #0066ff, 
-    0 0 15px #0066ff, 
-    0 0 15px #0066ff,
-    0 0 15px #0066ff,
-    0 0 15px #0066ff,
-    0 0 15px #0066ff,
-    0 0 15px #0066ff;
-
 }
 
 /* Base styles for the image */
@@ -865,7 +860,7 @@ html:not([dir="rtl"]) .page-item .page-link {
 
 .m2y2-hover:hover {
   transform: scale(1.05); /* Slightly enlarge the image */
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Darker shadow on hover */
+  // box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3); /* Darker shadow on hover */
   color: #007bff !important;
   background: #fff !important;
 }

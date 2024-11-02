@@ -66,7 +66,7 @@ class App extends Component {
             />
             <Route
               exact
-              path="/contact-us"
+              path="/contact"
               name="Contact Us Page"
               render={(props) => <ContactPage {...props} />}
             />
