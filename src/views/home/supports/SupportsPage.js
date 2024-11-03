@@ -25,10 +25,10 @@ const SupportsPage = () => {
       <div className="col-sm-2 border">
         <ul className="nav flex-column mt-5">
           <li className="nav-item">
-            <a className="nav-link m2y2-hover active" href="/faqs">FAQs</a>
+            <a className="nav-link m2y2-hover active" href="#faq">FAQs</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link m2y2-hover" href="/docs">Documentation</a>
+            <a className="nav-link m2y2-hover" href="#doc">Documentation</a>
           </li>
           <li className="nav-item">
             <a className="nav-link m2y2-hover" href="/contact">Contact Us</a>
@@ -75,9 +75,9 @@ const SupportsPage = () => {
         <div id="docs">
           <h4>Documentation</h4>
           <ul>
-            <li><a href="/docs/adding-products" target="_blank" rel="noopener noreferrer">Adding Products</a></li>
-            <li><a href="/docs/managing-inventory" target="_blank" rel="noopener noreferrer">Managing Inventory</a></li>
-            <li><a href="/docs/troubleshooting" target="_blank" rel="noopener noreferrer">Troubleshooting</a></li>
+            <li><a href="#doc/add-products" rel="noopener noreferrer">Adding Products</a></li>
+            <li><a href="#doc/managing-inventory" rel="noopener noreferrer">Managing Inventory</a></li>
+            <li><a href="#doc/troubleshooting" rel="noopener noreferrer">Troubleshooting</a></li>
             {/* Add more links as needed */}
           </ul>
         </div>
