@@ -20,7 +20,8 @@ const AboutUsPage = React.lazy(() => import('./views/home/AboutUsPage'));
 const TrialRegister = React.lazy(() => import('./views/home/products/TrialRegister'));
 const PaymentMethods = React.lazy(() => import('./views/home/products/PaymentPage'));
 
-const LoginIndex = React.lazy(() => import("./views/login/LoginIndex"));
+const AdminLoginIndex = React.lazy(() => import("./views/login/AdminLoginIndex"));
+const UserLoginIndex = React.lazy(() => import("./views/login/UserLoginIndex"));
 const Logout = React.lazy(() => import("./views/logout/LogoutIndex"));
 
 const Page404 = React.lazy(() => import("./views/pages/page404/Page404"));
@@ -82,9 +83,15 @@ class App extends Component {
             {/* Auth */}
             <Route
               exact
-              path="/login"
-              name="Login Page"
-              render={(props) => <LoginIndex {...props} />}
+              path="/admin-login"
+              name="Admin Login Page"
+              render={(props) => <AdminLoginIndex {...props} />}
+            />
+            <Route
+              exact
+              path="/user-login"
+              name="User Login Page"
+              render={(props) => <UserLoginIndex {...props} />}
             />
             <Route
               exact

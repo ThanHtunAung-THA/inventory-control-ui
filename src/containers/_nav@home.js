@@ -12,8 +12,7 @@ const Navbar = () => {
           src="/image/Inven.jpg"
           height="50"
           width="50"
-          style={{ borderRadius: '50%' }}
-          className="styled-image2 mx-3"
+          className="styled-image2 img-fluid img-thumbnail rounded-circle mx-3"
         />
         <span style={{ color: '#017abf' }}>IVEN - Stock Management System</span>
       </a>
@@ -46,7 +45,7 @@ const Navbar = () => {
             <a className="nav-link m2y2-hover" href="/about">About</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link m2y2-hover" href="/login">LogIn</a>
+            <a className="nav-link m2y2-hover" href="/user-login">LogIn</a>
           </li>
         </ul>
         <div className="icons ml-3">

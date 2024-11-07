@@ -848,14 +848,13 @@ html:not([dir="rtl"]) .page-item .page-link {
 }
 
 /* Hover effect */
-.styled-image:hover {
+.styled-image:hover, .styled-image2:hover {
   transform: scale(1.05); /* Slightly enlarge the image */
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Darker shadow on hover */
 }
 
 .styled-image2:hover {
   transform: scale(1.3); /* Slightly enlarge the image */
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3); /* Darker shadow on hover */
 }
 
 .m2y2-hover:hover {

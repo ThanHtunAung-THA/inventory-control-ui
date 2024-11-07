@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import LoginForm from "./LoginForm";
+import AdminLoginForm from "./AdminLoginForm";
 import { checkNullOrBlank,checkPassword } from "../common/CommonValidation";
 import Loading from "../common/Loading";
 import {ApiRequest} from "../common/ApiRequest";
 
 
-const LoginIndex = () => {
+const AdminLoginIndex = () => {
     const history = useHistory();
     const [loading, setLoading] = useState(false); // For Loading
     const [success, setSuccess] = useState([]); // for success message
@@ -74,7 +74,7 @@ const LoginIndex = () => {
     }
     return(
         <>
-        <LoginForm
+        <AdminLoginForm
         loginClick={loginClick}
         passwordChange={passwordChange}
         password={password}
@@ -88,4 +88,4 @@ const LoginIndex = () => {
     )
 }
 
-export default LoginIndex
+export default AdminLoginIndex
