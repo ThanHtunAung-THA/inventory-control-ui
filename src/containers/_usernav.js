@@ -2,7 +2,7 @@ export default [
   {
     _tag: 'CSidebarNavItem',
     name: 'Dashboard',
-    to: '/admin-dashboard',
+    to: '/user/dashboard',
     className: "dashboard"
   },
 
@@ -33,7 +33,7 @@ export default [
   {
     _tag: 'CSidebarNavItem',
     name: 'Logout',
-    to: '/admin/logout',
+    to: '/user/logout',
     className: "logout"
   },
  

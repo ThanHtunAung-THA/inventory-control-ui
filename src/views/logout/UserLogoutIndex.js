@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-const LogoutIndex = () => {
+const UserLogoutIndex = () => {
   let history = useHistory();
   useEffect(() => {
     localStorage.clear();
-    history.push("/admin-login");
+    history.push("/user-login");
   }, []);
 
   return <></>;
 };
 
-export default LogoutIndex;
+export default UserLogoutIndex;

@@ -10,6 +10,7 @@ const loading = (
 
 // Containers
 const TheLayout = React.lazy(() => import("./containers/TheLayout"));
+const TheLayout_User = React.lazy(() => import("./containers/UserLayout"));
 
 // Pages
 const IndexPage = React.lazy(() => import("./views/home/IndexPage"));
@@ -23,6 +24,7 @@ const PaymentMethods = React.lazy(() => import('./views/home/products/PaymentPag
 const AdminLoginIndex = React.lazy(() => import("./views/login/AdminLoginIndex"));
 const UserLoginIndex = React.lazy(() => import("./views/login/UserLoginIndex"));
 const Logout = React.lazy(() => import("./views/logout/LogoutIndex"));
+const UserLogout = React.lazy(() => import("./views/logout/UserLogoutIndex"));
 
 const Page404 = React.lazy(() => import("./views/pages/page404/Page404"));
 const Page500 = React.lazy(() => import("./views/pages/page500/Page500"));
@@ -95,9 +97,15 @@ class App extends Component {
             />
             <Route
               exact
-              path="/logout"
+              path="/admin/logout"
               name="Logout"
               render={(props) => <Logout {...props} />}
+            />
+            <Route
+              exact
+              path="/user/logout"
+              name="User Logout"
+              render={(props) => <UserLogout {...props} />}
             />
             <Route
               exact
@@ -112,9 +120,14 @@ class App extends Component {
               render={(props) => <Page500 {...props} />}
             />
             <Route
-              path="/"
-              name="Home"
+              path="/admin"
+              name="Admin Home"
               render={(props) => <TheLayout {...props} />}
+            />
+            <Route
+              path="/user"
+              name="User Home"
+              render={(props) => <TheLayout_User {...props} />}
             />
           </Switch>
         </React.Suspense>

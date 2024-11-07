@@ -15,7 +15,7 @@ const loading = (
   </div>
 )
 
-const TheContent = () => {
+const UserContent = () => {
   return (
     <main className="c-main">
       <CContainer fluid>
@@ -35,7 +35,7 @@ const TheContent = () => {
                   )} />
               )
             })}
-            <Redirect from="/" to="/admin-login" />
+            <Redirect from="/" to="/user-login" />
           </Switch>
         </Suspense>
       </CContainer>
@@ -43,4 +43,4 @@ const TheContent = () => {
   )
 }
 
-export default React.memo(TheContent)
+export default React.memo(UserContent)

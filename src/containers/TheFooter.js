@@ -10,7 +10,7 @@ const TheFooter = () => {
       </div> */}
       <div className="mfs-auto">
         <span className="mr-1">Powered by</span>
-        <a style={{color: "blue"}} target="_blank" rel="noopener noreferrer">Kise</a>
+        <a href='https://github.com/ThanHtunAung-THA' style={{color: "blue"}} target="_blank" rel="noopener noreferrer">M2Y2</a>
       </div>
     </CFooter>
   )
