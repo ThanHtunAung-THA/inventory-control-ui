@@ -60,7 +60,7 @@ const AdminLoginIndex = () => {
             setSuccess([]);
           } else {
             if (response.data.status == "OK") {
-              history.push(`/Dashboard`)
+              history.push(`/admin/dashboard`)
               localStorage.setItem(`LoginProcess`, "true");
               setError([]);
             } else {

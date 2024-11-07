@@ -17,7 +17,7 @@ import { useHistory } from 'react-router';
 
 
 
-const Dashboard = () => {
+const UserDashboard = () => {
 
   const history = useHistory();
   const [data, setData] = useState( [
@@ -206,4 +206,4 @@ const delCLick =(name,g)=>{
   )
 }
 
-export default Dashboard
+export default UserDashboard

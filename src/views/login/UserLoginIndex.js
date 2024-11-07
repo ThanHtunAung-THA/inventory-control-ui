@@ -46,7 +46,7 @@ const UserLoginIndex = () => {
           setError([]);
           let saveData = {
             method: "get",
-            url: `admin/login`,
+            url: `user/login`,
             params: {
              user_code : userCode,
             password : password
@@ -60,7 +60,7 @@ const UserLoginIndex = () => {
             setSuccess([]);
           } else {
             if (response.data.status == "OK") {
-              history.push(`/Dashboard`)
+              history.push(`/user/dashboard`)
               localStorage.setItem(`LoginProcess`, "true");
               setError([]);
             } else {
