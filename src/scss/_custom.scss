@@ -347,8 +347,8 @@ $input-bottom-border: darken(#e3e5f1, 15);
 }
 
 .form-btn {
-  background-image: linear-gradient(to bottom, #18212a, #495563);
-  color: white;
+  background-image: linear-gradient(to bottom, #fff, #495563);
+  color: #000 !important;
   // border-color: #E7E5E5;
   border: none;
   border-radius: 6px;
@@ -362,7 +362,7 @@ $input-bottom-border: darken(#e3e5f1, 15);
 .form-btn:focus:hover,
 .form-btn:active:hover,
 .form-btn:hover {
-  color: #000000;
+  color: #fff !important;
   // background-image: linear-gradient(to bottom, #a1a8f7, #ffffff);
   -webkit-transform: translateY(-3px);
   transform: translateY(-3px);
@@ -649,15 +649,22 @@ button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disab
 // 	background-repeat: no-repeat;
 // }
 /************* END DATEPICKER *************/
-.login{
-padding: 0 30px;
-border-radius: 15px;
-background-image: linear-gradient(to right, #161e29, #3c4654);
-border: 1px solid #39372e;
-box-shadow: 0px 0px 8px rgba(166, 167, 155, 0.6);
+// .login{
+// padding: 0 30px;
+// border-radius: 15px;
+// background-image: linear-gradient(to right, #161e29, #3c4654);
+// border: 1px solid #39372e;
+// box-shadow: 0px 0px 8px rgba(166, 167, 155, 0.6);
+// }
+.login {
+  padding: 0 16px;
+  border-radius: 1rem;
+  background-image: linear-gradient(to right, #161e29, #3c4654);
+  /* border: 1px solid #39372e; */
+  box-shadow: 0px 0px 8px rgba(166, 167, 155, 0.6);
 }
 .login-bg{
-  background-image: url(/image/side_bar_profile.jpg);
+  background-image: url(/image/Inven-login-bg.png);
   background-size: cover;
 }
 .login-title{
@@ -673,8 +680,15 @@ box-shadow: 0px 0px 8px rgba(166, 167, 155, 0.6);
   height: 40px;
 }
 .login-btn{
-  width: auto !important;
-  margin-right: 1rem;
+  width: 94% !important;
+  // margin-right: 1rem;
+}
+.login div.card-body.bg-warning,
+.login div.card-body.bg-light {
+  border-bottom-left-radius: 120px !important ;
+  border-bottom-right-radius: 120px !important ;
+  border-top-left-radius: 0.5rem !important ;
+  border-top-right-radius: 0.5rem !important ;
 }
 hr{
   margin: 0;
@@ -874,4 +888,18 @@ html:not([dir="rtl"]) .page-item .page-link {
   flex: 1;
   overflow-y: auto;
   }
-  
+
+//====================>> login page
+.dropdown-item {
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #797a7a; /* Change to your desired hover color */
+  color: #fff; /* Change text color on hover */
+}
+
+.dropdown-item.active {
+  // background-color: #0056b3; /* Change to your desired active color */
+  color: #fff; /* Change text color when active */
+}

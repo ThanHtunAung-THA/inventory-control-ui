@@ -19,12 +19,12 @@ const AdminLoginForm = (props) => {
 <>
 <div className="min-vh-100  flex-row align-items-center login-bg">
 {/* Dropdown button here */}
-<div className="row justify-content-center mb-3 mr-1 float-right">
+<div className="row justify-content-center mb-3 float-right" style={{marginTop:'1px', marginRight:'1px'}}>
   <CDropdown>
-    <CDropdownToggle color="dark">
-      LogIn mode
-    </CDropdownToggle>
-    <CDropdownMenu>
+  <CDropdownToggle color="dark " style={{borderRadius:'0', borderBottomLeftRadius:'15px'}}>
+    LogIn mode
+  </CDropdownToggle>
+  <CDropdownMenu className="mt-1" style={{borderTopLeftRadius:'15px'}}>
       <CDropdownItem href="#" header>Admin</CDropdownItem>
       <CDropdownItem href="/user-login">User</CDropdownItem>
       <CDropdownItem href="/products">new account?</CDropdownItem>
@@ -33,31 +33,34 @@ const AdminLoginForm = (props) => {
 </div>
 
 <div className="container">
+
   <div className="row justify-content-center">
     <div className="col-lg-6">
       <div className="card mt-5 login">
-        <div className="card-body">
-          <div className="row justify-content-center">
-            <img src="./image/main-logo.png" width={150} height={150} alt="Logo"/>
-          </div>
+          {/* topside div */}
+        <div className="card-body bg-light">
           <div className="row justify-content-center mb-3">
-            <h3 className="login-title">Admin Login System</h3>
+            <img src="./image/Inven.jpg" className='rounded-circle' width={150} height={150} alt="Logo"/>
           </div>
+          <div className="row justify-content-center mb-1">
+            <h3 className="login-title " style={{color:'#000'}}>Admin Login System</h3>
+          </div>
+        </div>
 
           <SuccessError success={success} error={error} />
 
+        <div className='card-body bg-transparent'>
+            {/* botside div */}
           <div className="row align-items-center mt-4">
-            <div className="col-lg-4">
-              <label className="form-label">User Code</label>
-            </div>
-            <div className="col-lg-8">
+            
+            <div className="col-lg-12">
               <div className="input-group">
                 <div className="input-group-prepend">
                   <span className="input-group-text">
                     <img src="./image/user.png" width="20" height="20" alt="User Icon"/>
                   </span>
                 </div>
-                <input type="text" className="form-control login-input" placeholder="Enter User Code" autoFocus value={userCode} onChange={userCodeChange}/>
+                <input type="text" className="form-control login-input" placeholder="Enter User Code" autofocus value={userCode} onChange={userCodeChange}/>
               </div>
             </div>
           </div>
@@ -65,10 +68,8 @@ const AdminLoginForm = (props) => {
           <br/><br/>
 
           <div className="row align-items-center">
-            <div className="col-lg-4">
-              <label className="form-label">Password</label>
-            </div>
-            <div className="col-lg-8">
+            
+            <div className="col-lg-12">
               <div className="input-group">
                 <div className="input-group-prepend">
                   <span className="input-group-text">
