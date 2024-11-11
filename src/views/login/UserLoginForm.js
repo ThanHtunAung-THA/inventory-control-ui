@@ -16,11 +16,11 @@ const UserLoginForm = (props) => {
 
   return (
 <>
-<div className="min-vh-100  flex-row align-items-center login-bg">
+<div className="min-vh-100  flex-row align-items-center user-login-bg">
 {/* Dropdown button here */}
 <div className="row justify-content-center mb-3 float-right" style={{marginTop:'1px', marginRight:'1px'}}>
   <CDropdown >
-    <CDropdownToggle color="dark " style={{borderRadius:'0', borderBottomLeftRadius:'15px'}}>
+    <CDropdownToggle style={{borderRadius:'0', borderBottomLeftRadius:'15px'}}>
       LogIn mode
     </CDropdownToggle>
     <CDropdownMenu className="mt-1" style={{borderTopLeftRadius:'15px'}}>
@@ -35,14 +35,17 @@ const UserLoginForm = (props) => {
 
   <div className="row justify-content-center">
     <div className="col-lg-6">
-      <div className="card mt-5 login">
+    <div className="card login mt-5">
           {/* topside div */}
-        <div className="card-body bg-warning">
-        <div className="row justify-content-center mb-3">
-            <img src="./image/Inven.jpg" className='rounded-circle' width={150} height={150} alt="Logo"/>
-          </div>
+        <div className="card-body rounded-bottom user">
+          {/* <div className="row justify-content-center mb-3 "> */}
+            {/* <h3 className='display-3' style={{color:'#3e405b'}}> */}
+              {/* IVEN */}
+              {/* <img src="./image/Inven.jpg" className='rounded-circle' width={150} height={150} alt="Logo"/> */}
+            {/* </h3> */}
+          {/* </div> */}
           <div className="row justify-content-center mb-1">
-            <h3 className="login-title" style={{color:'#000'}}>User Login System</h3>
+            <h2 className="login-title ">User Login System</h2>
           </div>
         </div>
 
@@ -50,30 +53,30 @@ const UserLoginForm = (props) => {
 
         <div className='card-body bg-transparent'>
             {/* botside div */}
-          <div className="row align-items-center mt-4">
+            <div className="row align-items-center mt-4 justify-content-center">
             
-            <div className="col-lg-12">
+            <div className="col-lg-10">
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <span className="input-group-text">
-                    <img src="./image/user.png" width="20" height="20" alt="User Icon"/>
-                  </span>
+                <span className="input-group-text login-input mr-3">
+                  <img src="./image/user.png" width="20" height="20" alt="User Icon"/>
+                </span>
                 </div>
-                <input type="text" className="form-control login-input" placeholder="Enter User Code" autofocus value={userCode} onChange={userCodeChange}/>
+                <input type="text" className="form-control login-input" placeholder="Enter User Code" autoFocus value={userCode} onChange={userCodeChange}/>
               </div>
             </div>
           </div>
 
           <br/><br/>
 
-          <div className="row align-items-center">
+          <div className="row align-items-center justify-content-center">
             
-            <div className="col-lg-12">
+            <div className="col-lg-10">
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <span className="input-group-text">
-                    <img src="./image/password.png" width="20" height="20" alt="Password Icon"/>
-                  </span>
+                <span className="input-group-text login-input mr-3">
+                  <img src="./image/password.png" width="20" height="20" alt="Password Icon"/>
+                </span>
                 </div>
                 <input type="password" className="form-control login-input" placeholder="Enter Password" value={password} onChange={passwordChange}/>
               </div>
@@ -82,7 +85,7 @@ const UserLoginForm = (props) => {
 
           <br/><br/>
 
-          <div className="row justify-content-center mb-4">
+          <div className="row align-items-center justify-content-center ml-4 mr-4 mb-4">
             <button id="login" className="btn btn-primary form-btn login-btn" onClick={loginClick}>Login</button>
           </div>
         </div>
