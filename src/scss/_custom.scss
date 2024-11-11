@@ -8,20 +8,119 @@
 .c-sidebar-nav > .dashboard a::before {
     background-image: url(/image/dashboard.svg);
     margin-right: 0.5rem;
-}
-.c-sidebar-nav > .employee-management a::before {
+    width: 20px; /* Adjust to your desired width */
+    height: 20px; /* Adjust to your desired height */
+    background-size: 20px 20px; /* Match this to width and height for best results */
+  }
+.c-sidebar-nav > .outstander-svg a::before {
   background-image: url(/image/employee-management.svg);
   margin-right: 0.5rem;
+  width: 20px; /* Adjust to your desired width */
+  height: 20px; /* Adjust to your desired height */
+  background-size: 20px 20px; /* Match this to width and height for best results */
 }
-.c-sidebar-nav > .admin a::before {
+.c-sidebar-nav > .cash-svg a::before {
+  background-image: url(/image/payment-method-pay-svgrepo-com.svg);
+  margin-right: 0.5rem;
+  width: 20px; /* Adjust to your desired width */
+  height: 20px; /* Adjust to your desired height */
+  background-size: 20px 20px; /* Match this to width and height for best results */
+}
+.c-sidebar-nav > .setting-svg a::before {
+  background-image: url(/image/settings-gear-svgrepo-com.svg);
+  margin-right: 0.5rem;
+  width: 20px; /* Adjust to your desired width */
+  height: 20px; /* Adjust to your desired height */
+  background-size: 20px 20px; /* Match this to width and height for best results */
+}
+.c-sidebar-nav > .list-svg-blue a::before {
+  background-image: url(/image/list-menu-svgrepo-com-blue.svg);
+  margin-right: 0.5rem;
+  width: 20px; /* Adjust to your desired width */
+  height: 20px; /* Adjust to your desired height */
+  background-size: 20px 20px; /* Match this to width and height for best results */
+}
+.c-sidebar-nav > .list-svg-red a::before {
+  background-image: url(/image/list-menu-svgrepo-com-red.svg);
+  margin-right: 0.5rem;
+  width: 20px; /* Adjust to your desired width */
+  height: 20px; /* Adjust to your desired height */
+  background-size: 20px 20px; /* Match this to width and height for best results */
+}
+.c-sidebar-nav > .sale-svg a::before {
+  background-image: url(/image/sale-report-report-svgrepo-com.svg);
+  margin-right: 0.5rem;
+  width: 20px; /* Adjust to your desired width */
+  height: 20px; /* Adjust to your desired height */
+  background-size: 20px 20px; /* Match this to width and height for best results */
+}
+.c-sidebar-nav > .purchase-svg a::before {
+  background-image: url(/image/shopping-basket-purchase-svgrepo-com.svg);
+  margin-right: 0.5rem;
+  width: 20px; /* Adjust to your desired width */
+  height: 20px; /* Adjust to your desired height */
+  background-size: 20px 20px; /* Match this to width and height for best results */
+}
+.c-sidebar-nav > .adjust-svg a::before {
+  background-image: url(/image/levels-adjust-svgrepo-com.svg);
+  margin-right: 0.5rem;
+  width: 20px; /* Adjust to your desired width */
+  height: 20px; /* Adjust to your desired height */
+  background-size: 20px 20px; /* Match this to width and height for best results */
+}
+.c-sidebar-nav > .stock-svg a::before {
+  background-image: url(/image/stock-svgrepo-com.svg);
+  margin-right: 0.5rem;
+  width: 20px; /* Adjust to your desired width */
+  height: 20px; /* Adjust to your desired height */
+  background-size: 20px 20px; /* Match this to width and height for best results */
+}
+.c-sidebar-nav > .ledger-svg a::before {
+  background-image: url(/image/ledger-svgrepo-com.svg);
+  margin-right: 0.5rem;
+  width: 20px; /* Adjust to your desired width */
+  height: 20px; /* Adjust to your desired height */
+  background-size: 20px 20px; /* Match this to width and height for best results */
+}
+.c-sidebar-nav > .user-svg a::before {
+  background-image: url(/image/account-settings.png);
+  margin-right: 0.5rem;
+  width: 20px; /* Adjust to your desired width */
+  height: 20px; /* Adjust to your desired height */
+  background-size: 20px 20px; /* Match this to width and height for best results */
+}
+.c-sidebar-nav > .admin-svg a::before {
+  background-image: url(/image/admin-svgrepo-com.svg);
+  margin-right: 0.5rem;
+  width: 20px; /* Adjust to your desired width */
+  height: 20px; /* Adjust to your desired height */
+  background-size: 20px 20px; /* Match this to width and height for best results */
+}
+.c-sidebar-nav > .shop a::before {
   background-image: url(/image/shop-management.svg);
   margin-right: 0.5rem;
+  width: 20px; /* Adjust to your desired width */
+  height: 20px; /* Adjust to your desired height */
+  background-size: 20px 20px; /* Match this to width and height for best results */
 }
 .c-sidebar-nav > .logout a::before {
-  background-image: url(/image/logout.svg);
+  background-image: url(/image/logout-white.svg);
   margin-right: 0.5rem;
+  width: 20px; /* Adjust to your desired width */
+  height: 20px; /* Adjust to your desired height */
+  background-size: 20px 20px; /* Match this to width and height for best results */
+  
 }
 
+.c-sidebar-nav > .custom-divider {
+  border-top: 1px solid #ccc; /* Line color */
+  // margin: 10px 0; /* Spacing around the divider */
+  // padding: 10px 0; /* Padding for the label */
+  text-align: center; /* Center the label */
+  color: #666; /* Label color */
+  font-weight: bold; /* Make the label bold */
+
+}
 
   
   body {

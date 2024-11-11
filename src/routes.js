@@ -9,7 +9,7 @@ const EmployeeList = React.lazy(() => import('./views/employee-management/employ
 const AdminRegAndList  = React.lazy(() => import('./views/admin-management/admin-reg-list/adminRegandList'));
 
 const routes = [
-  { path: '/', exact: true, name: 'Home' },
+  // { path: '/', exact: true, name: 'Home' },
 
   { path: '/admin/dashboard', name: 'Admin Dashboard', component: AdminDashboard },
   { path: '/user/dashboard', name: 'User Dashboard', component: UserDashboard },

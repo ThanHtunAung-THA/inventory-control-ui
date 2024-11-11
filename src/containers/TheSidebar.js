@@ -27,13 +27,14 @@ const TheSidebar = () => {
       show={show}
       onShowChange={(val) => dispatch({ type: "set", sidebarShow: val })}
     >
-      <CSidebarBrand className="d-md-down-none" to="/">
+      <CSidebarBrand className="d-md-down-none" to="/admin/dashboard">
         <CImg
-          src={"/image/main-logo.png"}
-          className="c-avatar-img"
+          src={"/image/Inven.jpg"}
+          className="img-fluid rounded-circle mr-2"
           alt="admin@bootstrapmaster.com"
-          style={{width:"101px"}}
+          style={{width:"3rem"}}
         />
+        IVEN - inventory control
       </CSidebarBrand>
       <CSidebarNav>
         <CCreateElement
@@ -43,6 +44,7 @@ const TheSidebar = () => {
             CSidebarNavDropdown,
             CSidebarNavItem,
             CSidebarNavTitle,
+            
           }}
         />
       </CSidebarNav>
