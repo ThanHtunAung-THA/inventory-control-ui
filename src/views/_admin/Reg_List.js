@@ -11,11 +11,11 @@ import {
   CSelect
 } from '@coreui/react'
 import { useHistory } from 'react-router'
-import Loading from "../../common/Loading";
-import SuccessError from "../../common/SuccessError"; 
-import { ApiRequest } from "../../common/ApiRequest";
+import Loading from "../common/Loading";
+import SuccessError from "../common/SuccessError"; 
+import { ApiRequest } from "../common/ApiRequest";
 
-const AdminRegAndListIndex = () => {
+const Reg_ListIndex = () => {
   const history = useHistory();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -305,4 +305,4 @@ const AdminRegAndListIndex = () => {
   )
 }
 
-export default AdminRegAndListIndex
+export default Reg_ListIndex

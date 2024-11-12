@@ -87,14 +87,14 @@ export default [
   {
     _tag: 'CSidebarNavItem',
     name: 'User Settings',
-    to: '/admin-management/admin-reg-list', 
+    to: '/admin/user-settings', 
     className: "user-svg"
   },
 
   {
     _tag: 'CSidebarNavItem',
     name: 'Admin Settings',
-    to: '/admin-management/admin-reg-list',
+    to: '/admin/admin-settings',
     className: "admin-svg"
   },
 
