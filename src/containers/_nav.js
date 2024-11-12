@@ -106,12 +106,19 @@ export default [
   },
 
   {
-    _tag: 'CSidebarNavItem',
+    _tag: 'CSidebarNavItem',  
     name: 'Logout',
     to: '/admin/logout',
     className: "logout"
   },
  
+  {
+    _tag: 'CSidebarNavDivider',
+    name: '',
+    to: '#',
+    className: "transparent-divider"
+  },
+
   // {
   //   _tag: 'CSidebarNavDropdown',
   //   name: 'Setting',
