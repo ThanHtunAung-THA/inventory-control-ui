@@ -773,13 +773,13 @@ button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disab
   // background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);
 }
 .admin-login-bg{
-  // background-image: url(/image/Inven-login-bg.png);
-  background: linear-gradient(135deg, #1e3a5f, #2e5379);
+  background-image: url('/image/bg-login.jpg');
+  // background: linear-gradient(135deg, #1e3a5f, #2e5379);
   background-size: cover;
 }
 .user-login-bg{
-  // background-image: url(/image/Inven-login-bg.png);
-  background: linear-gradient(135deg, #dceeff, #ffffff);
+  background-image: url('/image/bg-login.jpg');
+  // background: linear-gradient(135deg, #dceeff, #ffffff);
   background-size: cover;
 }
 .login-title{
