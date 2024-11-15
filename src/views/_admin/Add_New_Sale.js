@@ -6,7 +6,7 @@ import axios from 'axios';
 
 
 
-const Sale = () => {
+const Add_New_Sale = () => {
 
   const [sales, setSales] = useState([]);
   const [totalSales, setTotalSales] = useState(0);
@@ -20,7 +20,7 @@ const Sale = () => {
   // Fetch sales data from API
   const fetchSales = async () => {
       try {
-          const response = await axios.get('http://localhost:8000/api/sale/get'); // Adjust the API endpoint as necessary
+          const response = await axios.get('/api/sales'); // Adjust the API endpoint as necessary
           setSales(response.data.data);
 
           // Calculate total sales and total profit
@@ -41,14 +41,14 @@ const Sale = () => {
 
   // Handle edit sale
   const handleEdit = (id) => {
-      history.push(`/admin/edit-sale/${id}`); // Adjust route as necessary
+      history.push(`/edit-sale/${id}`); // Adjust route as necessary
   };
 
   // Handle delete sale
   const handleDelete = async (id) => {
       if (window.confirm('Are you sure you want to delete this sale?')) {
           try {
-              await axios.delete(`/api/sale/${id}`);
+              await axios.delete(`/api/sales/${id}`);
               fetchSales(); // Refresh sales list
           } catch (error) {
               console.error('Error deleting sale:', error);
@@ -58,7 +58,6 @@ const Sale = () => {
 
   const columns = [
       { name: 'Date', selector: row => row.date, sortable: true },
-      { name: 'User_Code', selector: row => row.user_code, sortable: true },
       { name: 'Customer', selector: row => row.customer, sortable: true },
       { name: 'Location', selector: row => row.location },
       { name: 'Quantity', selector: row => row.quantity, sortable: true },
@@ -85,7 +84,7 @@ return (
   <CCardHeader>
       <CRow>
           <CCol md="4">
-              <h5>Total Sales: {totalSales}</h5>
+              <h5>Add New Sale</h5>
           </CCol>
           <CCol md="4">
               <h5>Total Profit: {totalProfit}</h5>
@@ -113,4 +112,4 @@ return (
   )
 }
 
-export default Sale
+export default Add_New_Sale

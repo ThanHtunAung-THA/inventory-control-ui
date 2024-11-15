@@ -20,9 +20,9 @@ const routes = [
   // { path: '/', exact: true, name: 'Home' },
 
   { path: '/admin/dashboard', name: 'Dashboard', component: AdminDashboard },
-  { path: '/admin/sale', name: 'Sale', component: AdminSale },
-  { path: '/admin/new-sale', name: 'Sale / Add New Sale', component: AdminAddNewSale },
-  { path: '/admin/purchase', name: 'Purchase', component: AdminPurchase },
+  { path: '/admin/sale', name: 'Sale Lists', component: AdminSale },
+  { path: '/admin/new-sale', name: 'Add New Sale list', component: AdminAddNewSale },
+  { path: '/admin/purchase', name: 'Purchase Lists', component: AdminPurchase },
 
   { path: '/admin/admin-settings', name: 'setting for admin', component: AdminSetting },
   { path: '/admin/user-settings', name: 'setting for user', component: UserManagement },

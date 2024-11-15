@@ -7,11 +7,14 @@ import {
 import React from 'react'
 import SuccessError from '../common/SuccessError';
 
+
 const AdminLoginForm = (props) => {
     let {loginClick,passwordChange,password,userCodeChange,userCode,success,error
         } = props;
+
   return (
 <>
+
 <div className="min-vh-100  flex-row align-items-center user-login-bg">
 {/* Dropdown button here */}
 <div className="row justify-content-center mb-3 float-right" style={{marginTop:'1px', marginRight:'1px'}}>
@@ -26,6 +29,8 @@ const AdminLoginForm = (props) => {
     </CDropdownMenu>
   </CDropdown>
 </div>
+
+<SuccessError success={success} error={error} />
 
 <div className="container">
   <div className="row justify-content-center">
@@ -45,7 +50,7 @@ const AdminLoginForm = (props) => {
           </div>
         </div>
 
-          <SuccessError success={success} error={error} />
+          {/* <SuccessError success={success} error={error} /> */}
 
         <div className='card-body bg-transparent'>
             {/* botside div */}

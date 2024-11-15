@@ -88,15 +88,15 @@ const TheHeader = () => {
         <TheHeaderDropdown />
       </CHeaderNav> */}
 
-      <CSubheader className="px-3 ">
+      <CSubheader className="pr-3 pl-1">
         <CToggler
           inHeader
-          className="ml-md-3 d-lg-none "
+          className=" d-lg-none "
           onClick={toggleSidebarMobile}
         />
         <CToggler
           inHeader
-          className="ml-3 d-md-down-none"
+          className=" d-md-down-none"
           onClick={toggleSidebar}
         />
         <CBreadcrumbRouter
@@ -106,7 +106,7 @@ const TheHeader = () => {
         <div className="d-md-down-none mfe-2 c-subheader-nav ">
           <CRow
             className="c-subheader-nav-link"
-            style={{ position: "absolute", right: 0, marginRight: "0px" }}
+            style={{ position: "absolute", right: 0, marginRight: "-40px" }}
           >
             {/* <CCol
               style={{
