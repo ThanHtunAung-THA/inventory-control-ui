@@ -1,17 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
-import { CButton, CCard, CCardBody, CCardHeader, CRow, CCol } from '@coreui/react';
+import { 
+    CInput, CButton, CLink, CCard, CCardBody, CCardHeader, CRow, CCol,
+    CDropdown, CDropdownToggle, CDropdownMenu, CDropdownItem
+} from '@coreui/react';
 import { useHistory } from 'react-router';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus,faCirclePlus,faPlusCircle } from '@fortawesome/free-solid-svg-icons'; // Import the plus icon
 
 
 
-const Add_New_Sale = () => {
 
-  const [sales, setSales] = useState([]);
-  const [totalSales, setTotalSales] = useState(0);
-  const [totalProfit, setTotalProfit] = useState(0);
-  const history = useHistory();
+
+const Sale_list = () => {
+
+    const [sales, setSales] = useState([]);
+    const [filteredSales, setFilteredSales] = useState([]); // For filtered data
+    const [searchTerm, setSearchTerm] = useState(''); // For search input
+    const [totalSales, setTotalSales] = useState(0);
+    const [totalProfit, setTotalProfit] = useState(0);
+    const history = useHistory();
 
   useEffect(() => {
       fetchSales();
@@ -20,8 +29,10 @@ const Add_New_Sale = () => {
   // Fetch sales data from API
   const fetchSales = async () => {
       try {
-          const response = await axios.get('/api/sales'); // Adjust the API endpoint as necessary
+          const response = await axios.get('http://localhost:8000/api/sale/get'); // Adjust the API endpoint as necessary
           setSales(response.data.data);
+          setFilteredSales(response.data.data); // Initially, filtered data is the same as all data
+
 
           // Calculate total sales and total profit
           const salesTotal = response.data.data.reduce((acc, sale) => acc + sale.total, 0);
@@ -36,19 +47,19 @@ const Add_New_Sale = () => {
 
   // Handle adding a new sale
   const handleAddSale = () => {
-      history.push('/admin/new-sale'); // Adjust route as necessary
+      history.push('/admin/sale-new'); // Adjust route as necessary
   };
 
-  // Handle edit sale
+//   Handle edit sale
   const handleEdit = (id) => {
-      history.push(`/edit-sale/${id}`); // Adjust route as necessary
+      history.push(`/admin/sale-edit/${id}`); // Adjust route as necessary       //to work fully , i must create update page with id accepter
   };
 
   // Handle delete sale
   const handleDelete = async (id) => {
       if (window.confirm('Are you sure you want to delete this sale?')) {
           try {
-              await axios.delete(`/api/sales/${id}`);
+              await axios.delete(`/api/sale/${id}`);
               fetchSales(); // Refresh sales list
           } catch (error) {
               console.error('Error deleting sale:', error);
@@ -58,6 +69,7 @@ const Add_New_Sale = () => {
 
   const columns = [
       { name: 'Date', selector: row => row.date, sortable: true },
+      { name: 'User_Code', selector: row => row.user_code, sortable: true },
       { name: 'Customer', selector: row => row.customer, sortable: true },
       { name: 'Location', selector: row => row.location },
       { name: 'Quantity', selector: row => row.quantity, sortable: true },
@@ -67,13 +79,18 @@ const Add_New_Sale = () => {
           name: 'Actions',
           cell: row => (
               <>
-                  <CButton color="info" size="sm" onClick={() => handleEdit(row.id)}>
-                      Edit
-                  </CButton>
-                  <CButton color="danger" size="sm" onClick={() => handleDelete(row.id)} className="ml-2">
-                      Delete
-                  </CButton>
-              </>
+                <CDropdown>
+                    <CDropdownToggle color="" size="" className="cdd-sale">
+                        Actions
+                    </CDropdownToggle>
+                    <CDropdownMenu>
+                        <CDropdownItem href={`/admin/sale-edit/${row.id}`}>Edit</CDropdownItem>
+                        <CDropdownItem onClick={() => handleDelete(row.id)}>Delete</CDropdownItem>
+                    </CDropdownMenu>
+                </CDropdown>
+
+
+             </>
           )
       }
   ];
@@ -84,15 +101,15 @@ return (
   <CCardHeader>
       <CRow>
           <CCol md="4">
-              <h5>Add New Sale</h5>
+              <h5>Total Sales: {totalSales}</h5>
           </CCol>
           <CCol md="4">
               <h5>Total Profit: {totalProfit}</h5>
           </CCol>
           <CCol md="4" className="text-right">
-              <CButton color="success" onClick={handleAddSale}>
-                  + Add New Sale
-              </CButton>
+            <CLink href="/admin/sale-new" className="btn link-sale">
+                <FontAwesomeIcon icon={faCirclePlus} /> Add New Sale
+            </CLink>
           </CCol>
       </CRow>
   </CCardHeader>
@@ -112,4 +129,4 @@ return (
   )
 }
 
-export default Add_New_Sale
+export default Sale_list

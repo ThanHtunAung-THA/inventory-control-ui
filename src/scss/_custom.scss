@@ -238,24 +238,32 @@ main.c-main {
   
   
   .c-sidebar .c-sidebar-nav-link.c-active {
-    border-radius: 0 5rem 5rem 0;
+    // border-radius: 0 5rem 5rem 0;
     background: #c4cce3;
     color: #feec72 !important;
     // bg color from animation
-    background: linear-gradient(to left, #b6ba38, transparent 50%) right;
+    background: linear-gradient(to left, #e07a5f, transparent 100%) right;
     background-size: 200%;
     transition: 0.5s ease-out;
+
+    
   }
-  
+
   .c-sidebar .c-sidebar-nav-link:hover,
   .c-sidebar .c-sidebar-nav-dropdown-toggle:hover {
-    background: #c4cce3;
+    background: #e07b5f8c;
     color: #feec72 !important;
-    border-radius: 0 5rem 5rem 0;
+    // border-radius: 0 5rem 5rem 0;
     // animation hover
-    background: linear-gradient(to left, #b6ba38 10%, transparent 50%) right;
     background-size: 200%;
     transition: 0.5s ease-out;
+    
+    /* Add the arrow image as a background */
+    background-image: url('/image/nyan-cat-nyan.gif'); /* Replace with your image path */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-position: right center; /* Position the image on the right */
+    background-size: 50px auto; /* Adjust size of the image */
+    
   }
   
   .c-avatar {
@@ -1078,11 +1086,11 @@ overflow-y: auto;
   }
   
 //====================>> login page
-.dropdown-toggle {
+.dropdown-toggle, .btn.link-sale {
   background-color: #e07a5f;
   color: #3e405b !important;
 }
-.dropdown-toggle:hover {
+.dropdown-toggle:hover, .btn.link-sale:hover {
   color: #fff !important;
 }
 .dropdown-item {
@@ -1098,3 +1106,9 @@ overflow-y: auto;
   background-color: #e07a5f; /* Change to your desired active color */
   color: #fff; /* Change text color when active */
 }
+
+.dropdown-toggle.cdd-sale{
+  width: fit-content !important;
+}
+
+//====================>> sale page
