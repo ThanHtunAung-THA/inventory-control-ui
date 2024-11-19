@@ -49,6 +49,7 @@ const AdminLoginIndex = () => {
             url: `admin/login`,
             params: {
              user_code : userCode,
+             user_name : 'userName',
             password : password
             },
           };
@@ -60,8 +61,9 @@ const AdminLoginIndex = () => {
             setSuccess([]);
           } else {
             if (response.data.status == "OK") {
-              history.push(`/admin/dashboard`)
               localStorage.setItem(`LoginProcess`, "true");
+              localStorage.setItem(`Usercode`, userCode);
+              history.push(`/admin/dashboard`)
               setError([]);
             } else {
               setError([response.data.message]);

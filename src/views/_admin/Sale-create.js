@@ -4,8 +4,6 @@ import { CButton, CCard, CCardBody, CCardHeader, CRow, CCol } from '@coreui/reac
 import { useHistory } from 'react-router';
 import axios from 'axios';
 
-
-
 const Add_New_Sale = () => {
 
   const [sales, setSales] = useState([]);

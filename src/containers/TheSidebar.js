@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   CCreateElement,
@@ -13,14 +13,29 @@ import {
   CImg
 } from "@coreui/react";
 
-import CIcon from "@coreui/icons-react";
-
 // sidebar nav config
-import navigation from "./_nav";
+import getNavigation  from "./_nav";
 
 const TheSidebar = () => {
   const dispatch = useDispatch();
   const show = useSelector((state) => state.sidebarShow);
+  // State to hold the user code
+  const [userCode, setUserCode] = useState(localStorage.getItem('Usercode') || '');
+
+  // Effect to update userCode when the component mounts
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setUserCode(localStorage.getItem('Usercode'));
+    };
+
+    // Update userCode when Local Storage changes
+    window.addEventListener('storage', handleStorageChange);
+    
+    // Cleanup listener on unmount
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
 
   return (
     <CSidebar
@@ -38,7 +53,7 @@ const TheSidebar = () => {
       </CSidebarBrand>
       <CSidebarNav>
         <CCreateElement
-          items={navigation}
+          items={getNavigation(userCode)}
           components={{
             CSidebarNavDivider,
             CSidebarNavDropdown,
@@ -48,6 +63,12 @@ const TheSidebar = () => {
           }}
         />
       </CSidebarNav>
+      
+{/* 
+      <div className="sidebar-profile">
+        <p>User: {userCode}</p>
+      </div> */}
+
       {/* <CSidebarMinimizer className="c-d-md-down-none" /> */}
     </CSidebar>
   );

@@ -15,8 +15,6 @@ import {
 import CIcon from '@coreui/icons-react'
 import { useHistory } from 'react-router';
 
-
-
 const Dashboard = () => {
 
   const history = useHistory();
@@ -24,7 +22,7 @@ const Dashboard = () => {
   useEffect(() => {
     let flag = localStorage.getItem(`LoginProcess`)
     if(flag != "true"){
-      history.push(`/Login`);
+      history.push(`/admin-login`);
     }
 }, );
 

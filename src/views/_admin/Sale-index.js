@@ -8,12 +8,13 @@ import { useHistory } from 'react-router';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus,faCirclePlus,faPlusCircle } from '@fortawesome/free-solid-svg-icons'; // Import the plus icon
+import SuccessError from '../common/SuccessError';
 
+const Sale_list = (props) => {
 
+    let {success,error
+    } = props;
 
-
-
-const Sale_list = () => {
 
     const [sales, setSales] = useState([]);
     const [filteredSales, setFilteredSales] = useState([]); // For filtered data
@@ -97,6 +98,8 @@ const Sale_list = () => {
 
 return (
 <>
+<SuccessError success={success} error={error} />
+
 <CCard>
   <CCardHeader>
       <CRow>

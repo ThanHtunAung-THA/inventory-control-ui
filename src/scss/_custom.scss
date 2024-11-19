@@ -124,6 +124,14 @@ main.c-main {
   height: 25px; /* Adjust to your desired height */
   background-size: 25px 25px; /* Match this to width and height for best results */
 }
+.c-sidebar-nav > .profile a::before {
+  background-image: url(/image/user.png);
+  margin-right: 0.5rem;
+  width: 25px; /* Adjust to your desired width */
+  height: 25px; /* Adjust to your desired height */
+  background-size: 25px 25px; /* Match this to width and height for best results */
+  
+}
 .c-sidebar-nav > .logout a::before {
   background-image: url(/image/logout-white.svg);
   margin-right: 0.5rem;
