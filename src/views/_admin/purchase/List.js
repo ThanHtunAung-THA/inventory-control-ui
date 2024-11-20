@@ -8,9 +8,9 @@ import { useHistory } from 'react-router';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus,faCirclePlus,faPlusCircle } from '@fortawesome/free-solid-svg-icons'; // Import the plus icon
-import SuccessError from '../common/SuccessError';
+import SuccessError from '../../common/SuccessError';
 
-const Sale_list = (props) => {
+const List = (props) => {
 
     let {success,error
     } = props;
@@ -87,7 +87,7 @@ const Sale_list = (props) => {
   const columns = [
       { name: 'Date', selector: row => row.date, sortable: true },
       { name: 'User_Code', selector: row => row.user_code, sortable: true },
-      { name: 'Customer', selector: row => row.customer, sortable: true },
+      { name: 'Supplier', selector: row => row.customer, sortable: true },
       { name: 'Location', selector: row => row.location },
       { name: 'Quantity', selector: row => row.quantity, sortable: true },
       { name: 'Total', selector: row => row.total, sortable: true },
@@ -120,10 +120,10 @@ return (
   <CCardHeader>
       <CRow>
           <CCol md="4">
-              <h5>Total Sales: {totalSales}</h5>
+              <h5>Total Purchases: {totalSales}</h5>
           </CCol>
           <CCol md="4">
-              <h5>Total Profit: {totalProfit}</h5>
+              <h5>Total Costs: {totalProfit}</h5>
           </CCol>
           <CCol md="4" className="text-right">
             <CLink href="/admin/sale-new" className="btn link-sale">
@@ -162,4 +162,4 @@ return (
   )
 }
 
-export default Sale_list
+export default List

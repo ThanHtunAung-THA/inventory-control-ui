@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const Add_New_Sale = () => {
+const Create = () => {
 
 return (
 <>
@@ -10,4 +10,4 @@ return (
   )
 }
 
-export default Add_New_Sale
+export default Create

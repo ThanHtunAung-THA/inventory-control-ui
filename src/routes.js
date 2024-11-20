@@ -2,11 +2,14 @@ import React from 'react';
 
 const AdminDashboard = React.lazy(() => import('./views/_admin/Dashboard'));
 
-const AdminSaleList = React.lazy(() => import('./views/_admin/Sale-index'));
-const AdminAddNewSale = React.lazy(() => import('./views/_admin/Sale-create'));
-const AdminEditSale = React.lazy(() => import('./views/_admin/Sale-update'));
+const AdminSaleList = React.lazy(() => import('./views/_admin/sale/List'));
+const AdminSaleAdd = React.lazy(() => import('./views/_admin/sale/Create'));
+const AdminSaleEdit = React.lazy(() => import('./views/_admin/sale/Update'));
 // const AdminDeleteSale = React.lazy(() => import('./views/_admin/Sale-delete'));
-const AdminPurchase = React.lazy(() => import('./views/_admin/Purchase'));
+const AdminPurchaseList = React.lazy(() => import('./views/_admin/purchase/List'));
+const AdminPurchaseAdd = React.lazy(() => import('./views/_admin/purchase/Create'));
+const AdminPurchaseEdit = React.lazy(() => import('./views/_admin/purchase/Update'));
+
 const AdminSetting  = React.lazy(() => import('./views/_admin/AdminSettings'));
 const UserManagement  = React.lazy(() => import('./views/_admin/UserSettings'));
 
@@ -25,11 +28,13 @@ const routes = [
   { path: '/admin/dashboard', name: 'Dashboard', component: AdminDashboard },
 
   { path: '/admin/sale', name: 'Sale Lists', component: AdminSaleList },
-  { path: '/admin/sale-new', name: 'Add New Sale list', component: AdminAddNewSale },
-  { path: '/admin/sale-edit/:id', name: 'Edit Sale list', component: AdminEditSale },
+  { path: '/admin/sale-new', name: 'Add New Sale list', component: AdminSaleAdd },
+  { path: '/admin/sale-edit/:id', name: 'Edit Sale list', component: AdminSaleEdit },
   // { path: '/admin/sale-delete/:id', name: 'Delete Sale list', component: AdminDeleteSale },
 
-  { path: '/admin/purchase', name: 'Purchase Lists', component: AdminPurchase },
+  { path: '/admin/purchase', name: 'Purchase Lists', component: AdminPurchaseList },
+  { path: '/admin/purchase-new', name: 'Add New Purchase list', component: AdminPurchaseAdd },
+  { path: '/admin/purchase-edit/:id', name: 'Edit Purchase list', component: AdminPurchaseEdit },
 
   { path: '/admin/admin-settings', name: 'setting for admin', component: AdminSetting },
   { path: '/admin/user-settings', name: 'setting for user', component: UserManagement },

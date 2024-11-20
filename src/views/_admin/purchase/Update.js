@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import { CButton, CCard, CCardBody, CCardHeader, CRow, CCol } from '@coreui/react';
 import { useHistory } from 'react-router';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 
 
-const Delete_Sale = () => {
+const Update = () => {
+  const { id } = useParams(); // Extract the id from the URL
 
   const [sales, setSales] = useState([]);
   const [totalSales, setTotalSales] = useState(0);
@@ -15,14 +17,22 @@ const Delete_Sale = () => {
 
   useEffect(() => {
 
-    }, []);
+}, []);
+
+
+
+  // Handle adding a new sale
 
 
 return (
 <>
-    <h1>Delete Sale Form</h1>
+  <div>
+      <h1>Edit Sale</h1>
+      <p>Editing sale with ID: {id}</p>
+      {/* Your edit form or logic goes here */}
+  </div>
 </>
   )
 }
 
-export default Delete_Sale
+export default Update

@@ -7,7 +7,7 @@ import axios from 'axios';
 
 
 
-const Edit_Sale = () => {
+const Update = () => {
   const { id } = useParams(); // Extract the id from the URL
 
   const [sales, setSales] = useState([]);
@@ -35,4 +35,4 @@ return (
   )
 }
 
-export default Edit_Sale
+export default Update

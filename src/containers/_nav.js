@@ -5,12 +5,6 @@ const getNavigation = (userCode, userName) => [
     to: '/admin/dashboard',
     className: "dashboard"
   },
-  // {
-  //   _tag: 'CSidebarNavItem',
-  //   name: 'Sale',
-  //   to: '/admin/sale',
-  //   className: "sale-svg"
-  // },
   {
     _tag: 'CSidebarNavDropdown',
     name: 'Sale',
@@ -26,6 +20,24 @@ const getNavigation = (userCode, userName) => [
         _tag: 'CSidebarNavItem',
         name: '+ New Sale',
         to: '/admin/sale-new',
+      }
+    ],
+  },
+  {
+    _tag: 'CSidebarNavDropdown',
+    name: 'Purchase',
+    route: '/admin/purchase',
+    className: "purchase-svg",
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'purchase',
+        to: '/admin/purchase',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: '+ New Purchase',
+        to: '/admin/purchase-new',
       }
     ],
   },
