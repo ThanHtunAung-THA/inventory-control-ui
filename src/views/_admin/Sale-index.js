@@ -34,7 +34,6 @@ const Sale_list = (props) => {
           setSales(response.data.data);
           setFilteredSales(response.data.data); // Initially, filtered data is the same as all data
 
-
           // Calculate total sales and total profit
           const salesTotal = response.data.data.reduce((acc, sale) => acc + sale.total, 0);
           const profitTotal = response.data.data.reduce((acc, sale) => acc + (sale.total - sale.paid), 0);
@@ -67,6 +66,23 @@ const Sale_list = (props) => {
           }
       }
   };
+
+    // Handle search input change
+    const handleSearchChange = (e) => {
+        const value = e.target.value.toLowerCase();
+        setSearchTerm(value);
+
+        // Filter sales based on the search term
+        const filteredData = sales.filter((sale) =>
+            sale.date.toLowerCase().includes(value) ||
+            sale.user_code.toLowerCase().includes(value) ||
+            sale.customer.toLowerCase().includes(value) ||
+            sale.location.toLowerCase().includes(value) ||
+            sale.total.toString().includes(value)
+        );
+
+        setFilteredSales(filteredData);
+    };
 
   const columns = [
       { name: 'Date', selector: row => row.date, sortable: true },
@@ -115,17 +131,31 @@ return (
             </CLink>
           </CCol>
       </CRow>
+
+      <CRow className="mt-3">
+        <CCol md="12">
+            <CInput
+                type="text"
+                placeholder="Search by Date, User Code, Customer, Location, or Total"
+                value={searchTerm}
+                onChange={handleSearchChange}
+            />
+        </CCol>
+    </CRow>
+
   </CCardHeader>
+
   <CCardBody>
       <DataTable
           columns={columns}
-          data={sales}
+          data={filteredSales}
           pagination
           highlightOnHover
           striped
           responsive
       />
   </CCardBody>
+
 </CCard>
 
 </>

@@ -20,12 +20,14 @@ const TheSidebar = () => {
   const dispatch = useDispatch();
   const show = useSelector((state) => state.sidebarShow);
   // State to hold the user code
-  const [userCode, setUserCode] = useState(localStorage.getItem('Usercode') || '');
+  const [userCode, setUserCode] = useState(localStorage.getItem('user-code') || '');
+  const [userName, setUserName] = useState(localStorage.getItem('user-name') || '');
 
   // Effect to update userCode when the component mounts
   useEffect(() => {
     const handleStorageChange = () => {
-      setUserCode(localStorage.getItem('Usercode'));
+      setUserCode(localStorage.getItem('user-code'));
+      setUserName(localStorage.getItem('user-name'));
     };
 
     // Update userCode when Local Storage changes
@@ -53,7 +55,7 @@ const TheSidebar = () => {
       </CSidebarBrand>
       <CSidebarNav>
         <CCreateElement
-          items={getNavigation(userCode)}
+          items={getNavigation(userCode, userName)}
           components={{
             CSidebarNavDivider,
             CSidebarNavDropdown,
