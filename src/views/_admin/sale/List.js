@@ -76,6 +76,7 @@ const List = (props) => {
         const filteredData = sales.filter((sale) =>
             sale.date.toLowerCase().includes(value) ||
             sale.user_code.toLowerCase().includes(value) ||
+            sale.item_code.toLowerCase().includes(value) ||
             sale.customer.toLowerCase().includes(value) ||
             sale.location.toLowerCase().includes(value) ||
             sale.total.toString().includes(value)
@@ -87,6 +88,7 @@ const List = (props) => {
   const columns = [
       { name: 'Date', selector: row => row.date, sortable: true },
       { name: 'User_Code', selector: row => row.user_code, sortable: true },
+      { name: 'Item_Code', selector: row => row.item_code, sortable: true },
       { name: 'Customer', selector: row => row.customer, sortable: true },
       { name: 'Location', selector: row => row.location },
       { name: 'Quantity', selector: row => row.quantity, sortable: true },

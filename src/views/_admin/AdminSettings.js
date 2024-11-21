@@ -36,7 +36,7 @@ const AdminSettings = () => {
     if (flag == "true") {
       console.log("Login process success")
     } else {
-      history.push(`/Login`);
+      history.push(`/admin-login`);
     }
 
     (async () => {
@@ -189,6 +189,7 @@ const AdminSettings = () => {
     }
     setLoading(false);
   }
+  
   return (
     <>
       <CRow>

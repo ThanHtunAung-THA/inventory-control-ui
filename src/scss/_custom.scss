@@ -1096,10 +1096,10 @@ overflow-y: auto;
 //====================>> login page
 .dropdown-toggle, .btn.link-sale {
   background-color: #e07a5f;
-  color: #3e405b !important;
+  color: #fff !important;
 }
 .dropdown-toggle:hover, .btn.link-sale:hover {
-  color: #fff !important;
+  color: #3e405b !important;
 }
 .dropdown-item {
   transition: background-color 0.3s ease;
@@ -1107,12 +1107,12 @@ overflow-y: auto;
 
 .dropdown-item:hover {
   background-color: #e07a5f; /* Change to your desired hover color */
-  color: #fff !important; /* Change text color on hover */
+  color: #3e405b !important; /* Change text color on hover */
 }
 
 .dropdown-item.active {
   background-color: #e07a5f; /* Change to your desired active color */
-  color: #fff; /* Change text color when active */
+  color: #3e405b; /* Change text color when active */
 }
 
 .dropdown-toggle.cdd-sale{
