@@ -20,9 +20,7 @@ const Create = () => {
   const history = useHistory();
   
   const [userCode, setUserCode] = useState(localStorage.getItem(`user-code`) || "");
-  const [saleDate, setSaleDate] = useState(null);
-  const [location, setLocation] = useState("");
-
+  const [customer, setCustomer] = useState("Customer" || "");
   const [itemCode, setItemCode] = useState(
     Array.from({ length: 50 }, (v, i) => ({
       id: (i + 1).toString(),
@@ -30,8 +28,8 @@ const Create = () => {
     }))
   );
   const [selectedItemCode, setSelectedItemCode] = useState("");
-
-  const [customer, setCustomer] = useState("Customer" || "");
+  const [location, setLocation] = useState("");
+  const [saleDate, setSaleDate] = useState(null);
   const [paymentType, setPaymentType] = useState("");
   const [currency, setCurrency] = useState("Kyats");
   const [quantity, setQuantity] = useState(0);
@@ -44,29 +42,30 @@ const Create = () => {
   const [error, setError] = useState([]);
   const [success, setSuccess] = useState([]);
 
-  // useEffect(()=> {
-  //   let flag = localStorage.getItem(`LoginProcess`)
-  //   // let updateFrom = localStorage.getItem(`Update`)
-  //   // localStorage.removeItem('Update')
-  //   // setUpdateID(updateFrom);
-  //   // if (flag == "true") {
+  useEffect(() => {
+
+    let flag = localStorage.getItem(`LoginProcess`)
+    if (flag == "true") {
+      console.log("Login process success")
+    } else {
+      history.push(`/admin-login`);
+    }
+
+    // (async () => {
+    //   setLoading(true);
+    //     await search();
+    //   setLoading(false);
+    // })();
+
+  }, []);
+
     
-  //   //    if(updateFrom != null){
-  //   //       formload();
-  //   //       setUpdateStatus(true);
-          
-  //   //    }
-  //   // } else {
-  //   //   history.push(`/admin-login`);
-  //   // }
-
-  // },[])
-
+  /* 
   useEffect(() => {
     console.log("itemCode check:", selectedItemCode);
   }, [selectedItemCode]);
 
-
+ */
   const userCodeChange = (e) => { setUserCode(e.target.value); }
   const customerNameChange = (e) => { setCustomer(e.target.value); }
   const itemCodeChange = (e) => { setSelectedItemCode(e.target.value); }

@@ -45,7 +45,6 @@ const AdminSettings = () => {
       setLoading(false);
     })();
 
-
   },[])
  
 
@@ -235,16 +234,16 @@ const AdminSettings = () => {
               </CRow>
               <CRow style={{ justifyContent: "center" }} className="mt-4">
               { updateStatus == false && (
-    <CButton className="form-btn" onClick={saveClick}>
-      Save
-    </CButton>
-  )}
-{
-  updateStatus == true && (
-    <CButton className="form-btn" onClick={updateClick}>
-      Update
-    </CButton>
-  )}
+                  <CButton className="form-btn" onClick={saveClick}>
+                    Save
+                  </CButton>
+              )}
+              {
+                updateStatus == true && (
+                  <CButton className="form-btn" onClick={updateClick}>
+                    Update
+                  </CButton>
+              )}
               </CRow>
             </CCardBody>
           </CCard>

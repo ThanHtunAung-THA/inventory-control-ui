@@ -5,6 +5,8 @@ import {
     CDropdown, CDropdownToggle, CDropdownMenu, CDropdownItem
 } from '@coreui/react';
 import { useHistory } from 'react-router';
+// import { useNavigate } from 'react-router-dom';
+
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus,faCirclePlus,faPlusCircle } from '@fortawesome/free-solid-svg-icons'; // Import the plus icon
@@ -22,6 +24,8 @@ const List = (props) => {
     const [totalSales, setTotalSales] = useState(0);
     const [totalProfit, setTotalProfit] = useState(0);
     const history = useHistory();
+    // const navigate = useNavigate();
+
 
   useEffect(() => {
       fetchSales();
@@ -45,21 +49,21 @@ const List = (props) => {
       }
   };
 
-  // Handle adding a new sale
-  const handleAddSale = () => {
-      history.push('/admin/sale-new'); // Adjust route as necessary
-  };
-
 //   Handle edit sale
-  const handleEdit = (id) => {
-      history.push(`/admin/sale-edit/${id}`); // Adjust route as necessary       //to work fully , i must create update page with id accepter
-  };
+const handleEdit = (sale) => {
+    history.push({
+        pathname: `/admin/sale-edit/${sale.id}`,
+        state: { sale } // Pass the entire sale object or specific properties
+    });
+
+    // console.log('check : ', sale);
+};
 
   // Handle delete sale
   const handleDelete = async (id) => {
       if (window.confirm('Are you sure you want to delete this sale?')) {
           try {
-              await axios.delete(`/api/sale/${id}`);
+              await axios.delete(`/api/sale/destroy/${id}`);
               fetchSales(); // Refresh sales list
           } catch (error) {
               console.error('Error deleting sale:', error);
@@ -89,11 +93,14 @@ const List = (props) => {
       { name: 'Date', selector: row => row.date, sortable: true },
       { name: 'User_Code', selector: row => row.user_code, sortable: true },
       { name: 'Item_Code', selector: row => row.item_code, sortable: true },
-      { name: 'Customer', selector: row => row.customer, sortable: true },
+      { name: 'Customer', selector: row => row.customer, sortable: false },
       { name: 'Location', selector: row => row.location },
       { name: 'Quantity', selector: row => row.quantity, sortable: true },
+    //   { name: 'Dis/FOC', selector: row => row.discount_and_foc, sortable: false },
       { name: 'Total', selector: row => row.total, sortable: true },
-      { name: 'Balance', selector: row => row.balance, sortable: true },
+      { name: 'Balance', selector: row => row.balance, sortable: false },
+    //   { selector : row => row.discount_and_foc},
+    //   { selector : row => row.paymentType},
       {
           name: 'Actions',
           cell: row => (
@@ -103,8 +110,9 @@ const List = (props) => {
                         Actions
                     </CDropdownToggle>
                     <CDropdownMenu>
-                        <CDropdownItem href={`/admin/sale-edit/${row.id}`}>Edit</CDropdownItem>
-                        <CDropdownItem onClick={() => handleDelete(row.id)}>Delete</CDropdownItem>
+                        {/* <CDropdownItem href={`/admin/sale-edit/${row.id}`}>Edit</CDropdownItem> */}
+                        <CDropdownItem onClick={ () => handleEdit(row)}>Edit</CDropdownItem>
+                        <CDropdownItem onClick={ () => handleDelete(row.id)}>Delete</CDropdownItem>
                     </CDropdownMenu>
                 </CDropdown>
 
