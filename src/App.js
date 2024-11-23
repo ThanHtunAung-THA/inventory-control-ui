@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import "./scss/style.scss";
 
 const loading = (
@@ -13,6 +13,12 @@ const TheLayout = React.lazy(() => import("./containers/TheLayout"));
 const TheLayout_User = React.lazy(() => import("./containers/UserLayout"));
 
 // Pages
+const UserLoginIndex = React.lazy(() => import("./views/login/UserLoginIndex"));
+const AdminLoginIndex = React.lazy(() => import("./views/login/AdminLoginIndex"));
+const AdminRegister = React.lazy(() => import("./views/login/AdminRegister"));
+const Logout = React.lazy(() => import("./views/logout/LogoutIndex"));
+const UserLogout = React.lazy(() => import("./views/logout/UserLogoutIndex"));
+
 const IndexPage = React.lazy(() => import("./views/home/IndexPage"));
 const ProductsPage = React.lazy(() => import('./views/home/products/ProductsPage'));
 const SupportsPage = React.lazy(() => import('./views/home/supports/SupportsPage'));
@@ -21,10 +27,6 @@ const AboutUsPage = React.lazy(() => import('./views/home/AboutUsPage'));
 const TrialRegister = React.lazy(() => import('./views/home/products/TrialRegister'));
 const PaymentMethods = React.lazy(() => import('./views/home/products/PaymentPage'));
 
-const AdminLoginIndex = React.lazy(() => import("./views/login/AdminLoginIndex"));
-const UserLoginIndex = React.lazy(() => import("./views/login/UserLoginIndex"));
-const Logout = React.lazy(() => import("./views/logout/LogoutIndex"));
-const UserLogout = React.lazy(() => import("./views/logout/UserLogoutIndex"));
 
 const Page404 = React.lazy(() => import("./views/pages/page404/Page404"));
 const Page500 = React.lazy(() => import("./views/pages/page500/Page500"));
@@ -35,11 +37,32 @@ class App extends Component {
       <BrowserRouter>
         <React.Suspense fallback={loading}>
           <Switch>
+            <Route exact path="/" render={() => <Redirect to="/user-login" />} />
+            
+            {/* Auth */}
+            <Route
+              exact
+              path="/user-login"
+              name="User Login Page"
+              render={(props) => <UserLoginIndex {...props} />}
+            />
+            <Route
+              exact
+              path="/admin-login"
+              name="Admin Login Page"
+              render={(props) => <AdminLoginIndex {...props} />}
+            />
+            <Route
+              exact
+              path="/admin-register"
+              name="Admin Register Page"
+              render={(props) => <AdminRegister {...props} />}
+            />
 
             {/* landing pages */}
             <Route
               exact
-              path="/"
+              path="/home"
               name="Home Page"
               render={(props) => <IndexPage {...props} />}
             />
@@ -81,20 +104,6 @@ class App extends Component {
             />
 
             {/* others */}
-
-            {/* Auth */}
-            <Route
-              exact
-              path="/admin-login"
-              name="Admin Login Page"
-              render={(props) => <AdminLoginIndex {...props} />}
-            />
-            <Route
-              exact
-              path="/user-login"
-              name="User Login Page"
-              render={(props) => <UserLoginIndex {...props} />}
-            />
             <Route
               exact
               path="/admin/logout"
