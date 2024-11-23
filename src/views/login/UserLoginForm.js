@@ -16,7 +16,7 @@ const UserLoginForm = (props) => {
 
   return (
 <>
-<div className="min-vh-100  flex-row align-items-center user-login-bg">
+<div className="min-vh-100  flex-row align-items-center login-bg">
 {/* Dropdown button here */}
 <div className="row justify-content-center mb-3 float-right" style={{marginTop:'1px', marginRight:'1px'}}>
   <CDropdown >
@@ -26,7 +26,7 @@ const UserLoginForm = (props) => {
     <CDropdownMenu className="mt-1" style={{borderTopLeftRadius:'15px'}}>
       <CDropdownItem href="/admin-login" >Admin</CDropdownItem>
       <CDropdownItem href="#" header>User</CDropdownItem>
-      <CDropdownItem href="/products">new account?</CDropdownItem>
+      <CDropdownItem href="#" header>new account?</CDropdownItem>
     </CDropdownMenu>
   </CDropdown>
 </div>

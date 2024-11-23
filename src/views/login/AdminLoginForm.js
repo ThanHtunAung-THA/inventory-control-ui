@@ -1,22 +1,23 @@
-import { 
-  CButton, CCard, CCardBody, CCol, CImg, 
-  CInput, CInputGroup, CInputGroupPrepend, CInputGroupText, 
-  CLabel, CRow, 
-  CDropdown, CDropdownToggle, CDropdownMenu, CDropdownItem,
-  CLink } from '@coreui/react';
 import React from 'react'
+import { 
+  CDropdown, CDropdownToggle, CDropdownMenu, CDropdownItem,
+ } from '@coreui/react';
 import SuccessError from '../common/SuccessError';
 
 
 const AdminLoginForm = (props) => {
-    let {loginClick,passwordChange,password,userCodeChange,userCode,success,error
-        } = props;
+    
+  let {
+    loginClick, passwordChange, password, 
+    userCodeChange, userCode,
+    success, error
+  } = props;
 
   return (
 <>
 
-<div className="min-vh-100  flex-row align-items-center user-login-bg">
-{/* Dropdown button here */}
+<div className="min-vh-100  flex-row align-items-center login-bg">
+
 <div className="row justify-content-center mb-3 float-right" style={{marginTop:'1px', marginRight:'1px'}}>
   <CDropdown>
   <CDropdownToggle style={{borderRadius:'0', borderBottomLeftRadius:'15px'}}>
@@ -25,7 +26,7 @@ const AdminLoginForm = (props) => {
   <CDropdownMenu className="mt-1" style={{borderTopLeftRadius:'15px'}}>
       <CDropdownItem href="#" header>Admin</CDropdownItem>
       <CDropdownItem href="/user-login">User</CDropdownItem>
-      <CDropdownItem href="/products">new account?</CDropdownItem>
+      <CDropdownItem href="/admin-register">new account?</CDropdownItem>
     </CDropdownMenu>
   </CDropdown>
 </div>

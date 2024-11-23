@@ -33,7 +33,7 @@ const IndexPage = (props) => {
           src="/image/Inven.jpg"
           width="500"
           className="styled-image img-fluid"  
-          style={{borderRadius:'35px'}}
+          style={{borderRadius:'10px'}}
         />
       </div>
     </div>
