@@ -5,7 +5,7 @@ import {
     CDropdown, CDropdownToggle, CDropdownMenu, CDropdownItem
 } from '@coreui/react';
 import { useHistory } from 'react-router';
-// import { useNavigate } from 'react-router-dom';
+import Swal from "sweetalert2";
 
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,9 +14,7 @@ import SuccessError from '../../common/SuccessError';
 
 const List = (props) => {
 
-    let {success,error
-    } = props;
-
+    let { success, error } = props;
 
     const [sales, setSales] = useState([]);
     const [filteredSales, setFilteredSales] = useState([]); // For filtered data
@@ -24,8 +22,6 @@ const List = (props) => {
     const [totalSales, setTotalSales] = useState(0);
     const [totalProfit, setTotalProfit] = useState(0);
     const history = useHistory();
-    // const navigate = useNavigate();
-
 
   useEffect(() => {
       fetchSales();
@@ -55,28 +51,76 @@ const handleEdit = (sale) => {
         pathname: `/admin/sale-edit/${sale.id}`,
         state: { sale } // Pass the entire sale object or specific properties
     });
-
-    // console.log('check : ', sale);
 };
 
   // Handle delete sale
-  const handleDelete = async (id) => {
-      if (window.confirm('Are you sure you want to delete this sale?')) {
-          try {
-              await axios.delete(`/api/sale/destroy/${id}`);
-              fetchSales(); // Refresh sales list
-          } catch (error) {
-              console.error('Error deleting sale:', error);
-          }
-      }
-  };
+  const handleDelete = async (sale) => {
+    const message = `
+        <div class="container" style="font-family: Arial, sans-serif; line-height: 1.5;">
+            <table class="table table-bordered mt-3">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>User Code</th>
+                        <th>Item Code</th>
+                        <th>Date</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>${sale.id}</td>
+                        <td>${sale.user_code}</td>
+                        <td>${sale.item_code}</td>
+                        <td>${sale.date}</td>
+                        <td>${sale.total}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    `;
+
+    // Show SweetAlert confirmation dialog
+    const result = await Swal.fire({
+        title: 'Delete-Confirmation',
+        // text: message,
+        html: message,
+
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        width: 600,
+        
+    });
+
+    if (result.isConfirmed) {
+        try {
+            await axios.delete(`/api/sale/remove/${sale.id}`);
+            
+            fetchSales();
+
+            Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+              });
+                    
+        } catch (error) {
+            Swal.fire({
+            title: "Error!",
+            text: "Your file has not been deleted.",
+            icon: "warning"
+            });
+        }
+    }
+};
 
     // Handle search input change
     const handleSearchChange = (e) => {
         const value = e.target.value.toLowerCase();
         setSearchTerm(value);
 
-        // Filter sales based on the search term
         const filteredData = sales.filter((sale) =>
             sale.date.toLowerCase().includes(value) ||
             sale.user_code.toLowerCase().includes(value) ||
@@ -96,11 +140,8 @@ const handleEdit = (sale) => {
       { name: 'Customer', selector: row => row.customer, sortable: false },
       { name: 'Location', selector: row => row.location },
       { name: 'Quantity', selector: row => row.quantity, sortable: true },
-    //   { name: 'Dis/FOC', selector: row => row.discount_and_foc, sortable: false },
       { name: 'Total', selector: row => row.total, sortable: true },
       { name: 'Balance', selector: row => row.balance, sortable: false },
-    //   { selector : row => row.discount_and_foc},
-    //   { selector : row => row.paymentType},
       {
           name: 'Actions',
           cell: row => (
@@ -112,7 +153,7 @@ const handleEdit = (sale) => {
                     <CDropdownMenu>
                         {/* <CDropdownItem href={`/admin/sale-edit/${row.id}`}>Edit</CDropdownItem> */}
                         <CDropdownItem onClick={ () => handleEdit(row)}>Edit</CDropdownItem>
-                        <CDropdownItem onClick={ () => handleDelete(row.id)}>Delete</CDropdownItem>
+                        <CDropdownItem onClick={ () => handleDelete(row)}>Delete</CDropdownItem>
                     </CDropdownMenu>
                 </CDropdown>
 

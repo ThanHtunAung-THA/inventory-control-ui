@@ -50,7 +50,6 @@ const AdminLoginForm = (props) => {
           </div>
         </div>
 
-          {/* <SuccessError success={success} error={error} /> */}
 
         <div className='card-body bg-transparent'>
             {/* botside div */}
