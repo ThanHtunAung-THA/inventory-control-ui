@@ -19,6 +19,7 @@ main.c-main {
   padding-left: 2px !important;
   padding-right: 2px !important;
 }
+
 // for side bar profile
 .c-avatar-img{  
     border-radius: unset !important;
@@ -814,7 +815,7 @@ button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disab
   // background: linear-gradient(135deg, #1e3a5f, #2e5379);
   background-size: cover;
 }
-.user-login-bg{
+.login-bg{
   background-image: url('/image/bg-login.jpg');
   // background: linear-gradient(135deg, #dceeff, #ffffff);
   background-size: cover;
@@ -859,7 +860,9 @@ button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disab
   margin-left: 4rem;
 }
 
-.login div.card-body.rounded-bottom.admin, .login div.card-body.rounded-bottom.user {
+.login div.card-body.rounded-bottom.admin, 
+.login div.card-body.rounded-bottom.user,
+.login div.card-body.rounded-bottom.register {
   background-color: #e07a5f;
   padding-top: 12em;
   border-top-left-radius: 1.5rem !important;
@@ -875,6 +878,11 @@ button:not(:disabled), [type="button"]:not(:disabled), [type="reset"]:not(:disab
   border-bottom-right-radius: 0rem !important;
   border-bottom-left-radius: 7rem !important;
 }
+.login div.card-body.rounded-bottom.register {
+  // border-bottom-right-radius: 3.5rem !important;
+  // border-bottom-left-radius: 3.5rem !important;
+}
+
 hr{
   margin: 0;
   width: 100%;
@@ -1119,4 +1127,16 @@ overflow-y: auto;
   width: fit-content !important;
 }
 
+.hint-box {
+  background-color: #f8d7da; /* Light red background */
+  color: #721c24; /* Dark red text */
+  border: 1px solid #f5c6cb; /* Border color */
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px; /* Rounded corners */
+}
+
+
 //====================>> sale page
+
+//====================>> custom ToolTip 

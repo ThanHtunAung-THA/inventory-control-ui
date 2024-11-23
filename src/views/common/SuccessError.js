@@ -18,21 +18,28 @@ const SuccessError = ({ error = [], error2 = [], success = [] }) => {
   const showAlert = (type, messages) => {
     Swal.fire({
       title: type === "success" ? "Success" : "Error",
-      html: messages.map((msg, index) => `<div key=${index}><img src='/image/${type}.svg' width='17' class='mr-1'/> ${msg}</div>`).join(""),
+      html: messages.map((msg, index) => `<div key=${index} class="mb-4"> ${msg} </div>`).join(""),
       width: 600,
       padding: "3em",
       color: type === "success" ? "#28a745" : "#dc3545", // success or error color
       background: "#fff ",
       backdrop: `
-        rgba(0,0,123,0.4)
-        url("/image/nyan-cat-nyan.gif")
-        left top
-        no-repeat
+      rgba(100,100,100,0.8)
+        
       `,
+/* 
+  rgba(0,0,123,0.4)
+  url("/image/nyan-cat-nyan.gif")
+  left top
+  no-repeat
+
+  #ef353594
+  #ff00003b
+*/
+
       confirmButtonText: "Close",
     });
   };
-
   // Trigger the alert whenever error or success messages are passed as props
   useEffect(() => {
     if (errors.length > 0) {
