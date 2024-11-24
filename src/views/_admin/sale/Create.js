@@ -51,21 +51,15 @@ const Create = () => {
       history.push(`/admin-login`);
     }
 
-    // (async () => {
-    //   setLoading(true);
-    //     await search();
-    //   setLoading(false);
-    // })();
+    // loading time
+    setLoading(true);
+    setTimeout( () => {
+        setLoading(false);
+    }, 1000); // 1000 milliseconds = 1 seconds
+
 
   }, []);
 
-    
-  /* 
-  useEffect(() => {
-    console.log("itemCode check:", selectedItemCode);
-  }, [selectedItemCode]);
-
- */
   const userCodeChange = (e) => { setUserCode(e.target.value); }
   const customerNameChange = (e) => { setCustomer(e.target.value); }
   const itemCodeChange = (e) => { setSelectedItemCode(e.target.value); }

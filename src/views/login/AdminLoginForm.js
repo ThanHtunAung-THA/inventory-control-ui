@@ -1,8 +1,9 @@
-import React from 'react'
+import React, {useState,useEffect} from 'react'
 import { 
   CDropdown, CDropdownToggle, CDropdownMenu, CDropdownItem,
  } from '@coreui/react';
 import SuccessError from '../common/SuccessError';
+import Loading from "../common/Loading";
 
 
 const AdminLoginForm = (props) => {
@@ -12,6 +13,16 @@ const AdminLoginForm = (props) => {
     userCodeChange, userCode,
     success, error
   } = props;
+  const [ loading, setLoading ] = useState(false);
+
+  useEffect( () => {
+
+    // loading time
+    setLoading(true);
+    setTimeout( () => {
+        setLoading(false);
+    }, 1000); // 1000 milliseconds = 1 seconds
+}, []);
 
   return (
 <>
@@ -32,6 +43,7 @@ const AdminLoginForm = (props) => {
 </div>
 
 <SuccessError success={success} error={error} />
+{loading && <Loading start={true} />}
 
 <div className="container">
   <div className="row justify-content-center">
@@ -63,7 +75,7 @@ const AdminLoginForm = (props) => {
                     <img src="./image/user.png" width="20" height="20" alt="User Icon"/>
                   </span>
                 </div>
-                <input type="text" className="form-control login-input" placeholder="Enter User Code" autoFocus value={userCode} onChange={userCodeChange}/>
+                <input type="text" className="form-control login-input" placeholder="Enter User-Code or registered Email" autoFocus value={userCode} onChange={userCodeChange}/>
               </div>
             </div>
           </div>

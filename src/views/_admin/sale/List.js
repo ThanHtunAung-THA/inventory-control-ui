@@ -11,10 +11,15 @@ import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus,faCirclePlus,faPlusCircle } from '@fortawesome/free-solid-svg-icons'; // Import the plus icon
 import SuccessError from '../../common/SuccessError';
+import Loading from "../../common/Loading";
 
 const List = (props) => {
 
-    let { success, error } = props;
+    // let { success, error } = props;
+    const [success, setSuccess] = useState([]);
+    const [error, setError] = useState([]);
+
+    const [loading, setLoading] = useState(false); // For Loading
 
     const [sales, setSales] = useState([]);
     const [filteredSales, setFilteredSales] = useState([]); // For filtered data
@@ -23,13 +28,27 @@ const List = (props) => {
     const [totalProfit, setTotalProfit] = useState(0);
     const history = useHistory();
 
+
   useEffect(() => {
+    let flag = localStorage.getItem(`LoginProcess`)
+    if (flag == "true") {
+      console.log("Login process success")
+    } else {
+      history.push(`/admin-login`);
+    }
+
       fetchSales();
   }, []);
 
   // Fetch sales data from API
   const fetchSales = async () => {
+
       try {
+        setLoading(true);
+        // setTimeout( () => {
+        //     setLoading(false);
+        // }, 5000); // 1000 milliseconds = 1 seconds
+
           const response = await axios.get('http://localhost:8000/api/sale/get'); // Adjust the API endpoint as necessary
           setSales(response.data.data);
           setFilteredSales(response.data.data); // Initially, filtered data is the same as all data
@@ -43,18 +62,30 @@ const List = (props) => {
       } catch (error) {
           console.error('Error fetching sales:', error);
       }
+    setTimeout( () => {
+        setLoading(false);
+    }, 1500); // 1000 milliseconds = 1 seconds
+
   };
 
 //   Handle edit sale
 const handleEdit = (sale) => {
-    history.push({
-        pathname: `/admin/sale-edit/${sale.id}`,
-        state: { sale } // Pass the entire sale object or specific properties
-    });
+    setLoading(true);
+
+    setTimeout( () => {
+        setLoading(false);
+
+        history.push({
+            pathname: `/admin/sale-edit/${sale.id}`,
+            state: { sale } // Pass the entire sale object or specific properties
+        });
+    }, 800); // 1000 milliseconds = 1 seconds
+
 };
 
   // Handle delete sale
   const handleDelete = async (sale) => {
+
     const message = `
         <div class="container" style="font-family: Arial, sans-serif; line-height: 1.5;">
             <table class="table table-bordered mt-3">
@@ -96,6 +127,14 @@ const handleEdit = (sale) => {
 
     if (result.isConfirmed) {
         try {
+            setLoading(true);
+
+            setTimeout( () => {
+                setLoading(false);
+        
+            }, 1000); // 1000 milliseconds = 1 seconds
+        
+        
             await axios.delete(`/api/sale/remove/${sale.id}`);
             
             fetchSales();
@@ -114,6 +153,7 @@ const handleEdit = (sale) => {
             });
         }
     }
+    
 };
 
     // Handle search input change
@@ -166,6 +206,7 @@ const handleEdit = (sale) => {
 return (
 <>
 <SuccessError success={success} error={error} />
+{loading && <Loading start={true} />}
 
 <CCard>
   <CCardHeader>

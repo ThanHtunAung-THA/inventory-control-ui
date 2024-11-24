@@ -6,7 +6,6 @@ import {
 import { useHistory } from 'react-router'
 import Loading from "../common/Loading";
 import SuccessError from "../common/SuccessError"; 
-import { ApiRequest } from "../common/ApiRequest";
 import axios from 'axios';
 import { checkNullOrBlank,checkPassword } from "../common/CommonValidation";
 
@@ -14,6 +13,15 @@ import { checkNullOrBlank,checkPassword } from "../common/CommonValidation";
 
 
 const AdminRegister = () => {
+
+  useEffect( () => {
+
+    // loading time
+    setLoading(true);
+    setTimeout( () => {
+        setLoading(false);
+    }, 1000); // 1000 milliseconds = 1 seconds
+}, []);
 
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
@@ -145,25 +153,55 @@ const AdminRegister = () => {
           password: password,
       };
       
-      setLoading(true); 
-      // let response = await ApiRequest(saveData);
+      setLoading(true);
       let response = await axios.post('http://localhost:8000/api/admin/save', saveData);
       if (response.flag === false) {
         setError(response.message);
         setSuccess([]);
       } else {
         if (response.data.status == "OK") {
-          setSuccess([response.data.message]);
-          setSuccess([response.data.data]);
-          reset();
-          setError([]);
+          const [user_code, name, email, password] = response.data.info;
+          let msg = ` 
+            ${response.data.message}. Copy your account info: <br/><br/>
+            <div class="container-fluid">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>User Code</th>
+                            <th>User Name</th>
+                            <th>User Email</th>
+                            <th>User Password</th>
+                          
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                          <td>${user_code} </td>
+                          <td>${name} </td>
+                          <td>${email}</td>
+                          <td>${password} </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        `;
+    
+          // setSuccess([msg]);
+          // setLoading(true);
+          setTimeout( () => {     
+            setLoading(false);       
+            setSuccess([msg]);
+            reset();
+            setError([]);
+        }, 2000); // 1000 milliseconds = 1 seconds
+
           history.push(`/admin-login`);
         } else {
           setError([response.data.message]);
           setSuccess([]);
         }
       }
-      setLoading(false);
+      // setLoading(false);
 
     }
   };
@@ -193,7 +231,7 @@ const AdminRegister = () => {
 </div>
 
 <SuccessError success={success} error={error} />
-{/* <Loading start={loading} /> */}
+{loading && <Loading start={true} />}
 
 <div className="container">
   <div className="row justify-content-center">
@@ -275,7 +313,7 @@ const AdminRegister = () => {
           </div>
 
           <div className="row align-items-center justify-content-center my-4">
-              <button id="login" className="btn btn-primary form-btn login-btn" onClick={saveClick}>Sign up</button> {/* Change col-9 to col-12 */}
+              <button id="login" className="btn btn-primary form-btn login-btn" onClick={saveClick}>Register</button> {/* Change col-9 to col-12 */}
           </div>
         </div>
       </div>

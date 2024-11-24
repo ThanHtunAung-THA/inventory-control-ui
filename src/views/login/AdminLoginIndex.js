@@ -44,15 +44,19 @@ const AdminLoginIndex = () => {
           setError(err);
         }else{
           setError([]);
+
+          const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userCode);
+
           let saveData = {
             method: "get",
             url: `admin/login`,
             params: {
-             user_code : userCode,
-             password : password
+              ...(isEmail ? { email : userCode } : { user_code : userCode }),
+              password : password
             },
           };
           setLoading(true);
+
           let response = await ApiRequest(saveData);
           console.log("response",response);
           if (response.flag === false) {
@@ -63,14 +67,20 @@ const AdminLoginIndex = () => {
               localStorage.setItem(`LoginProcess`, "true");
               localStorage.setItem(`user-code`, response.data.usercode);
               localStorage.setItem(`user-name`, response.data.username);
-              history.push(`/admin/dashboard`)
+              // history.push(`/admin/dashboard`)-
+              // setLoading(true);
+              setTimeout(() => {
+                setLoading(false);
+                history.push(`/admin/dashboard`);
+              }, 1500); 
+
               setError([]);
             } else {
               setError([response.data.message]);
               setSuccess([]);
             }
           }
-          setLoading(false);
+          // setLoading(false);
         }
        
     }

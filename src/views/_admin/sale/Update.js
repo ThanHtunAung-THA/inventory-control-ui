@@ -60,11 +60,11 @@ const Update = () => {
       history.push(`/admin-login`);
     }
 
-    // (async () => {
-    //   setLoading(true);
-    //     await search();
-    //   setLoading(false);
-    // })();
+    // loading time
+    setLoading(true);
+    setTimeout( () => {
+        setLoading(false);
+    }, 1000); // 1000 milliseconds = 1 seconds
 
   }, []);
 
