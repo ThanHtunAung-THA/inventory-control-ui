@@ -187,7 +187,7 @@ const handleEdit = (sale) => {
           cell: row => (
               <>
                 <CDropdown>
-                    <CDropdownToggle color="" size="" className="cdd-sale">
+                    <CDropdownToggle color="" size="" className="cdd-custom">
                         Actions
                     </CDropdownToggle>
                     <CDropdownMenu>
@@ -218,8 +218,8 @@ return (
               <h5>Total Profit: {totalProfit}</h5>
           </CCol>
           <CCol md="4" className="text-right">
-            <CLink href="/admin/sale-new" className="btn link-sale">
-                <FontAwesomeIcon icon={faCirclePlus} /> Add New Sale
+            <CLink href="/admin/sale-new" className="btn link">
+                <FontAwesomeIcon icon={faCirclePlus} /> New Entry
             </CLink>
           </CCol>
       </CRow>

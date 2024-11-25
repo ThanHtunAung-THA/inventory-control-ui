@@ -8,20 +8,16 @@ import axios from 'axios';
 
 const Delete = () => {
 
-  const [sales, setSales] = useState([]);
-  const [totalSales, setTotalSales] = useState(0);
-  const [totalProfit, setTotalProfit] = useState(0);
-  const history = useHistory();
-
-  useEffect(() => {
-
-    }, []);
-
 
 return (
 <>
-    <h1>Delete Sale Form</h1>
+    <h1>Delete Purchase Form</h1>
+
+    
+     {/* TODO:   to implement batch delete process in future */}
+   
 </>
+
   )
 }
 
