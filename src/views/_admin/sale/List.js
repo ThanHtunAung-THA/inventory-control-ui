@@ -13,7 +13,7 @@ import { faPlus,faCirclePlus,faPlusCircle } from '@fortawesome/free-solid-svg-ic
 import SuccessError from '../../common/SuccessError';
 import Loading from "../../common/Loading";
 
-const List = (props) => {
+const List = () => {
 
     // let { success, error } = props;
     const [success, setSuccess] = useState([]);

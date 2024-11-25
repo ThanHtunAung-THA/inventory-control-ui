@@ -264,13 +264,11 @@ main.c-main {
     background: #e07a5f;
     color: #fff !important;
     // bg color from animation
-    background-image: url('/image/left-arrow-back-svgrepo-com.svg'); /* Replace with your image path */
+    background-image: url('/image/left-red-arrow-back-svgrepo-com.svg'); /* Replace with your image path */
     background-repeat: no-repeat; /* Prevent the image from repeating */
     background-position: right center; /* Position the image on the right */
     background-size: 30px 30px; /* Adjust size of the image */
 
-
-    
   }
 
   .c-sidebar .c-sidebar-nav-link:hover,
@@ -279,11 +277,11 @@ main.c-main {
     color: #feec72 !important;
 
     // bg color from animation
-    transition: 1sec ease-out;
-    background-image: url('/image/left-red-arrow-back-svgrepo-com.svg'); /* Replace with your image path */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
-    background-position: right center; /* Position the image on the right */
-    background-size: 30px 30px; /* Adjust size of the image */
+    // transition: 1sec ease-out;
+    // background-image: url('/image/left-red-arrow-back-svgrepo-com.svg'); /* Replace with your image path */
+    // background-repeat: no-repeat; /* Prevent the image from repeating */
+    // background-position: right center; /* Position the image on the right */
+    // background-size: 30px 30px; /* Adjust size of the image */
     
   }
   

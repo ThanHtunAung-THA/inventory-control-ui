@@ -37,7 +37,6 @@ const routes = [
   { path: '/admin/user-settings', name: 'setting for user', component: UserManagement },
 
   
-  
   // ================= User Routes =================
   { path: '/user/dashboard', name: 'User Dashboard', component: UserDashboard },
   

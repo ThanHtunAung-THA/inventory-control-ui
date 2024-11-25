@@ -23,10 +23,10 @@ const SuccessError = ({ error = [], error2 = [], success = [] }) => {
       padding: "3em",
       color: type === "success" ? "#28a745" : "#dc3545", // success or error color
       background: "#fff ",
-      backdrop: `
-      rgba(100,100,100,0.8)
+      backdrop: type === "success" 
+      ? `rgba(100,100,100,0.8)` 
+      : `rgba(100,100,100,0.8) url("/image/confused-unga.gif") left top no-repeat`,
         
-      `,
 /* 
   rgba(0,0,123,0.4)
   url("/image/nyan-cat-nyan.gif")
@@ -40,6 +40,7 @@ const SuccessError = ({ error = [], error2 = [], success = [] }) => {
       confirmButtonText: "Close",
     });
   };
+  
   // Trigger the alert whenever error or success messages are passed as props
   useEffect(() => {
     if (errors.length > 0) {
