@@ -65,11 +65,6 @@ const TheSidebar = () => {
           }}
         />
       </CSidebarNav>
-      
-{/* 
-      <div className="sidebar-profile">
-        <p>User: {userCode}</p>
-      </div> */}
 
       {/* <CSidebarMinimizer className="c-d-md-down-none" /> */}
     </CSidebar>

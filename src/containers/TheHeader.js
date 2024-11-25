@@ -106,7 +106,7 @@ const TheHeader = () => {
         <div className="d-md-down-none mfe-2 c-subheader-nav ">
           <CRow
             className="c-subheader-nav-link"
-            style={{ position: "absolute", right: 0, marginRight: "-40px" }}
+            style={{ position: "absolute", right: 0, marginRight: "-35px" }}
           >
             {/* <CCol
               style={{

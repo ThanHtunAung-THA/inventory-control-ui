@@ -27,82 +27,95 @@ main.c-main {
 .c-sidebar{
     background-image: linear-gradient(to right, #161e29, #3c4654) !important;
 }
+
+/* Common styles for all sidebar icons */
+// .c-sidebar-nav > .nav-item a::before {
+//   content: ''; /* Ensures the pseudo-element is rendered */
+//   margin-right: 0.5rem;
+//   width: 25px; /* Icon width */
+//   height: 25px; /* Icon height */
+//   background-size: 25px 25px; /* Match width and height */
+//   display: inline-block; /* Ensures it's displayed inline with text */
+//   background-repeat: no-repeat; /* Prevents repetition of the image */
+// }
+
+/* Specific icons for each class */
 .c-sidebar-nav > .dashboard a::before {
     background-image: url(/image/dashboard.png);
     margin-right: 0.5rem;
-    width: 25px; /* Adjust to your desired width */
-    height: 25px; /* Adjust to your desired height */
-    background-size: 25px 25px; /* Match this to width and height for best results */
+    width: 15px; /* Adjust to your desired width */
+    height: 15px; /* Adjust to your desired height */
+    background-size: 15px 15px; /* Match this to width and height for best results */
   }
-.c-sidebar-nav > .outstander-svg a::before {
+.c-sidebar-nav > .outstanding-svg a::before {
   background-image: url(/image/employee-management.svg);
   margin-right: 0.5rem;
-  width: 25px; /* Adjust to your desired width */
-  height: 25px; /* Adjust to your desired height */
-  background-size: 25px 25px; /* Match this to width and height for best results */
+  width: 15px; /* Adjust to your desired width */
+  height: 15px; /* Adjust to your desired height */
+  background-size: 15px 15px; /* Match this to width and height for best results */
 }
 .c-sidebar-nav > .cash-svg a::before {
   background-image: url(/image/payment-method-pay-svgrepo-com.svg);
   margin-right: 0.5rem;
-  width: 25px; /* Adjust to your desired width */
-  height: 25px; /* Adjust to your desired height */
-  background-size: 25px 25px; /* Match this to width and height for best results */
+  width: 15px; /* Adjust to your desired width */
+  height: 15px; /* Adjust to your desired height */
+  background-size: 15px 15px; /* Match this to width and height for best results */
 }
 .c-sidebar-nav > .setting-svg a::before {
   background-image: url(/image/settings-gear-svgrepo-com.svg);
   margin-right: 0.5rem;
-  width: 25px; /* Adjust to your desired width */
-  height: 25px; /* Adjust to your desired height */
-  background-size: 25px 25px; /* Match this to width and height for best results */
+  width: 15px; /* Adjust to your desired width */
+  height: 15px; /* Adjust to your desired height */
+  background-size: 15px 15px; /* Match this to width and height for best results */
 }
 .c-sidebar-nav > .list-svg-blue a::before {
   background-image: url(/image/list-menu-svgrepo-com-blue.svg);
   margin-right: 0.5rem;
-  width: 25px; /* Adjust to your desired width */
-  height: 25px; /* Adjust to your desired height */
-  background-size: 25px 25px; /* Match this to width and height for best results */
+  width: 15px; /* Adjust to your desired width */
+  height: 15px; /* Adjust to your desired height */
+  background-size: 15px 15px; /* Match this to width and height for best results */
 }
 .c-sidebar-nav > .list-svg-red a::before {
   background-image: url(/image/list-menu-svgrepo-com-red.svg);
   margin-right: 0.5rem;
-  width: 25px; /* Adjust to your desired width */
-  height: 25px; /* Adjust to your desired height */
-  background-size: 25px 25px; /* Match this to width and height for best results */
+  width: 15px; /* Adjust to your desired width */
+  height: 15px; /* Adjust to your desired height */
+  background-size: 15px 15px; /* Match this to width and height for best results */
 }
 .c-sidebar-nav > .sale-svg a::before {
   background-image: url(/image/sale-svgrepo-com.svg);
   margin-right: 0.5rem;
-  width: 25px; /* Adjust to your desired width */
-  height: 25px; /* Adjust to your desired height */
-  background-size: 25px 25px; /* Match this to width and height for best results */
+  width: 15px; /* Adjust to your desired width */
+  height: 15px; /* Adjust to your desired height */
+  background-size: 15px 15px; /* Match this to width and height for best results */
 }
 .c-sidebar-nav > .purchase-svg a::before {
   background-image: url(/image/shopping-basket-purchase-svgrepo-com.svg);
   margin-right: 0.5rem;
-  width: 25px; /* Adjust to your desired width */
-  height: 25px; /* Adjust to your desired height */
-  background-size: 25px 25px; /* Match this to width and height for best results */
+  width: 15px; /* Adjust to your desired width */
+  height: 15px; /* Adjust to your desired height */
+  background-size: 15px 15px; /* Match this to width and height for best results */
 }
 .c-sidebar-nav > .adjust-svg a::before {
   background-image: url(/image/levels-adjust-svgrepo-com.svg);
   margin-right: 0.5rem;
-  width: 25px; /* Adjust to your desired width */
-  height: 25px; /* Adjust to your desired height */
-  background-size: 25px 25px; /* Match this to width and height for best results */
+  width: 15px; /* Adjust to your desired width */
+  height: 15px; /* Adjust to your desired height */
+  background-size: 15px 15px; /* Match this to width and height for best results */
 }
 .c-sidebar-nav > .stock-svg a::before {
   background-image: url(/image/stock-svgrepo-com.svg);
   margin-right: 0.5rem;
-  width: 25px; /* Adjust to your desired width */
-  height: 25px; /* Adjust to your desired height */
-  background-size: 25px 25px; /* Match this to width and height for best results */
+  width: 15px; /* Adjust to your desired width */
+  height: 15px; /* Adjust to your desired height */
+  background-size: 15px 15px; /* Match this to width and height for best results */
 }
 .c-sidebar-nav > .ledger-svg a::before {
   background-image: url(/image/ledger-svgrepo-com.svg);
   margin-right: 0.5rem;
-  width: 25px; /* Adjust to your desired width */
-  height: 25px; /* Adjust to your desired height */
-  background-size: 25px 25px; /* Match this to width and height for best results */
+  width: 15px; /* Adjust to your desired width */
+  height: 15px; /* Adjust to your desired height */
+  background-size: 15px 15px; /* Match this to width and height for best results */
 }
 .c-sidebar-nav > .user-svg a::before {
   background-image: url(/image/account-settings.png);
@@ -121,9 +134,9 @@ main.c-main {
 .c-sidebar-nav > .shop a::before {
   background-image: url(/image/shop-management.svg);
   margin-right: 0.5rem;
-  width: 25px; /* Adjust to your desired width */
-  height: 25px; /* Adjust to your desired height */
-  background-size: 25px 25px; /* Match this to width and height for best results */
+  width: 15px; /* Adjust to your desired width */
+  height: 15px; /* Adjust to your desired height */
+  background-size: 15px 15px; /* Match this to width and height for best results */
 }
 .c-sidebar-nav > .profile a::before {
   background-image: url(/image/admin-user-web-svgrepo-com.svg);
@@ -248,12 +261,14 @@ main.c-main {
   
   .c-sidebar .c-sidebar-nav-link.c-active {
     // border-radius: 0 5rem 5rem 0;
-    background: #c4cce3;
-    color: #feec72 !important;
+    background: #e07a5f;
+    color: #fff !important;
     // bg color from animation
-    background: linear-gradient(to left, #e07a5f, transparent 100%) right;
-    background-size: 200%;
-    transition: 0.5s ease-out;
+    background-image: url('/image/left-arrow-back-svgrepo-com.svg'); /* Replace with your image path */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-position: right center; /* Position the image on the right */
+    background-size: 30px 30px; /* Adjust size of the image */
+
 
     
   }
@@ -262,16 +277,13 @@ main.c-main {
   .c-sidebar .c-sidebar-nav-dropdown-toggle:hover {
     background: #e07b5f8c;
     color: #feec72 !important;
-    // border-radius: 0 5rem 5rem 0;
-    // animation hover
-    background-size: 200%;
-    transition: 0.5s ease-out;
-    
-    /* Add the arrow image as a background */
-    background-image: url('/image/nyan-cat-nyan.gif'); /* Replace with your image path */
+
+    // bg color from animation
+    transition: 1sec ease-out;
+    background-image: url('/image/left-red-arrow-back-svgrepo-com.svg'); /* Replace with your image path */
     background-repeat: no-repeat; /* Prevent the image from repeating */
     background-position: right center; /* Position the image on the right */
-    background-size: 50px auto; /* Adjust size of the image */
+    background-size: 30px 30px; /* Adjust size of the image */
     
   }
   
@@ -1098,11 +1110,14 @@ overflow-y: auto;
   }
   
 //====================>> login page
-.dropdown-toggle, .btn.link-sale {
+.dropdown-toggle, 
+.btn.link,
+.btn.link-sale,
+.btn.link-purchase{
   background-color: #e07a5f;
   color: #fff !important;
 }
-.dropdown-toggle:hover, .btn.link-sale:hover {
+.dropdown-toggle:hover, .btn.link:hover {
   color: #3e405b !important;
 }
 .dropdown-item {
@@ -1111,7 +1126,7 @@ overflow-y: auto;
 
 .dropdown-item:hover {
   background-color: #e07a5f; /* Change to your desired hover color */
-  color: #3e405b !important; /* Change text color on hover */
+  color: #fff !important; /* Change text color on hover */
 }
 
 .dropdown-item.active {
@@ -1119,7 +1134,7 @@ overflow-y: auto;
   color: #3e405b; /* Change text color when active */
 }
 
-.dropdown-toggle.cdd-sale{
+.dropdown-toggle.cdd-custom{
   width: fit-content !important;
 }
 

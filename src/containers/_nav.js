@@ -5,6 +5,7 @@ const getNavigation = (userCode, userName) => [
     to: '/admin/dashboard',
     className: "dashboard"
   },
+
   {
     _tag: 'CSidebarNavDropdown',
     name: 'Sale',
@@ -13,7 +14,7 @@ const getNavigation = (userCode, userName) => [
     _children: [
       {
         _tag: 'CSidebarNavItem',
-        name: 'sale',
+        name: 'Sale',
         to: '/admin/sale',
       },
       {
@@ -23,6 +24,7 @@ const getNavigation = (userCode, userName) => [
       }
     ],
   },
+
   {
     _tag: 'CSidebarNavDropdown',
     name: 'Purchase',
@@ -43,12 +45,6 @@ const getNavigation = (userCode, userName) => [
   },
 
   {
-    _tag: 'CSidebarNavItem',
-    name: 'Purchase',
-    to: '/admin/purchase',
-    className: "purchase-svg"
-  },
-  {
     _tag: 'CSidebarNavDropdown',
     name: 'Adjust / Convert',
     route: '/admin/adjust-convert',
@@ -66,18 +62,45 @@ const getNavigation = (userCode, userName) => [
       }
     ],
   },
+
   {
-    _tag: 'CSidebarNavItem',
+    _tag: 'CSidebarNavDropdown',
     name: 'Stock Status',
-    to: '/admin/stockstatus',
-    className: "stock-svg"
+    route: '/admin/stockstatus',
+    className: "stock-svg",
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Stock Status',
+        to: '/admin/stockstatus',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: '+ New Stock',
+        to: '/admin/convert',
+      }
+    ],
   },
+
   {
-    _tag: 'CSidebarNavItem',
+    _tag: 'CSidebarNavDropdown',
     name: 'Outstanding',
-    to: '/admin/outstanding',
-    className: "outstander-svg"
+    route: '/admin/outstanding',
+    className: "outstanding-svg",
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Outstanding',
+        to: '/admin/outstanding',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: '+ New Sale',
+        to: '/admin/outstanding-new',
+      }
+    ],
   },
+
   {
     _tag: 'CSidebarNavDropdown',
     name: 'Cash / Bank',
@@ -96,12 +119,26 @@ const getNavigation = (userCode, userName) => [
       }
     ],
   },
+
   {
-    _tag: 'CSidebarNavItem',
+    _tag: 'CSidebarNavDropdown',
     name: 'G-Ledger',
-    to: '/admin/gledger',
-    className: "ledger-svg"
+    route: '/admin/gledger',
+    className: "ledger-svg",
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'G-Ledger',
+        to: '/admin/gledger',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: '+ New G-Ledger',
+        to: '/admin/gledger-new',
+      }
+    ],
   },
+
   {
     _tag: 'CSidebarNavDivider',
     name: '',
