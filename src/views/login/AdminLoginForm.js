@@ -23,7 +23,6 @@ const AdminLoginForm = (props) => {
   const [ loading, setLoading ] = useState(false);
 
 
-
   return (
 <>
 
@@ -49,7 +48,6 @@ const AdminLoginForm = (props) => {
   <div className="row justify-content-center">
     <div className="col-lg-6">
       <div className="card login mt-5">
-
           {/* topside div */}
         <div className="card-body rounded-bottom admin">
           {/* <div className="row justify-content-center mb-3 "> */}
@@ -62,12 +60,9 @@ const AdminLoginForm = (props) => {
             <h2 className="login-title ">Admin Login System</h2>
           </div>
         </div>
-
-
         <div className='card-body bg-transparent'>
             {/* botside div */}
           <div className="row align-items-center mt-4 justify-content-center">
-            
             <div className="col-lg-10">
               <div className="input-group">
                 <div className="input-group-prepend">
@@ -79,11 +74,8 @@ const AdminLoginForm = (props) => {
               </div>
             </div>
           </div>
-
           <br/><br/>
-
           <div className="row align-items-center justify-content-center">
-            
             <div className="col-lg-10">
               <div className="input-group">
                 <div className="input-group-prepend">
@@ -95,9 +87,7 @@ const AdminLoginForm = (props) => {
               </div>
             </div>
           </div>
-
           <br/><br/>
-
           <div className="row align-items-center justify-content-center mb-4">
               <button id="login" className="btn btn-primary form-btn login-btn" onClick={loginClick}>Login</button> {/* Change col-9 to col-12 */}
           </div>
@@ -107,8 +97,6 @@ const AdminLoginForm = (props) => {
   </div>
 </div>
 </div>
-
-
 </>
   )
 }

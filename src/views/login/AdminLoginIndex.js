@@ -63,7 +63,7 @@ const AdminLoginIndex = () => {
               setTimeout(() => {
                 setLoading(false);
                 history.push(`/admin/dashboard`);
-              }, 1500); 
+              }, 500); 
               setError([]);
             } else {
               setError([response.data.message]);
@@ -71,7 +71,7 @@ const AdminLoginIndex = () => {
             }
           }
         }       
-    }
+    };
 
     return(
         <>

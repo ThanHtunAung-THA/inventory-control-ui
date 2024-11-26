@@ -19,15 +19,17 @@ const SuccessError = ({ error = [], error2 = [], success = [] }) => {
     Swal.fire({
       title: type === "success" ? "Success" : "Error",
       html: messages.map((msg, index) => `<div key=${index} class="mb-4"> ${msg} </div>`).join(""),
-      width: 'fit-content',
       padding: "3em",
+      width: type === "success" ? 'fit-content' : "600px",
       color: type === "success" ? "#28a745" : "#dc3545", // success or error color
       background: "#fff ",
       backdrop: type === "success" 
-      ? `rgba(100,100,100,0.8)` 
-      : `rgba(100,100,100,0.8) url("/image/confused-unga.gif") right top no-repeat`,
+      ? `#4276cd9c`
+      : `#b94949cc`,
+      // : `rgba(100,100,100,0.8) url("/image/confused-unga.gif") right top no-repeat`,
         
 /* 
+  `rgba(100,100,100,0.8)` 
   rgba(0,0,123,0.4)
   url("/image/nyan-cat-nyan.gif")
   left top
