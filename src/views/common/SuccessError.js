@@ -25,7 +25,7 @@ const SuccessError = ({ error = [], error2 = [], success = [] }) => {
       background: "#fff ",
       backdrop: type === "success" 
       ? `rgba(100,100,100,0.8)` 
-      : `rgba(100,100,100,0.8) url("/image/confused-unga.gif") left top no-repeat`,
+      : `rgba(100,100,100,0.8) url("/image/confused-unga.gif") right top no-repeat`,
         
 /* 
   rgba(0,0,123,0.4)

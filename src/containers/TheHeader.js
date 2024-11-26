@@ -88,7 +88,7 @@ const TheHeader = () => {
         <TheHeaderDropdown />
       </CHeaderNav> */}
 
-      <CSubheader className="pr-3 pl-1">
+      <CSubheader className="pr-3">
         <CToggler
           inHeader
           className=" d-lg-none "

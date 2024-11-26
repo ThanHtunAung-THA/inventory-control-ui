@@ -7,9 +7,10 @@ header.c-header.c-header-light.c-header-fixed.c-header-with-subheader {
 }
 .c-header-toggler {
   background-color: whitesmoke;
-  border: 1px solid black !important;
-  height: 45px !important;
-  margin-top: 5px !important;
+  border: 1px solid rgba(0, 0, 21, 0.1) !important;
+  border-radius: 0 !important;
+  // height: 45px !important;
+  // margin-top: 5px !important;
 }
 main.c-main {
   padding-top: 0.5rem !important;
@@ -264,7 +265,7 @@ main.c-main {
     background: #e07a5f;
     color: #fff !important;
     // bg color from animation
-    background-image: url('/image/left-red-arrow-back-svgrepo-com.svg'); /* Replace with your image path */
+    background-image: url('/image/right-side-arrow-back-svgrepo-com.svg'); /* Replace with your image path */
     background-repeat: no-repeat; /* Prevent the image from repeating */
     background-position: right center; /* Position the image on the right */
     background-size: 30px 30px; /* Adjust size of the image */
