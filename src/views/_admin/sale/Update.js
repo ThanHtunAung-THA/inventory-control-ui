@@ -18,12 +18,23 @@ import { ApiRequest } from "../../common/ApiRequest";
 import moment from "moment";
 
 const Update = () => {
-  // const {id} = useParams();
-  const objBarier = useLocation();
-  const { sale } = objBarier.state || {}; // Get the sale object from state
-
+  useEffect(() => {
+    let flag = localStorage.getItem(`LoginProcess`)
+    if (flag == "true") {
+      console.log("Login process success")
+      console.log("sale data :", sale)
+    } else {
+      history.push(`/admin-login`);
+    }
+    setLoading(true);
+    setTimeout( () => {
+        setLoading(false);
+    }, 1000); // 1000 milliseconds = 1 seconds
+  }, []);
   const history = useHistory();
 
+  const objBarier = useLocation();
+  const { sale } = objBarier.state || {}; // Get the sale object from state
   const [id, setId] = useState(sale ? sale.id : '');
   const [userCode, setUserCode] = useState(sale ? sale.user_code : '');
   const [customer, setCustomer] = useState(sale ? sale.customer : '');
@@ -35,7 +46,7 @@ const Update = () => {
   );
   const [selectedItemCode, setSelectedItemCode] = useState(sale ? sale.item_code : '');
   const [location, setLocation] = useState(sale ? sale.location : '');
-  const [saleDate, setSaleDate] = useState(sale ? sale.saleDate : null);
+  const [saleDate, setSaleDate] = useState(sale ? sale.date : '');
   const [paymentType, setPaymentType] = useState(sale ? sale.payment_type : '');
   const [currency, setCurrency] = useState(sale ? sale.currency : "Kyats");
   const [quantity, setQuantity] = useState(sale ? sale.quantity : 0);
@@ -48,25 +59,6 @@ const Update = () => {
   const [error, setError] = useState([]);
   const [success, setSuccess] = useState([]);
 
-      // console.log('check : ', sale);
-      // console.log('check2 : ', sale.item_code);
-
-  useEffect(() => {
-
-    let flag = localStorage.getItem(`LoginProcess`)
-    if (flag == "true") {
-      console.log("Login process success")
-    } else {
-      history.push(`/admin-login`);
-    }
-
-    // loading time
-    setLoading(true);
-    setTimeout( () => {
-        setLoading(false);
-    }, 1000); // 1000 milliseconds = 1 seconds
-
-  }, []);
 
   const userCodeChange = (e) => { setUserCode(e.target.value); }
   const customerNameChange = (e) => { setCustomer(e.target.value); }

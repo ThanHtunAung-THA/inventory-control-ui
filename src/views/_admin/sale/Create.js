@@ -17,8 +17,20 @@ import { ApiRequest } from "../../common/ApiRequest";
 import moment from "moment";
 
 const Create = () => {
+  useEffect(() => {
+    let flag = localStorage.getItem(`LoginProcess`)
+    if (flag == "true") {
+      console.log("Login process success")
+    } else {
+      history.push(`/admin-login`);
+    }
+    setLoading(true);
+    setTimeout( () => {
+        setLoading(false);
+    }, 500); // 1000 milliseconds = 1 seconds
+  }, []);
+
   const history = useHistory();
-  
   const [userCode, setUserCode] = useState(localStorage.getItem(`user-code`) || "");
   const [customer, setCustomer] = useState("Customer" || "");
   const [itemCode, setItemCode] = useState(
@@ -29,7 +41,7 @@ const Create = () => {
   );
   const [selectedItemCode, setSelectedItemCode] = useState("");
   const [location, setLocation] = useState("");
-  const [saleDate, setSaleDate] = useState(null);
+  const [saleDate, setSaleDate] = useState( moment().format("YYYY-MM-DD")  || "");
   const [paymentType, setPaymentType] = useState("");
   const [currency, setCurrency] = useState("Kyats");
   const [quantity, setQuantity] = useState(0);
@@ -37,38 +49,37 @@ const Create = () => {
   const [paid, setPaid] = useState(0);
   const [total, setTotal] = useState(0);
   const [balance, setBalance] = useState(0);
-  
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState([]);
   const [success, setSuccess] = useState([]);
 
-  useEffect(() => {
+  const handleInputChange = (setter) => (e) => {
+    setError([]); // Clear errors
+    setSuccess([]); // Clear successes
+    setter(e.target.value); // Update the state with the new value
+  };
+  
+  const userCodeChange = handleInputChange(setUserCode);
+  const customerNameChange = handleInputChange(setCustomer);
+  const itemCodeChange = handleInputChange(setSelectedItemCode);
+  const locationChange = handleInputChange(setLocation);
+  const paymentTypeChange = handleInputChange(setPaymentType);
+  const currencyChange = handleInputChange(setCurrency);
+  const quantityChange = handleInputChange(setQuantity);
+  const discountChange = handleInputChange(setDiscount);
+  const paidChange = handleInputChange(setPaid);
+  const totalChange = handleInputChange(setTotal);
+  const balanceChange = handleInputChange(setBalance);
 
-    let flag = localStorage.getItem(`LoginProcess`)
-    if (flag == "true") {
-      console.log("Login process success")
-    } else {
-      history.push(`/admin-login`);
-    }
-
-    // loading time
-    setLoading(true);
-    setTimeout( () => {
-        setLoading(false);
-    }, 1000); // 1000 milliseconds = 1 seconds
-
-
-  }, []);
-
-  const userCodeChange = (e) => { setUserCode(e.target.value); }
-  const customerNameChange = (e) => { setCustomer(e.target.value); }
-  const itemCodeChange = (e) => { setSelectedItemCode(e.target.value); }
   const saleDateChange = (e) => {
+    setError([]);
+    setSuccess([]);
     let date = "";
     date = moment(e).format("YYYY-MM-DD");
     setSaleDate(date);
   }
 
+  // === submit process ===
   const handleSubmit = async () => {
     setLoading(true);
     let saveData = {
@@ -164,7 +175,7 @@ const Create = () => {
                   <CRow>
                     <CCol lg="4"><p>Location</p></CCol>
                     <CCol lg="8">
-                      <CSelect value={location} onChange={(e) => setLocation(e.target.value)}>
+                      <CSelect value={location} onChange={locationChange} >
                         <option value="">-- Select --</option>
                         <option value="Yangon">Yangon</option>
                         <option value="Mandalay">Mandalay</option>
@@ -196,7 +207,7 @@ const Create = () => {
                   <CRow>
                     <CCol lg="4"><p>Payment Type</p></CCol>
                     <CCol lg="8">
-                      <CSelect value={paymentType} onChange={(e) => setPaymentType(e.target.value)}>
+                      <CSelect value={paymentType} onChange={paymentTypeChange}>
                         <option value="">-- Select --</option>
                         <option value="Cash">Cash</option>
                         <option value="Credit Card">Credit Card</option>
@@ -207,7 +218,7 @@ const Create = () => {
                   <CRow>
                     <CCol lg="4"><p>Currency</p></CCol>
                     <CCol lg="8">
-                      <CSelect value={currency} onChange={(e) => setCurrency(e.target.value)}>
+                      <CSelect value={currency} onChange={currencyChange}>
                         <option value="Kyats">Kyats</option>
                         <option value="USD">USD</option>
                         <option value="EUR">EUR</option>
@@ -217,31 +228,31 @@ const Create = () => {
                   <CRow>
                     <CCol lg="4"><p>Quantity</p></CCol>
                     <CCol lg="8">
-                      <CInput type="number" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
+                      <CInput type="number" value={quantity} onChange={quantityChange} />
                     </CCol>
                   </CRow>
                   <CRow>
                     <CCol lg="4"><p>Discount</p></CCol>
                     <CCol lg="8">
-                      <CInput type="number" value={discount} onChange={(e) => setDiscount(e.target.value)} />
+                      <CInput type="number" value={discount} onChange={discountChange} />
                     </CCol>
                   </CRow>
                   <CRow>
                     <CCol lg="4"><p>Paid</p></CCol>
                     <CCol lg="8">
-                      <CInput type="number" value={paid} onChange={(e) => setPaid(e.target.value)} />
+                      <CInput type="number" value={paid} onChange={paidChange} />
                     </CCol>
                   </CRow>
                   <CRow>
                     <CCol lg="4"><p>Total</p></CCol>
                     <CCol lg="8">
-                      <CInput type="number" value={total} onChange={(e) => setTotal(e.target.value)} />
+                      <CInput type="number" value={total} onChange={totalChange} />
                     </CCol>
                   </CRow>
                   <CRow>
                     <CCol lg="4"><p>Balance</p></CCol>
                     <CCol lg="8">
-                      <CInput type="number" value={balance} onChange={(e) => setBalance(e.target.value)} />
+                      <CInput type="number" value={balance} onChange={balanceChange} />
                     </CCol>
                   </CRow>
                 </CCol>

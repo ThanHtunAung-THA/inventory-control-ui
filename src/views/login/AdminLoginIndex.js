@@ -13,10 +13,7 @@ const AdminLoginIndex = () => {
     const [error, setError] = useState([]); // for error message
     const [userCode, setUserCode] = useState(""); // for shop code
     const [password, setPassword] = useState(""); // for password
-
     let err = [];
-
-
 
     const passwordChange = (e) => {
         setSuccess([]);
@@ -27,26 +24,23 @@ const AdminLoginIndex = () => {
     const userCodeChange = (e) => {
         setSuccess([]);
         setError([]);
-      setUserCode(e.target.value);
+        setUserCode(e.target.value);
     }
 
+    // === submit process ===
     const loginClick = async() => {
-     
         if(!checkNullOrBlank(password)){
             err.push("Please fill password");
         }
         if(!checkNullOrBlank(userCode)){
           err.push("Please fill userCode");
         }
-
         if(err.length > 0) {
           setSuccess([]);
           setError(err);
         }else{
           setError([]);
-
           const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userCode);
-
           let saveData = {
             method: "get",
             url: `admin/login`,
@@ -56,7 +50,6 @@ const AdminLoginIndex = () => {
             },
           };
           setLoading(true);
-
           let response = await ApiRequest(saveData);
           console.log("response",response);
           if (response.flag === false) {
@@ -67,23 +60,19 @@ const AdminLoginIndex = () => {
               localStorage.setItem(`LoginProcess`, "true");
               localStorage.setItem(`user-code`, response.data.usercode);
               localStorage.setItem(`user-name`, response.data.username);
-              // history.push(`/admin/dashboard`)-
-              // setLoading(true);
               setTimeout(() => {
                 setLoading(false);
                 history.push(`/admin/dashboard`);
               }, 1500); 
-
               setError([]);
             } else {
               setError([response.data.message]);
               setSuccess([]);
             }
           }
-          // setLoading(false);
-        }
-       
+        }       
     }
+
     return(
         <>
         <AdminLoginForm

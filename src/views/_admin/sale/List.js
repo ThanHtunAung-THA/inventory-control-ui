@@ -14,73 +14,54 @@ import SuccessError from '../../common/SuccessError';
 import Loading from "../../common/Loading";
 
 const List = () => {
-
-    // let { success, error } = props;
-    const [success, setSuccess] = useState([]);
-    const [error, setError] = useState([]);
-
+    const history = useHistory();
+    useEffect(() => {
+        let flag = localStorage.getItem(`LoginProcess`)
+        if (flag == "true") {
+          console.log("Login process success")
+        } else {
+          history.push(`/admin-login`);
+        }
+    
+          fetchSales();
+      }, []);
+    
     const [loading, setLoading] = useState(false); // For Loading
-
     const [sales, setSales] = useState([]);
     const [filteredSales, setFilteredSales] = useState([]); // For filtered data
     const [searchTerm, setSearchTerm] = useState(''); // For search input
     const [totalSales, setTotalSales] = useState(0);
     const [totalProfit, setTotalProfit] = useState(0);
-    const history = useHistory();
-
-
-  useEffect(() => {
-    let flag = localStorage.getItem(`LoginProcess`)
-    if (flag == "true") {
-      console.log("Login process success")
-    } else {
-      history.push(`/admin-login`);
-    }
-
-      fetchSales();
-  }, []);
+    const [success, setSuccess] = useState([]);
+    const [error, setError] = useState([]);
 
   // Fetch sales data from API
   const fetchSales = async () => {
+        try {
+            setLoading(true);
+            const response = await axios.get('http://localhost:8000/api/sale/get'); // Adjust the API endpoint as necessary
+            setSales(response.data.data);
+            setFilteredSales(response.data.data); // Initially, filtered data is the same as all data
 
-      try {
-        setLoading(true);
-        // setTimeout( () => {
-        //     setLoading(false);
-        // }, 5000); // 1000 milliseconds = 1 seconds
-
-          const response = await axios.get('http://localhost:8000/api/sale/get'); // Adjust the API endpoint as necessary
-          setSales(response.data.data);
-          setFilteredSales(response.data.data); // Initially, filtered data is the same as all data
-
-          // Calculate total sales and total profit
-          const salesTotal = response.data.data.reduce((acc, sale) => acc + sale.total, 0);
-          const profitTotal = response.data.data.reduce((acc, sale) => acc + (sale.total - sale.paid), 0);
-
-          setTotalSales(salesTotal);
-          setTotalProfit(profitTotal);
-      } catch (error) {
-          console.error('Error fetching sales:', error);
-      }
-    setTimeout( () => {
+            // Calculate total sales and total profit
+            const salesTotal = response.data.data.reduce((acc, sale) => acc + sale.total, 0);
+            const profitTotal = response.data.data.reduce((acc, sale) => acc + (sale.total - sale.paid), 0);
+            setTotalSales(salesTotal);
+            setTotalProfit(profitTotal);
+        } catch (error) {
+            console.error('Error fetching sales:', error);
+        }
+        setTimeout( () => {
         setLoading(false);
     }, 1500); // 1000 milliseconds = 1 seconds
-
   };
 
 //   Handle edit sale
 const handleEdit = (sale) => {
-    setLoading(true);
-
-    setTimeout( () => {
-        setLoading(false);
-
-        history.push({
-            pathname: `/admin/sale-edit/${sale.id}`,
-            state: { sale } // Pass the entire sale object or specific properties
-        });
-    }, 800); // 1000 milliseconds = 1 seconds
-
+    history.push({
+        pathname: `/admin/sale-edit/${sale.id}`,
+        state: { sale } // Pass the entire sale object or specific properties
+    });
 };
 
   // Handle delete sale
@@ -191,7 +172,6 @@ const handleEdit = (sale) => {
                         Actions
                     </CDropdownToggle>
                     <CDropdownMenu>
-                        {/* <CDropdownItem href={`/admin/sale-edit/${row.id}`}>Edit</CDropdownItem> */}
                         <CDropdownItem onClick={ () => handleEdit(row)}>Edit</CDropdownItem>
                         <CDropdownItem onClick={ () => handleDelete(row)}>Delete</CDropdownItem>
                     </CDropdownMenu>

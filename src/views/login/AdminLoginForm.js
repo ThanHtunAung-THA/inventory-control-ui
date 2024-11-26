@@ -7,7 +7,14 @@ import Loading from "../common/Loading";
 
 
 const AdminLoginForm = (props) => {
-    
+  useEffect( () => {
+    // loading time
+    setLoading(true);
+    setTimeout( () => {
+        setLoading(false);
+    }, 500); // 1000 milliseconds = 1 seconds
+}, []);
+
   let {
     loginClick, passwordChange, password, 
     userCodeChange, userCode,
@@ -15,14 +22,7 @@ const AdminLoginForm = (props) => {
   } = props;
   const [ loading, setLoading ] = useState(false);
 
-  useEffect( () => {
 
-    // loading time
-    setLoading(true);
-    setTimeout( () => {
-        setLoading(false);
-    }, 1000); // 1000 milliseconds = 1 seconds
-}, []);
 
   return (
 <>
