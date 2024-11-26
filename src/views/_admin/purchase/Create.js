@@ -10,6 +10,7 @@ import {
   CSelect
 } from '@coreui/react';
 import { useHistory } from 'react-router';
+import { checkNullOrBlank,checkPassword } from "../../common/CommonValidation";
 import DatePicker from '../../common/datepicker/DatePicker';
 import Loading from "../../common/Loading";
 import SuccessError from "../../common/SuccessError"; 
@@ -17,7 +18,6 @@ import { ApiRequest } from "../../common/ApiRequest";
 import moment from "moment";
 
 const Create = () => {
-  const history = useHistory();
   useEffect(() => {
     let flag = localStorage.getItem(`LoginProcess`)
     if (flag == "true") {
@@ -31,6 +31,8 @@ const Create = () => {
     }, 500); // 1000 milliseconds = 1 seconds
   }, []);
 
+  let err = [];
+  const history = useHistory();
   const [userCode, setUserCode] = useState(localStorage.getItem(`user-code`) || "");
   const [supplier, setSupplier] = useState("Supplier" || "");
   const [itemCode, setItemCode] = useState(
@@ -81,6 +83,33 @@ const Create = () => {
 
   // === submit process ===
   const handleSubmit = async () => {
+    if(!checkNullOrBlank(userCode)){
+      err.push("Please fill user code");
+    }
+    if(!checkNullOrBlank(supplier)){
+      err.push("Please fill supplier name");
+    }
+    if(!checkNullOrBlank(selectedItemCode)){
+      err.push("Please fill item code");
+    }
+    if(!checkNullOrBlank(location)){
+      err.push("Please fill location");
+    }
+    if(!checkNullOrBlank(purchaseDate)){
+      err.push("Please fill date");
+    }
+    if(!checkNullOrBlank(paymentType)){
+      err.push("Please Choose paymentType");
+    }
+    if(!checkNullOrBlank(currency)){
+      err.push("Please fill currency");
+    }
+    
+    if (err.length > 0) {
+      setSuccess([]);
+      setError(err);
+    } else {
+    setError([]);
     setLoading(true);
     let saveData = {
       method: "post",
@@ -115,7 +144,8 @@ const Create = () => {
       }
     }
     setLoading(false);
-  };
+  }
+};
 
   const resetForm = () => {
     setUserCode(localStorage.getItem(`user-code`));

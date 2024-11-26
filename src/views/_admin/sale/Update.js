@@ -10,7 +10,8 @@ import {
   CSelect
 } from '@coreui/react';
 import { useHistory } from 'react-router';
-import { useParams, useLocation  } from 'react-router-dom';
+import { useLocation  } from 'react-router-dom';
+import { checkNullOrBlank,checkPassword } from "../../common/CommonValidation";
 import DatePicker from '../../common/datepicker/DatePicker';
 import Loading from "../../common/Loading";
 import SuccessError from "../../common/SuccessError"; 
@@ -31,8 +32,9 @@ const Update = () => {
         setLoading(false);
     }, 1000); // 1000 milliseconds = 1 seconds
   }, []);
+  
+  let err = [];
   const history = useHistory();
-
   const objBarier = useLocation();
   const { sale } = objBarier.state || {}; // Get the sale object from state
   const [id, setId] = useState(sale ? sale.id : '');
@@ -69,7 +71,35 @@ const Update = () => {
     setSaleDate(date);
   }
 
+  // === submit process ===
   const handleSubmit = async () => {
+    if(!checkNullOrBlank(userCode)){
+      err.push("Please fill user code");
+    }
+    if(!checkNullOrBlank(customer)){
+      err.push("Please fill customer name");
+    }
+    if(!checkNullOrBlank(selectedItemCode)){
+      err.push("Please fill item code");
+    }
+    if(!checkNullOrBlank(location)){
+      err.push("Please fill location");
+    }
+    if(!checkNullOrBlank(saleDate)){
+      err.push("Please fill date");
+    }
+    if(!checkNullOrBlank(paymentType)){
+      err.push("Please Choose paymentType");
+    }
+    if(!checkNullOrBlank(currency)){
+      err.push("Please fill currency");
+    }
+    
+    if (err.length > 0) {
+      setSuccess([]);
+      setError(err);
+    } else {
+    setError([]);
     setLoading(true);
     let saveData = {
       method: "post",
@@ -97,30 +127,15 @@ const Update = () => {
       if (response.data.status === "OK") {
         setSuccess([response.data.message]);
         setError([]);
-        // resetForm();
-        
       } else {
         setError([response.data.message]);
         setSuccess([]);
       }
     }
     setLoading(false);
-  };
+  }
+};
 
-  const resetForm = () => {
-    setUserCode("");
-    setSaleDate(null);
-    setLocation("");
-    setSelectedItemCode("");
-    setCustomer("");
-    setPaymentType("");
-    setCurrency("");
-    setQuantity(0);
-    setDiscount(0);
-    setPaid(0);
-    setTotal(0);
-    setBalance(0);
-  };
 
 return (
 <>
