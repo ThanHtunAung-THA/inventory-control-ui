@@ -10,7 +10,7 @@ import {
   CSelect
 } from '@coreui/react';
 import { useHistory } from 'react-router';
-import { useParams, useLocation  } from 'react-router-dom';
+import { useLocation  } from 'react-router-dom';
 import DatePicker from '../../common/datepicker/DatePicker';
 import Loading from "../../common/Loading";
 import SuccessError from "../../common/SuccessError"; 
@@ -18,76 +18,81 @@ import { ApiRequest } from "../../common/ApiRequest";
 import moment from "moment";
 
 const Update = () => {
-  // const {id} = useParams();
-  const objBarier = useLocation();
-  const { sale } = objBarier.state || {}; // Get the sale object from state
-
   const history = useHistory();
-
-  const [id, setId] = useState(sale ? sale.id : '');
-  const [userCode, setUserCode] = useState(sale ? sale.user_code : '');
-  const [customer, setCustomer] = useState(sale ? sale.customer : '');
-  const [itemCode, setItemCode] = useState(
-    Array.from({ length: 50 }, (v, i) => ({
-      id: (i + 1).toString(),
-      name: `ITEM00${i + 1}`
-    }))
-  );
-  const [selectedItemCode, setSelectedItemCode] = useState(sale ? sale.item_code : '');
-  const [location, setLocation] = useState(sale ? sale.location : '');
-  const [saleDate, setSaleDate] = useState(sale ? sale.saleDate : null);
-  const [paymentType, setPaymentType] = useState(sale ? sale.payment_type : '');
-  const [currency, setCurrency] = useState(sale ? sale.currency : "Kyats");
-  const [quantity, setQuantity] = useState(sale ? sale.quantity : 0);
-  const [discount, setDiscount] = useState(sale ? sale.discount_and_foc : 0);
-  const [paid, setPaid] = useState(sale ? sale.paid : 0);
-  const [total, setTotal] = useState(sale ? sale.total : '');
-  const [balance, setBalance] = useState(sale ? sale.total : 0);
-  
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState([]);
-  const [success, setSuccess] = useState([]);
-
-      // console.log('check : ', sale);
-      // console.log('check2 : ', sale.item_code);
-
   useEffect(() => {
-
     let flag = localStorage.getItem(`LoginProcess`)
     if (flag == "true") {
       console.log("Login process success")
     } else {
       history.push(`/admin-login`);
     }
-
-    // loading time
     setLoading(true);
     setTimeout( () => {
         setLoading(false);
     }, 1000); // 1000 milliseconds = 1 seconds
-
   }, []);
+  
+  const objBarier = useLocation();
+  const { purchase } = objBarier.state || {}; // Get the purchase object from state
+  const [id, setId] = useState(purchase ? purchase.id : '');
+  const [userCode, setUserCode] = useState(purchase ? purchase.user_code : '');
+  const [supplier, setSupplier] = useState(purchase ? purchase.supplier : '');
+  const [itemCode, setItemCode] = useState(
+    Array.from({ length: 50 }, (v, i) => ({
+      id: (i + 1).toString(),
+      name: `ITEM00${i + 1}`
+    }))
+  );
+  const [selectedItemCode, setSelectedItemCode] = useState(purchase ? purchase.item_code : '');
+  const [location, setLocation] = useState(purchase ? purchase.location : '');
+  const [purchaseDate, setPurchaseDate] = useState(purchase ? purchase.date : null);
+  const [paymentType, setPaymentType] = useState(purchase ? purchase.payment_type : '');
+  const [currency, setCurrency] = useState(purchase ? purchase.currency : "Kyats");
+  const [quantity, setQuantity] = useState(purchase ? purchase.quantity : 0);
+  const [discount, setDiscount] = useState(purchase ? purchase.discount_and_foc : 0);
+  const [paid, setPaid] = useState(purchase ? purchase.paid : 0);
+  const [total, setTotal] = useState(purchase ? purchase.total : '');
+  const [balance, setBalance] = useState(purchase ? purchase.total : 0);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState([]);
+  const [success, setSuccess] = useState([]);
 
-  const userCodeChange = (e) => { setUserCode(e.target.value); }
-  const customerNameChange = (e) => { setCustomer(e.target.value); }
-  const itemCodeChange = (e) => { setSelectedItemCode(e.target.value); }
-  const saleDateChange = (e) => {
+  const handleInputChange = (setter) => (e) => {
+    setError([]); // Clear errors
+    setSuccess([]); // Clear successes
+    setter(e.target.value); // Update the state with the new value
+  };
+  
+  const userCodeChange = handleInputChange(setUserCode);
+  const supplierNameChange = handleInputChange(setSupplier);
+  const itemCodeChange = handleInputChange(setSelectedItemCode);
+  const locationChange = handleInputChange(setLocation);
+  const paymentTypeChange = handleInputChange(setPaymentType);
+  const currencyChange = handleInputChange(setCurrency);
+  const quantityChange = handleInputChange(setQuantity);
+  const discountChange = handleInputChange(setDiscount);
+  const paidChange = handleInputChange(setPaid);
+  const totalChange = handleInputChange(setTotal);
+  const balanceChange = handleInputChange(setBalance);
+
+  const purchaseDateChange = (e) => {
     let date = "";
     date = moment(e).format("YYYY-MM-DD");
-    setSaleDate(date);
+    setPurchaseDate(date);
   }
 
+  // === submit process ===
   const handleSubmit = async () => {
     setLoading(true);
     let saveData = {
       method: "post",
-      url: `sale/edit/${id}`,
+      url: `purchase/edit/${id}`,
       params: {
-        date: moment(saleDate).format("YYYY-MM-DD"),
+        date: moment(purchaseDate).format("YYYY-MM-DD"),
         user_code: userCode,
         item_code: selectedItemCode,
         location: location,
-        customer: customer,
+        supplier: supplier,
         payment_type: paymentType,
         currency: currency,
         quantity: quantity,
@@ -115,21 +120,6 @@ const Update = () => {
     setLoading(false);
   };
 
-  const resetForm = () => {
-    setUserCode("");
-    setSaleDate(null);
-    setLocation("");
-    setSelectedItemCode("");
-    setCustomer("");
-    setPaymentType("");
-    setCurrency("");
-    setQuantity(0);
-    setDiscount(0);
-    setPaid(0);
-    setTotal(0);
-    setBalance(0);
-  };
-
 return (
 <>
   <CRow>
@@ -137,7 +127,7 @@ return (
       <SuccessError success={success} error={error} />
       <CCard>
         <CCardHeader>
-          <h4 className='m-0'>Edit Sale Entry for Sale-list-ID #{id}</h4>
+          <h4 className='m-0'>New Purchase Entry</h4>
         </CCardHeader>
         <CCardBody>
           <CRow>
@@ -146,14 +136,12 @@ return (
                 <CCol lg="4"><p>User Code</p></CCol>
                 <CCol lg="8"><CInput type="text" value={userCode} onChange={userCodeChange} /></CCol>
               </CRow>
-
               <CRow>
-                <CCol lg="4"><p>Customer</p></CCol>
+                <CCol lg="4"><p>Supplier</p></CCol>
                 <CCol lg="8">
-                  <CInput type="text" value={customer} onChange={customerNameChange} />
+                  <CInput type="text" value={supplier} onChange={supplierNameChange} />
                 </CCol>
               </CRow>
-
               <CRow>
                 <CCol lg="4"><p>Item ID</p></CCol>
                 <CCol lg="8">
@@ -169,11 +157,10 @@ return (
                   </CSelect>
                 </CCol>
               </CRow>
-
               <CRow>
                 <CCol lg="4"><p>Location</p></CCol>
                 <CCol lg="8">
-                  <CSelect value={location} onChange={(e) => setLocation(e.target.value)}>
+                  <CSelect value={location} onChange={locationChange} >
                     <option value="">-- Select --</option>
                     <option value="Yangon">Yangon</option>
                     <option value="Mandalay">Mandalay</option>
@@ -183,29 +170,18 @@ return (
                   </CSelect>
                 </CCol>
               </CRow>
-
               <CRow>
                 <CCol lg="4"><p>Date</p></CCol>
                 <CCol lg="8">
-                  <DatePicker value={saleDate } change={saleDateChange} />
-
+                  <DatePicker value={purchaseDate } change={purchaseDateChange} />
                 </CCol>
               </CRow>
-
-              {/* <CRow>
-                <CCol lg="4"><p>Item ID</p></CCol>
-                <CCol lg="8">
-                  <CInput type="text" value={itemId} onChange={(e) => setItemId(e.target.value)} />
-                </CCol>
-              </CRow> */}
-
             </CCol>
-
             <CCol lg="6">
               <CRow>
                 <CCol lg="4"><p>Payment Type</p></CCol>
                 <CCol lg="8">
-                  <CSelect value={paymentType} onChange={(e) => setPaymentType(e.target.value)}>
+                  <CSelect value={paymentType} onChange={paymentTypeChange}>
                     <option value="">-- Select --</option>
                     <option value="Cash">Cash</option>
                     <option value="Credit Card">Credit Card</option>
@@ -216,7 +192,7 @@ return (
               <CRow>
                 <CCol lg="4"><p>Currency</p></CCol>
                 <CCol lg="8">
-                  <CSelect value={currency} onChange={(e) => setCurrency(e.target.value)}>
+                  <CSelect value={currency} onChange={currencyChange}>
                     <option value="Kyats">Kyats</option>
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>
@@ -226,31 +202,31 @@ return (
               <CRow>
                 <CCol lg="4"><p>Quantity</p></CCol>
                 <CCol lg="8">
-                  <CInput type="number" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
+                  <CInput type="number" value={quantity} onChange={quantityChange} />
                 </CCol>
               </CRow>
               <CRow>
                 <CCol lg="4"><p>Discount</p></CCol>
                 <CCol lg="8">
-                  <CInput type="number" value={discount} onChange={(e) => setDiscount(e.target.value)} />
+                  <CInput type="number" value={discount} onChange={discountChange} />
                 </CCol>
               </CRow>
               <CRow>
                 <CCol lg="4"><p>Paid</p></CCol>
                 <CCol lg="8">
-                  <CInput type="number" value={paid} onChange={(e) => setPaid(e.target.value)} />
+                  <CInput type="number" value={paid} onChange={paidChange} />
                 </CCol>
               </CRow>
               <CRow>
                 <CCol lg="4"><p>Total</p></CCol>
                 <CCol lg="8">
-                  <CInput type="number" value={total} onChange={(e) => setTotal(e.target.value)} />
+                  <CInput type="number" value={total} onChange={totalChange} />
                 </CCol>
               </CRow>
               <CRow>
                 <CCol lg="4"><p>Balance</p></CCol>
                 <CCol lg="8">
-                  <CInput type="number" value={balance} onChange={(e) => setBalance(e.target.value)} />
+                  <CInput type="number" value={balance} onChange={balanceChange} />
                 </CCol>
               </CRow>
             </CCol>
@@ -265,9 +241,8 @@ return (
     </CCol>
   </CRow>
   <Loading start={loading} />
-
 </>
-  )
-}
+  );
+};
 
 export default Update

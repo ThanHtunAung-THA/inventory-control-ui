@@ -13,7 +13,7 @@ import { faPlus,faCirclePlus,faPlusCircle } from '@fortawesome/free-solid-svg-ic
 import SuccessError from '../../common/SuccessError';
 import Loading from "../../common/Loading";
 
-const List = (props) => {
+const List = () => {
 
     // let { success, error } = props;
     const [success, setSuccess] = useState([]);
@@ -70,22 +70,14 @@ const List = (props) => {
 
 //   Handle edit purchase
 const handleEdit = (purchase) => {
-    setLoading(true);
-
-    setTimeout( () => {
-        setLoading(false);
-
-        history.push({
-            pathname: `/admin/purchase-edit/${purchase.id}`,
-            state: { purchase } // Pass the entire purchase object or specific properties
-        });
-    }, 800); // 1000 milliseconds = 1 seconds
-
+    history.push({
+        pathname: `/admin/purchase-edit/${purchase.id}`,
+        state: { purchase } // Pass the entire purchase object or specific properties
+    });
 };
 
   // Handle delete purchase
   const handleDelete = async (purchase) => {
-
     const message = `
         <div class="container" style="font-family: Arial, sans-serif; line-height: 1.5;">
             <table class="table table-bordered mt-3">
@@ -116,7 +108,6 @@ const handleEdit = (purchase) => {
         title: 'Delete-Confirmation',
         // text: message,
         html: message,
-
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Yes, delete it!',
@@ -128,23 +119,16 @@ const handleEdit = (purchase) => {
     if (result.isConfirmed) {
         try {
             setLoading(true);
-
+            await axios.delete(`/api/purchase/remove/${purchase.id}`);
+            fetchPurchases();
             setTimeout( () => {
                 setLoading(false);
-        
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                    });
             }, 1000); // 1000 milliseconds = 1 seconds
-        
-        
-            await axios.delete(`/api/purchase/remove/${purchase.id}`);
-            
-            fetchPurchases();
-
-            Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success"
-              });
-                    
         } catch (error) {
             Swal.fire({
             title: "Error!",
@@ -165,7 +149,7 @@ const handleEdit = (purchase) => {
             purchase.date.toLowerCase().includes(value) ||
             purchase.user_code.toLowerCase().includes(value) ||
             purchase.item_code.toLowerCase().includes(value) ||
-            purchase.customer.toLowerCase().includes(value) ||
+            purchase.supplier.toLowerCase().includes(value) ||
             purchase.location.toLowerCase().includes(value) ||
             purchase.total.toString().includes(value)
         );
@@ -177,7 +161,7 @@ const handleEdit = (purchase) => {
       { name: 'Date', selector: row => row.date, sortable: true },
       { name: 'User_Code', selector: row => row.user_code, sortable: true },
       { name: 'Item_Code', selector: row => row.item_code, sortable: true },
-      { name: 'Customer', selector: row => row.customer, sortable: false },
+      { name: 'Supplier', selector: row => row.supplier, sortable: false },
       { name: 'Location', selector: row => row.location },
       { name: 'Quantity', selector: row => row.quantity, sortable: true },
       { name: 'Total', selector: row => row.total, sortable: true },
@@ -196,60 +180,53 @@ const handleEdit = (purchase) => {
                         <CDropdownItem onClick={ () => handleDelete(row)}>Delete</CDropdownItem>
                     </CDropdownMenu>
                 </CDropdown>
-
-
              </>
           )
       }
-  ];
+    ];
 
 return (
 <>
-<SuccessError success={success} error={error} />
-{loading && <Loading start={true} />}
+    <SuccessError success={success} error={error} />
+    {loading && <Loading start={true} />}
 
-<CCard>
-  <CCardHeader>
-      <CRow>
-          <CCol md="4">
-              <h5>Total Purchases: {totalPurchases}</h5>
-          </CCol>
-          <CCol md="4">
-              <h5>Total Profit: {totalProfit}</h5>
-          </CCol>
-          <CCol md="4" className="text-right">
-            <CLink href="/admin/purchase-new" className="btn link">
-                <FontAwesomeIcon icon={faCirclePlus} /> New Entry
-            </CLink>
-          </CCol>
-      </CRow>
-
-      <CRow className="mt-3">
-        <CCol md="12">
-            <CInput
-                type="text"
-                placeholder="Search by Date, User Code, Customer, Location, or Total"
-                value={searchTerm}
-                onChange={handleSearchChange}
+    <CCard>
+        <CCardHeader>
+            <CRow>
+                <CCol md="4">
+                    <h5>Total Purchases: {totalPurchases}</h5>
+                </CCol>
+                <CCol md="4">
+                    <h5>Total Profit: {totalProfit}</h5>
+                </CCol>
+                <CCol md="4" className="text-right">
+                    <CLink href="/admin/purchase-new" className="btn link">
+                        <FontAwesomeIcon icon={faCirclePlus} /> New Entry
+                    </CLink>
+                </CCol>
+            </CRow>
+            <CRow className="mt-3">
+                <CCol md="12">
+                    <CInput
+                        type="text"
+                        placeholder="Search by Date, User Code, Supplier, Location, or Total"
+                        value={searchTerm}
+                        onChange={handleSearchChange}
+                    />
+                </CCol>
+            </CRow>
+        </CCardHeader>
+        <CCardBody>
+            <DataTable
+                columns={columns}
+                data={filteredPurchases}
+                pagination
+                highlightOnHover
+                striped
+                responsive
             />
-        </CCol>
-    </CRow>
-
-  </CCardHeader>
-
-  <CCardBody>
-      <DataTable
-          columns={columns}
-          data={filteredPurchases}
-          pagination
-          highlightOnHover
-          striped
-          responsive
-      />
-  </CCardBody>
-
-</CCard>
-
+        </CCardBody>
+    </CCard>
 </>
   )
 }
