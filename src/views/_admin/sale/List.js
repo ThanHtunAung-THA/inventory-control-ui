@@ -6,7 +6,7 @@ import {
 } from '@coreui/react';
 import { useHistory } from 'react-router';
 import Swal from "sweetalert2";
-
+import ConfirmationWithTable from '../../common/ConfirmationWithTable';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus,faCirclePlus,faPlusCircle } from '@fortawesome/free-solid-svg-icons'; // Import the plus icon
@@ -57,56 +57,45 @@ const List = () => {
   };
 
 //   Handle edit sale
-const handleEdit = (sale) => {
-    history.push({
-        pathname: `/admin/sale-edit/${sale.id}`,
-        state: { sale } // Pass the entire sale object or specific properties
-    });
+const handleEdit = async  (sale) => {
+
+    const msgTitle = 'Edit Confirmation';
+    const msgBody = [ 
+        { label: 'ID', value: sale.id }, 
+        { label: 'User  Code', value: sale.user_code }, 
+        { label: 'Item Code', value: sale.item_code }, 
+        { label: 'Date', value: sale.date }, 
+        { label: 'Total', value: sale.total } 
+    ];
+    const msgBtn1 = 'Proceed to edit';
+    const msgBtn2 = 'Cancel';
+    
+    const isConfirmed = await ConfirmationWithTable( msgTitle, msgBody, msgBtn1, msgBtn2 );
+
+    if (isConfirmed) {
+        history.push({
+            pathname: `/admin/sale-edit/${sale.id}`,
+            state: { sale }
+        });
+    }
 };
 
   // Handle delete sale
   const handleDelete = async (sale) => {
+    const msgTitle = 'Delete Confirmation';
+    const msgBody = [ 
+        { label: 'ID', value: sale.id }, 
+        { label: 'User  Code', value: sale.user_code }, 
+        { label: 'Item Code', value: sale.item_code }, 
+        { label: 'Date', value: sale.date }, 
+        { label: 'Total', value: sale.total } 
+    ];
+    const msgBtn1 = 'Proceed to Delete';
+    const msgBtn2 = 'Cancel';
+    
+    const isConfirmed = await ConfirmationWithTable( msgTitle, msgBody, msgBtn1, msgBtn2 );
 
-    const message = `
-        <div class="container" style="font-family: Arial, sans-serif; line-height: 1.5;">
-            <table class="table table-bordered mt-3">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>User Code</th>
-                        <th>Item Code</th>
-                        <th>Date</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>${sale.id}</td>
-                        <td>${sale.user_code}</td>
-                        <td>${sale.item_code}</td>
-                        <td>${sale.date}</td>
-                        <td>${sale.total}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    `;
-
-    // Show SweetAlert confirmation dialog
-    const result = await Swal.fire({
-        title: 'Delete-Confirmation',
-        // text: message,
-        html: message,
-
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, cancel!',
-        width: 600,
-        
-    });
-
-    if (result.isConfirmed) {
+    if (isConfirmed) {
         try {
             setLoading(true);
 
@@ -134,8 +123,7 @@ const handleEdit = (sale) => {
             });
         }
     }
-    
-};
+  };
 
     // Handle search input change
     const handleSearchChange = (e) => {
@@ -183,54 +171,53 @@ const handleEdit = (sale) => {
       }
   ];
 
-return (
-<>
-<SuccessError success={success} error={error} />
-{loading && <Loading start={true} />}
+  return (
+    <>
+        <SuccessError success={success} error={error} />
+        {loading && <Loading start={true} />}
 
-<CCard>
-  <CCardHeader>
-      <CRow>
-          <CCol md="4">
-              <h5>Total Sales: {totalSales}</h5>
-          </CCol>
-          <CCol md="4">
-              <h5>Total Profit: {totalProfit}</h5>
-          </CCol>
-          <CCol md="4" className="text-right">
-            <CLink href="/admin/sale-new" className="btn link">
-                <FontAwesomeIcon icon={faCirclePlus} /> New Entry
-            </CLink>
-          </CCol>
-      </CRow>
+        <CCard>
+            <CCardHeader>
+                <CRow>
+                    <CCol md="4">
+                        <h5>Total Sales: {totalSales}</h5>
+                    </CCol>
+                    <CCol md="4">
+                        <h5>Total Profit: {totalProfit}</h5>
+                    </CCol>
+                    <CCol md="4" className="text-right">
+                        <CLink href="/admin/sale-new" className="btn link">
+                            <FontAwesomeIcon icon={faCirclePlus} /> New Entry
+                        </CLink>
+                    </CCol>
+                </CRow>
 
-      <CRow className="mt-3">
-        <CCol md="12">
-            <CInput
-                type="text"
-                placeholder="Search by Date, User Code, Customer, Location, or Total"
-                value={searchTerm}
-                onChange={handleSearchChange}
-            />
-        </CCol>
-    </CRow>
+                <CRow className="mt-3">
+                    <CCol md="12">
+                        <CInput
+                            type="text"
+                            placeholder="Search by Date, User Code, Customer, Location, or Total"
+                            value={searchTerm}
+                            onChange={handleSearchChange}
+                        />
+                    </CCol>
+                </CRow>
 
-  </CCardHeader>
+            </CCardHeader>
 
-  <CCardBody>
-      <DataTable
-          columns={columns}
-          data={filteredSales}
-          pagination
-          highlightOnHover
-          striped
-          responsive
-      />
-  </CCardBody>
+            <CCardBody>
+                <DataTable
+                    columns={columns}
+                    data={filteredSales}
+                    pagination
+                    highlightOnHover
+                    striped
+                    responsive
+                />
+            </CCardBody>
 
-</CCard>
-
-</>
+        </CCard>
+    </>
   )
 }
 

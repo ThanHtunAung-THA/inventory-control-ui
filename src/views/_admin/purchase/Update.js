@@ -14,7 +14,8 @@ import { useLocation  } from 'react-router-dom';
 import { checkNullOrBlank,checkPassword } from "../../common/CommonValidation";
 import DatePicker from '../../common/datepicker/DatePicker';
 import Loading from "../../common/Loading";
-import SuccessError from "../../common/SuccessError"; 
+import SuccessError from "../../common/SuccessError";
+import ConfirmationWithTable from '../../common/ConfirmationWithTable';
 import { ApiRequest } from "../../common/ApiRequest";
 import moment from "moment";
 
@@ -23,13 +24,14 @@ const Update = () => {
     let flag = localStorage.getItem(`LoginProcess`)
     if (flag == "true") {
       console.log("Login process success")
+      console.log("purchase data :", purchase)
     } else {
       history.push(`/admin-login`);
     }
     setLoading(true);
     setTimeout( () => {
         setLoading(false);
-    }, 1000); // 1000 milliseconds = 1 seconds
+    }, 500); // 1000 milliseconds = 1 seconds
   }, []);
   
   let err = [];
@@ -47,17 +49,18 @@ const Update = () => {
   );
   const [selectedItemCode, setSelectedItemCode] = useState(purchase ? purchase.item_code : '');
   const [location, setLocation] = useState(purchase ? purchase.location : '');
-  const [purchaseDate, setPurchaseDate] = useState(purchase ? purchase.date : null);
+  const [purchaseDate, setPurchaseDate] = useState(purchase ? purchase.date : '');
   const [paymentType, setPaymentType] = useState(purchase ? purchase.payment_type : '');
   const [currency, setCurrency] = useState(purchase ? purchase.currency : "Kyats");
   const [quantity, setQuantity] = useState(purchase ? purchase.quantity : 0);
   const [discount, setDiscount] = useState(purchase ? purchase.discount_and_foc : 0);
   const [paid, setPaid] = useState(purchase ? purchase.paid : 0);
   const [total, setTotal] = useState(purchase ? purchase.total : '');
-  const [balance, setBalance] = useState(purchase ? purchase.total : 0);
+  const [balance, setBalance] = useState(purchase ? purchase.balance : 0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState([]);
   const [success, setSuccess] = useState([]);
+
 
   const handleInputChange = (setter) => (e) => {
     setError([]); // Clear errors
@@ -111,40 +114,55 @@ const Update = () => {
       setSuccess([]);
       setError(err);
     } else {
-    setError([]);
-    setLoading(true);
-    let saveData = {
-      method: "post",
-      url: `purchase/edit/${id}`,
-      params: {
-        date: moment(purchaseDate).format("YYYY-MM-DD"),
-        user_code: userCode,
-        item_code: selectedItemCode,
-        location: location,
-        supplier: supplier,
-        payment_type: paymentType,
-        currency: currency,
-        quantity: quantity,
-        discount_and_foc: discount,
-        paid: paid,
-        total: total,
-        balance: balance,
-      },
-    };
-    let response = await ApiRequest(saveData);
-    if (response.flag === false) {
-      setError(response.message);
-      setSuccess([]);
-    } else {
-      if (response.data.status === "OK") {
-        setSuccess([response.data.message]);
-        setError([]);
-      } else {
-        setError([response.data.message]);
+
+    const msgTitle = 'Edit Confirmation';
+    const msgBody = [ 
+        { label: 'User  Code', value: userCode }, 
+        { label: 'Item Code', value: selectedItemCode }, 
+        { label: 'Date', value: purchaseDate }, 
+        { label: 'Total', value: total } 
+    ];
+    const msgBtn1 = 'Edit';
+    const msgBtn2 = 'Cancel';
+    
+    const isConfirmed = await ConfirmationWithTable( msgTitle, msgBody, msgBtn1, msgBtn2 );
+
+    if (isConfirmed) {
+      setError([]);
+      setLoading(true);
+      let saveData = {
+        method: "post",
+        url: `purchase/edit/${id}`,
+        params: {
+          date: moment(purchaseDate).format("YYYY-MM-DD"),
+          user_code: userCode,
+          item_code: selectedItemCode,
+          location: location,
+          supplier: supplier,
+          payment_type: paymentType,
+          currency: currency,
+          quantity: quantity,
+          discount_and_foc: discount,
+          paid: paid,
+          total: total,
+          balance: balance,
+        },
+      };
+      let response = await ApiRequest(saveData);
+      if (response.flag === false) {
+        setError(response.message);
         setSuccess([]);
+      } else {
+        if (response.data.status === "OK") {
+          setSuccess([response.data.message]);
+          setError([]);
+        } else {
+          setError([response.data.message]);
+          setSuccess([]);
+        }
       }
+      setLoading(false);
     }
-    setLoading(false);
   }
 };
 
@@ -156,7 +174,7 @@ return (
       <SuccessError success={success} error={error} />
       <CCard>
         <CCardHeader>
-          <h4 className='m-0'>New Purchase Entry</h4>
+          <h4 className='m-0'>Edit Entry for Purchase-list-ID #{id}</h4>
         </CCardHeader>
         <CCardBody>
           <CRow>
@@ -271,7 +289,7 @@ return (
   </CRow>
   <Loading start={loading} />
 </>
-  );
-};
+  )
+}
 
 export default Update

@@ -1182,3 +1182,9 @@ overflow-y: auto;
   animation-name: play60;
   animation-iteration-count: infinite;
 }
+
+// ====================>> for swal2 alert box customization
+
+button.swal2-styled {
+  width: 12.5rem !important;
+}

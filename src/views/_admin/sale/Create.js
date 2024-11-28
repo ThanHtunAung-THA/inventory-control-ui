@@ -13,7 +13,8 @@ import { useHistory } from 'react-router';
 import { checkNullOrBlank,checkPassword } from "../../common/CommonValidation";
 import DatePicker from '../../common/datepicker/DatePicker';
 import Loading from "../../common/Loading";
-import SuccessError from "../../common/SuccessError"; 
+import SuccessError from "../../common/SuccessError";
+import ConfirmationWithTable from '../../common/ConfirmationWithTable';
 import { ApiRequest } from "../../common/ApiRequest";
 import moment from "moment";
 
@@ -104,48 +105,65 @@ const Create = () => {
     if(!checkNullOrBlank(currency)){
       err.push("Please fill currency");
     }
-    
     if (err.length > 0) {
       setSuccess([]);
       setError(err);
     } else {
-    setError([]);
-    setLoading(true);
-    let saveData = {
-      method: "post",
-      url: `sale/add`,
-      params: {
-        date: moment(saleDate).format("YYYY-MM-DD"),
-        user_code: userCode,
-        item_code: selectedItemCode,
-        location: location,
-        customer: customer,
-        payment_type: paymentType,
-        currency: currency,
-        quantity: quantity,
-        discount_and_foc: discount,
-        paid: paid,
-        total: total,
-        balance: balance,
-      },
-    };
-    let response = await ApiRequest(saveData);
-    if (response.flag === false) {
-      setError(response.message);
-      setSuccess([]);
-    } else {
-      if (response.data.status === "OK") {
-        setSuccess([response.data.message]);
+
+    const msgTitle = 'New Sale Entry Confirmation ';
+    const msgBody = [ 
+        { label: 'User  Code', value: userCode }, 
+        { label: 'Item Code', value: selectedItemCode }, 
+        { label: 'Date', value: saleDate }, 
+        { label: 'Total', value: total } 
+    ];
+    const msgBtn1 = 'Create';
+    const msgBtn2 = 'Cancel';
+    
+    const isConfirmed = await ConfirmationWithTable( msgTitle, msgBody, msgBtn1, msgBtn2 );
+
+    if (isConfirmed) {
+
         setError([]);
-        resetForm();
-      } else {
-        setError([response.data.message]);
-        setSuccess([]);
+        setLoading(true);
+        let saveData = {
+
+          method: "post",
+          url: `sale/add`,
+          params: {
+            date: moment(saleDate).format("YYYY-MM-DD"),
+            user_code: userCode,
+            item_code: selectedItemCode,
+            location: location,
+            customer: customer,
+            payment_type: paymentType,
+            currency: currency,
+            quantity: quantity,
+            discount_and_foc: discount,
+            paid: paid,
+            total: total,
+            balance: balance,
+          },
+        };
+        let response = await ApiRequest(saveData);
+        if (response.flag === false) {
+          setError(response.message);
+          setSuccess([]);
+        } else {
+          if (response.data.status === "OK") {
+            setSuccess([response.data.message]);
+            setError([]);
+            resetForm();
+          } else {
+            setError([response.data.message]);
+            setSuccess([]);
+          }
+        }
+        setLoading(false);
       }
     }
-    setLoading(false);
-  }
-};
+
+  };
 
   const resetForm = () => {
     setUserCode(localStorage.getItem(`user-code`));

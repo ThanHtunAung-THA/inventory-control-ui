@@ -24,8 +24,8 @@ const SuccessError = ({ error = [], error2 = [], success = [] }) => {
       color: type === "success" ? "#28a745" : "#dc3545", // success or error color
       background: "#fff ",
       backdrop: type === "success" 
-      ? `#4276cd9c`
-      : `#b94949cc`,
+      ? `#279d3c45`
+      : `#c5222245`,
       // : `rgba(100,100,100,0.8) url("/image/confused-unga.gif") right top no-repeat`,
         
 /* 
