@@ -192,7 +192,9 @@ const handleEdit = async  (purchase) => {
                     </CCol>
                     <CCol md="4" className="text-right">
                         <CLink href="/admin/purchase-new" className="btn link">
-                            <FontAwesomeIcon icon={faCirclePlus} style={{marginRight: 10}} /> New Entry
+                            {/* <FontAwesomeIcon icon={faCirclePlus} style={{marginRight: 10}}/>  */}
+                            <img src={"/image/file-add-svgrepo-com.svg"} alt="Settings" style={{ marginRight: 15, width: 28, height: 28 }} />
+                            New Entry
                         </CLink>
                     </CCol>
                 </CRow>

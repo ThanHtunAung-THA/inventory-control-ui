@@ -166,7 +166,7 @@ const handleEdit = async  (sale) => {
                         </CDropdownItem>
                         <CDropdownItem onClick={ () => handleDelete(row)} className="d-flex justify-content-between align-items-center">
                             Delete
-                            <img src={"/image/Delete-Component-inactive.svg"} alt="Settings" style={{marginLeft: 5, width: 28, height: 28 }} />
+                            <img src={"/image/Delete-Component-inactive.svg"} alt="Settings" style={{ width: 28, height: 28 }} />
                         </CDropdownItem>
                     </CDropdownMenu>
                 </CDropdown>
@@ -193,7 +193,9 @@ const handleEdit = async  (sale) => {
                     </CCol>
                     <CCol md="4" className="text-right">
                         <CLink href="/admin/sale-new" className="btn link">
-                            <FontAwesomeIcon icon={faCirclePlus} style={{marginRight: 10}}/> New Entry
+                            {/* <FontAwesomeIcon icon={faCirclePlus} style={{marginRight: 10}}/>  */}
+                            <img src={"/image/file-add-svgrepo-com.svg"} alt="Settings" style={{ marginRight: 15, width: 28, height: 28 }} />
+                            New Entry
                         </CLink>
                     </CCol>
                 </CRow>
