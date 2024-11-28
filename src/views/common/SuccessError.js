@@ -19,6 +19,7 @@ const SuccessError = ({ error = [], error2 = [], success = [] }) => {
     Swal.fire({
       title: type === "success" ? "Success" : "Error",
       html: messages.map((msg, index) => `<div key=${index} class="mb-4"> ${msg} </div>`).join(""),
+      icon: "warning",
       padding: "3em",
       width: type === "success" ? 'fit-content' : "600px",
       color: type === "success" ? "#28a745" : "#dc3545", // success or error color

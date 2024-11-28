@@ -280,7 +280,7 @@ return (
           </CRow>
           <CRow style={{ justifyContent: "center", marginTop: "30px" }}>
             <CButton className="form-btn" onClick={handleSubmit}>
-              Save
+              Update
             </CButton>
           </CRow>
         </CCardBody>

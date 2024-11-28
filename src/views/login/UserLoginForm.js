@@ -26,7 +26,7 @@ const UserLoginForm = (props) => {
     <CDropdownMenu className="mt-1" style={{borderTopLeftRadius:'15px'}}>
       <CDropdownItem href="/admin-login" >Admin</CDropdownItem>
       <CDropdownItem href="#" header>User</CDropdownItem>
-      <CDropdownItem href="#" header>new account?</CDropdownItem>
+      {/* <CDropdownItem href="#" header>new account?</CDropdownItem> */}
     </CDropdownMenu>
   </CDropdown>
 </div>

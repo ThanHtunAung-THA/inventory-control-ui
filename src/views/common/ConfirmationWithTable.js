@@ -31,7 +31,15 @@ const ConfirmationWithTable = async (title, body, confirmButtonText, cancelButto
         showCancelButton: true,
         confirmButtonText: confirmButtonText,
         cancelButtonText: cancelButtonText,
+        reverseButtons: true,
+        confirmButtonColor: title === 'Delete Confirmation' ? '#ff4d4d' : '#4d79ff',
+        cancelButtonColor: '#343A40',
+        // customClass: {
+        //     confirmButton: title === 'Delete Confirmation' ? 'btn btn-danger' : 'btn btn-warning',
+        //     cancelButton: 'btn btn-outline-light',
+        // },        
         width: "fit-content",
+        height: "100px",
     });
 
     return result.isConfirmed;
