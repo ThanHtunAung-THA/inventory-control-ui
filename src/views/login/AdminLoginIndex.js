@@ -7,86 +7,86 @@ import {ApiRequest} from "../common/ApiRequest";
 
 
 const AdminLoginIndex = () => {
-    const history = useHistory();
-    const [loading, setLoading] = useState(false); // For Loading
-    const [success, setSuccess] = useState([]); // for success message
-    const [error, setError] = useState([]); // for error message
-    const [userCode, setUserCode] = useState(""); // for shop code
-    const [password, setPassword] = useState(""); // for password
-    let err = [];
+  const history = useHistory();
+  const [loading, setLoading] = useState(false); // For Loading
+  const [success, setSuccess] = useState([]); // for success message
+  const [error, setError] = useState([]); // for error message
+  const [userCode, setUserCode] = useState(""); // for shop code
+  const [password, setPassword] = useState(""); // for password
+  let err = [];
 
-    const passwordChange = (e) => {
+  const passwordChange = (e) => {
+      setSuccess([]);
+      setError([]);
+      setPassword(e.target.value);
+  }
+
+  const userCodeChange = (e) => {
+      setSuccess([]);
+      setError([]);
+      setUserCode(e.target.value);
+  }
+
+  // === submit process ===
+  const loginClick = async() => {
+      if(!checkNullOrBlank(password)){
+          err.push("Please fill password");
+      }
+      if(!checkNullOrBlank(userCode)){
+        err.push("Please fill userCode");
+      }
+      if(err.length > 0) {
         setSuccess([]);
+        setError(err);
+      }else{
         setError([]);
-        setPassword(e.target.value);
-    }
-
-    const userCodeChange = (e) => {
-        setSuccess([]);
-        setError([]);
-        setUserCode(e.target.value);
-    }
-
-    // === submit process ===
-    const loginClick = async() => {
-        if(!checkNullOrBlank(password)){
-            err.push("Please fill password");
-        }
-        if(!checkNullOrBlank(userCode)){
-          err.push("Please fill userCode");
-        }
-        if(err.length > 0) {
+        const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userCode);
+        let saveData = {
+          method: "get",
+          url: `admin/login`,
+          params: {
+            ...(isEmail ? { email : userCode } : { user_code : userCode }),
+            password : password
+          },
+        };
+        setLoading(true);
+        let response = await ApiRequest(saveData);
+        console.log("response",response);
+        if (response.flag === false) {
+          setError(response.message);
           setSuccess([]);
-          setError(err);
-        }else{
-          setError([]);
-          const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userCode);
-          let saveData = {
-            method: "get",
-            url: `admin/login`,
-            params: {
-              ...(isEmail ? { email : userCode } : { user_code : userCode }),
-              password : password
-            },
-          };
-          setLoading(true);
-          let response = await ApiRequest(saveData);
-          console.log("response",response);
-          if (response.flag === false) {
-            setError(response.message);
-            setSuccess([]);
+        } else {
+          if (response.data.status == "OK") {
+            localStorage.setItem(`LoginProcess`, "true");
+            localStorage.setItem(`user-code`, response.data.usercode);
+            localStorage.setItem(`user-name`, response.data.username);
+            setTimeout(() => {
+              setLoading(false);
+              history.push(`/admin/dashboard`);
+            }, 500); 
+            setError([]);
           } else {
-            if (response.data.status == "OK") {
-              localStorage.setItem(`LoginProcess`, "true");
-              localStorage.setItem(`user-code`, response.data.usercode);
-              localStorage.setItem(`user-name`, response.data.username);
-              setTimeout(() => {
-                setLoading(false);
-                history.push(`/admin/dashboard`);
-              }, 500); 
-              setError([]);
-            } else {
-              setError([response.data.message]);
-              setSuccess([]);
-            }
+            setError([response.data.message]);
+            setSuccess([]);
           }
-        }       
-    };
+        }
+      }       
+  };
 
-    return(
-        <>
-        <AdminLoginForm
-        loginClick={loginClick}
-        passwordChange={passwordChange}
-        password={password}
-        userCodeChange={userCodeChange}
-        userCode={userCode}
-        success={success}
-        error={error}
-        />
-        <Loading start={loading} />
-        </>
-    )
+  return(
+      <>
+      <AdminLoginForm
+      loginClick={loginClick}
+      passwordChange={passwordChange}
+      password={password}
+      userCodeChange={userCodeChange}
+      userCode={userCode}
+      success={success}
+      error={error}
+      />
+      <Loading start={loading} />
+      </>
+  )
 }
 
 export default AdminLoginIndex

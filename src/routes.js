@@ -12,9 +12,18 @@ const AdminPurchaseEdit = React.lazy(() => import('./views/_admin/purchase/Updat
 
 const AdminSetting  = React.lazy(() => import('./views/_admin/AdminSettings'));
 const UserManagement  = React.lazy(() => import('./views/_admin/UserSettings'));
+// ================= ### =================
+const UserDashboard = React.lazy(() => import('./views/_user/Dashboard'));
 
-const UserDashboard = React.lazy(() => import('./views/dashboard/UserDashboard'));
+const UserSaleList = React.lazy(() => import('./views/_user/sale/List'));
+const UserSaleAdd = React.lazy(() => import('./views/_user/sale/Create'));
+const UserSaleEdit = React.lazy(() => import('./views/_user/sale/Update'));
 
+const UserPurchaseList = React.lazy(() => import('./views/_user/purchase/List'));
+const UserPurchaseAdd = React.lazy(() => import('./views/_user/purchase/Create'));
+const UserPurchaseEdit = React.lazy(() => import('./views/_user/purchase/Update'));
+
+// ================= ### =================
 const EmployeeRegistration = React.lazy(() => import('./views/employee-management/employee-registration/EmployeeRegistrationIndex'));
 const EmployeeList = React.lazy(() => import('./views/employee-management/employee-list/EmployeeListIndex'));
 
@@ -38,7 +47,15 @@ const routes = [
 
   
   // ================= User Routes =================
-  { path: '/user/dashboard', name: 'User Dashboard', component: UserDashboard },
+  { path: '/user/dashboard', name: 'Dashboard', component: UserDashboard },
+
+  { path: '/user/sale', name: 'Sale Lists', component: UserSaleList },
+  { path: '/user/sale-new', name: 'Add New Sale list', component: UserSaleAdd },
+  { path: '/user/sale-edit/:id', name: 'Edit Sale list', component: UserSaleEdit },
+
+  { path: '/user/purchase', name: 'Purchase Lists', component: UserPurchaseList },
+  { path: '/user/purchase-new', name: 'Add New Purchase list', component: UserPurchaseAdd },
+  { path: '/user/purchase-edit/:id', name: 'Edit Purchase list', component: UserPurchaseEdit },
   
 
 

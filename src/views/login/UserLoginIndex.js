@@ -7,85 +7,87 @@ import {ApiRequest} from "../common/ApiRequest";
 
 
 const UserLoginIndex = () => {
-    const history = useHistory();
-    const [loading, setLoading] = useState(false); // For Loading
-    const [success, setSuccess] = useState([]); // for success message
-    const [error, setError] = useState([]); // for error message
-    const [userCode, setUserCode] = useState(""); // for shop code
-    const [password, setPassword] = useState(""); // for password
+  const history = useHistory();
+  const [loading, setLoading] = useState(false); // For Loading
+  const [success, setSuccess] = useState([]); // for success message
+  const [error, setError] = useState([]); // for error message
+  const [userCode, setUserCode] = useState(""); // for shop code
+  const [password, setPassword] = useState(""); // for password
+  let err = [];
 
-    let err = [];
+  const passwordChange = (e) => {
+    setSuccess([]);
+    setError([]);
+    setPassword(e.target.value);
+  }
 
+  const userCodeChange = (e) => {
+    setSuccess([]);
+    setError([]);
+    setUserCode(e.target.value);
+  }
 
-
-    const passwordChange = (e) => {
-        setSuccess([]);
-        setError([]);
-        setPassword(e.target.value);
+  // === submit process ===
+  const loginClick = async() => {
+    if(!checkNullOrBlank(password)){
+        err.push("Please fill password");
     }
-
-    const userCodeChange = (e) => {
-        setSuccess([]);
-        setError([]);
-      setUserCode(e.target.value);
+    if(!checkNullOrBlank(userCode)){
+      err.push("Please fill userCode");
     }
-
-    const loginClick = async() => {
-     
-        if(!checkNullOrBlank(password)){
-            err.push("Please fill password");
-        }
-        if(!checkNullOrBlank(userCode)){
-          err.push("Please fill userCode");
-        }
-
-        if(err.length > 0) {
-          setSuccess([]);
-          setError(err);
-        }else{
+    if(err.length > 0) {
+      setSuccess([]);
+      setError(err);
+    }else{
+      setError([]);
+      const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userCode);
+      let saveData = {
+        method: "get",
+        url: `user/login`,
+        params: {
+          ...(isEmail ? { email : userCode } : { user_code : userCode }),
+          password : password
+        },
+      };
+      setLoading(true);
+      let response = await ApiRequest(saveData);
+      console.log("response",response);
+      if (response.flag === false) {
+        setError(response.message);
+        setSuccess([]);
+      } else {
+        if (response.data.status == "OK") {
+          localStorage.setItem(`LoginProcess`, "true");
+          localStorage.setItem(`user-code`, response.data.usercode);
+          localStorage.setItem(`user-name`, response.data.username);
+          setTimeout(() => {
+            setLoading(false);
+            history.push(`/user/dashboard`);
+          }, 500); 
           setError([]);
-          let saveData = {
-            method: "get",
-            url: `user/login`,
-            params: {
-             user_code : userCode,
-            password : password
-            },
-          };
-          setLoading(true);
-          let response = await ApiRequest(saveData);
-          console.log("response",response);
-          if (response.flag === false) {
-            setError(response.message);
-            setSuccess([]);
-          } else {
-            if (response.data.status == "OK") {
-              history.push(`/user/dashboard`)
-              localStorage.setItem(`LoginProcess`, "true");
-              setError([]);
-            } else {
-              setError([response.data.message]);
-              setSuccess([]);
-            }
-          }
-          setLoading(false);
+        } else {
+          setError([response.data.message]);
+          setSuccess([]);
         }
-       
-    }
-    return(
-        <>
-        <UserLoginForm
-        loginClick={loginClick}
-        passwordChange={passwordChange}
-        password={password}
-        userCodeChange={userCodeChange}
-        userCode={userCode}
-        success={success}
-        error={error}
-        />
-        <Loading start={loading} />
-        </>
-    )
+      }
+    }       
+  };
+
+
+  return(
+    <>
+    <UserLoginForm
+    loginClick={loginClick}
+    passwordChange={passwordChange}
+    password={password}
+    userCodeChange={userCodeChange}
+    userCode={userCode}
+    success={success}
+    error={error}
+    />
+    <Loading start={loading} />
+    </>
+)
 }
 
 export default UserLoginIndex
