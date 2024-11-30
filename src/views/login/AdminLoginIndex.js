@@ -70,7 +70,8 @@ const AdminLoginIndex = () => {
             setSuccess([]);
           }
         }
-      }       
+      }
+      setLoading(false);
   };
 
   return(

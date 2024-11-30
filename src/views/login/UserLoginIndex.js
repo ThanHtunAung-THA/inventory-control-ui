@@ -70,7 +70,8 @@ const UserLoginIndex = () => {
           setSuccess([]);
         }
       }
-    }       
+    }
+    setLoading(false);    
   };
 
 

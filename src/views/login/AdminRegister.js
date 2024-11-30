@@ -48,8 +48,8 @@ const AdminRegister = () => {
 
   const saveClick = async (e) => {
     e.preventDefault();
-    let err = []; // Initialize an error array
-
+    let err = [];
+    
     if (!nullChk(userName)) {
       err.push("please fill name");
     }else if (!validateName(userName)) {
@@ -181,7 +181,8 @@ const AdminRegister = () => {
                   type="text" 
                   className="form-control login-input" 
                   placeholder="Enter User Name" 
-                  autoFocus value={userName} 
+                  autoFocus 
+                  value={userName} 
                   onChange={userNameChange} 
                   required/>
               </div>
