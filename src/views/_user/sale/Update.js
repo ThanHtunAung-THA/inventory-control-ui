@@ -57,6 +57,7 @@ const Update = () => {
   const [paid, setPaid] = useState(sale ? sale.paid : 0);
   const [total, setTotal] = useState(sale ? sale.total : '');
   const [balance, setBalance] = useState(sale ? sale.balance : 0);
+  
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState([]);
   const [success, setSuccess] = useState([]);

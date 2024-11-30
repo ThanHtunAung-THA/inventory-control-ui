@@ -12,6 +12,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus,faCirclePlus,faPlusCircle } from '@fortawesome/free-solid-svg-icons'; // Import the plus icon
 import SuccessError from '../../common/SuccessError';
 import Loading from "../../common/Loading";
+import "../../../css/datatable.css"
+
 
 const List = () => {
     const history = useHistory();
@@ -20,7 +22,7 @@ const List = () => {
         if (flag == "true") {
           console.log("Login process success")
         } else {
-          history.push(`/admin-login`);
+          history.push(`/user-login`);
         }
     
           fetchPurchases();
@@ -74,7 +76,7 @@ const handleEdit = async  (purchase) => {
 
     if (isConfirmed) {
         history.push({
-            pathname: `/admin/purchase-edit/${purchase.id}`,
+            pathname: `/user/purchase-edit/${purchase.id}`,
             state: { purchase }
         });
     }
@@ -187,11 +189,11 @@ const handleEdit = async  (purchase) => {
                     <CCol md="4">
                         <h5>Total Purchases: {totalPurchases}</h5>
                     </CCol>
-                    <CCol md="4">
+                    <CCol md="4">   
                         <h5>Total Profit: {totalProfit}</h5>
                     </CCol>
                     <CCol md="4" className="text-right">
-                        <CLink href="/admin/purchase-new" className="btn link">
+                        <CLink href="/user/purchase-new" className="btn link">
                             {/* <FontAwesomeIcon icon={faCirclePlus} style={{marginRight: 10}}/>  */}
                             <img src={"/image/file-add-svgrepo-com.svg"} alt="Settings" style={{ marginRight: 15, width: 28, height: 28 }} />
                             New Entry
@@ -220,6 +222,7 @@ const handleEdit = async  (purchase) => {
                     highlightOnHover
                     striped
                     responsive
+                    className="DataTable"
                 />
             </CCardBody>
 

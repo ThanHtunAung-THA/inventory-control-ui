@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus,faCirclePlus,faPlusCircle } from '@fortawesome/free-solid-svg-icons'; // Import the plus icon
 import SuccessError from '../../common/SuccessError';
 import Loading from "../../common/Loading";
+import "../../../css/datatable.css"
 
 const List = () => {
     const history = useHistory();
@@ -20,7 +21,7 @@ const List = () => {
         if (flag == "true") {
           console.log("Login process success")
         } else {
-          history.push(`/admin-login`);
+          history.push(`/user-login`);
         }
     
           fetchSales();
@@ -62,8 +63,8 @@ const handleEdit = async  (sale) => {
     const msgTitle = 'Edit Confirmation';
     const msgBody = [ 
         { label: 'ID', value: sale.id }, 
-        { label: 'User  Code', value: sale.user_code }, 
-        { label: 'Item Code', value: sale.item_code }, 
+        { label: 'User-Code', value: sale.user_code }, 
+        { label: 'Item-Code', value: sale.item_code }, 
         { label: 'Date', value: sale.date }, 
         { label: 'Total', value: sale.total } 
     ];
@@ -74,7 +75,7 @@ const handleEdit = async  (sale) => {
 
     if (isConfirmed) {
         history.push({
-            pathname: `/admin/sale-edit/${sale.id}`,
+            pathname: `/user/sale-edit/${sale.id}`,
             state: { sale }
         });
     }
@@ -192,7 +193,7 @@ const handleEdit = async  (sale) => {
                         <h5>Total Profit: {totalProfit}</h5>
                     </CCol>
                     <CCol md="4" className="text-right">
-                        <CLink href="/admin/sale-new" className="btn link">
+                        <CLink href="/user/sale-new" className="btn link">
                             {/* <FontAwesomeIcon icon={faCirclePlus} style={{marginRight: 10}}/>  */}
                             <img src={"/image/file-add-svgrepo-com.svg"} alt="Settings" style={{ marginRight: 15, width: 28, height: 28 }} />
                             New Entry
@@ -221,6 +222,8 @@ const handleEdit = async  (sale) => {
                     highlightOnHover
                     striped
                     responsive
+                    className="DataTable"
+
                 />
             </CCardBody>
 
