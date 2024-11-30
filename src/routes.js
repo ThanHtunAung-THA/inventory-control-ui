@@ -10,8 +10,14 @@ const AdminPurchaseList = React.lazy(() => import('./views/_admin/purchase/List'
 const AdminPurchaseAdd = React.lazy(() => import('./views/_admin/purchase/Create'));
 const AdminPurchaseEdit = React.lazy(() => import('./views/_admin/purchase/Update'));
 
-const AdminSetting  = React.lazy(() => import('./views/_admin/AdminSettings'));
-const UserManagement  = React.lazy(() => import('./views/_admin/UserSettings'));
+const AdminList  = React.lazy(() => import('./views/_admin/settings/admins/List'));
+const AdminListAdd = React.lazy(() => import('./views/_admin/settings/admins/Create'));
+const AdminListEdit = React.lazy(() => import('./views/_admin/settings/admins/Update'));
+
+const UserList  = React.lazy(() => import('./views/_admin/settings/users/List'));
+const UserListAdd = React.lazy(() => import('./views/_admin/settings/users/Create'));
+const UserListEdit = React.lazy(() => import('./views/_admin/settings/users/Update'));
+
 // ================= ### =================
 const UserDashboard = React.lazy(() => import('./views/_user/Dashboard'));
 
@@ -42,8 +48,13 @@ const routes = [
   { path: '/admin/purchase-new', name: 'Add New Purchase list', component: AdminPurchaseAdd },
   { path: '/admin/purchase-edit/:id', name: 'Edit Purchase list', component: AdminPurchaseEdit },
 
-  { path: '/admin/admin-settings', name: 'setting for admin', component: AdminSetting },
-  { path: '/admin/user-settings', name: 'setting for user', component: UserManagement },
+  { path: '/admin/admin-list', name: 'Admins Management', component: AdminList },
+  { path: '/admin/admin-new', name: 'Add New Admin Account', component: AdminListAdd },
+  { path: '/admin/admin-edit/:id', name: 'Edit Admin Account', component: AdminListEdit },
+
+  { path: '/admin/user-list', name: 'Users Management', component: UserList },
+  { path: '/admin/user-new', name: 'Add New User Account', component: UserListAdd },
+  { path: '/admin/user-edit/:id', name: 'Edit User Account', component: UserListEdit },
 
   
   // ================= User Routes =================
@@ -62,8 +73,8 @@ const routes = [
   // ================= Common Routes =================
 
   { path: '/employee-management', name: 'Employee Management',exact: true },
-  { path: '/employee-management/employee-register', name: 'Employee Registration', component: EmployeeRegistration },
-  { path: '/employee-management/employee-list', name: 'Employee List', component: EmployeeList },
+  { path: '/admin/employee-register', name: 'Employee Registration', component: EmployeeRegistration },
+  { path: '/admin/employee-list', name: 'Employee List', component: EmployeeList },
 
 ];
 
