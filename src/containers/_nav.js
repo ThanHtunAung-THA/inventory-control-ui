@@ -148,13 +148,13 @@ const getNavigation = (userCode, userName) => [
   {
     _tag: 'CSidebarNavItem',
     name: 'User  Settings',
-    to: '/admin/user-settings', 
+    to: '/admin/user-list', 
     className: "user-svg"
   },
   {
     _tag: 'CSidebarNavItem',
     name: 'Admin Settings',
-    to: '/admin/admin-settings',
+    to: '/admin/admin-list',
     className: "admin-svg"
   },
   {

@@ -1138,6 +1138,13 @@ overflow-y: auto;
   // width: fit-content !important;
   width: 5rem !important;
 }
+// .custom-dropdown-menu {
+//   z-index: 1050; /* Set a high z-index to ensure it appears above other elements */
+//   position: absolute !important; /* Ensure it stays aligned properly */
+// }
+// .DataTable-wrapper {
+//   overflow: visible !important; /* Allow the dropdown to render fully */
+// }
 
 .hint-box {
   background-color: #f8d7da; /* Light red background */
@@ -1185,6 +1192,12 @@ overflow-y: auto;
   animation-iteration-count: infinite;
 }
 
+// ====================>> for settings pages
+
+.non-selectable {
+  user-select: none; /* Prevent text selection */
+}
+
 // ====================>> for swal2 alert box customization
 
 button.swal2-styled {
@@ -1194,4 +1207,16 @@ button.swal2-styled {
 .swal2-html-container {
   text-align: left !important;
   margin: auto !important;
+}
+
+// ====================>> for datatable customization
+.DataTable-pagination {
+  position: fixed; /* Keeps it at the bottom of the viewport */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100; /* Ensure it appears above other elements */
+  background: white; /* Add a background to avoid overlapping text */
+  padding: 10px 0;
+  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for styling */
 }
