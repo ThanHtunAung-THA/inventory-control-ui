@@ -4,7 +4,13 @@ import { useHistory } from "react-router";
 import axios from "axios";
 import SaleChart from '../chart/SaleChart'; // Import SaleChart component
 import PurchaseChart from '../chart/PurchaseChart'; // Import PurchaseChart component
-// import StockStatusChart from './StockStatusChart'; // Import StockStatusChart component
+import AdjustChart from '../chart/AdjustChart'; // Import PurchaseChart component
+import ConvertChart from '../chart/ConvertChart'; // Import PurchaseChart component
+import StockStatusChart from '../chart/StockStatusChart'; // Import PurchaseChart component
+import OutstandingChart from '../chart/OutstandingChart'; // Import PurchaseChart component
+import CashChart from '../chart/CashChart'; // Import PurchaseChart component
+import BankChart from '../chart/BankChart'; // Import PurchaseChart component
+import GledgerChart from '../chart/GledgerChart'; // Import PurchaseChart component
 
 const Dashboard = () => {
   const history = useHistory();
@@ -57,7 +63,7 @@ const Dashboard = () => {
         </CCol>
       </CRow>
       {/* Placeholder for other charts */}
-      <CRow>
+      {/* <CRow>
         {[...Array(7)].map((_, index) => (
           <CCol md="6" key={index}>
             <CCard>
@@ -68,7 +74,37 @@ const Dashboard = () => {
             </CCard>
           </CCol>
         ))}
+      </CRow> */}
+      <CRow>
+        <CCol md="6">
+          <AdjustChart adjustData={AdjustChart} />
+        </CCol>
+        <CCol md="6">
+          <ConvertChart convertData={ConvertChart} />
+        </CCol>
       </CRow>
+      <CRow>
+        <CCol md="6">
+          <StockStatusChart StockData={StockStatusChart} />
+        </CCol>
+        <CCol md="6">
+          <OutstandingChart outstandingData={OutstandingChart} />
+        </CCol>
+      </CRow>
+      <CRow>
+        <CCol md="6">
+          <CashChart CashData={CashChart} />
+        </CCol>
+        <CCol md="6">
+          <BankChart BankData={BankChart} />
+        </CCol>
+      </CRow>
+      <CRow>
+        <CCol md="12">
+          <GledgerChart gledgerData={GledgerChart} />
+        </CCol>
+      </CRow>
+
     </>
   );
 };
