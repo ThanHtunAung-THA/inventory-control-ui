@@ -66,18 +66,38 @@ const getNavigation = (userCode, userName) => [
   {
     _tag: 'CSidebarNavDropdown',
     name: 'Stock Status',
-    route: '/admin/stockstatus',
+    route: '/admin/stock',
     className: "stock-svg",
     _children: [
       {
         _tag: 'CSidebarNavItem',
         name: 'Stock Status',
-        to: '/admin/stockstatus',
+        to: '/admin/stock',
       },
       {
         _tag: 'CSidebarNavItem',
         name: '+ New Stock',
-        to: '/admin/convert',
+        // to: 'admin/stock-new',
+        to: '',
+      }
+    ],
+  },
+
+  {
+    _tag: 'CSidebarNavDropdown',
+    name: 'Price / Discount',
+    route: '/admin/stock',
+    className: "stock-svg",
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Price',
+        to: '/admin/price',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Discount',
+        to: '/admin/discount',
       }
     ],
   },
@@ -97,6 +117,7 @@ const getNavigation = (userCode, userName) => [
         _tag: 'CSidebarNavItem',
         name: '+ New Sale',
         to: '/admin/outstanding-new',
+        to: '',
       }
     ],
   },
@@ -134,7 +155,8 @@ const getNavigation = (userCode, userName) => [
       {
         _tag: 'CSidebarNavItem',
         name: '+ New G-Ledger',
-        to: '/admin/gledger-new',
+        // to: '/admin/gledger-new',
+        to: '',
       }
     ],
   },
@@ -165,7 +187,7 @@ const getNavigation = (userCode, userName) => [
   },
   {
     _tag: 'CSidebarNavItem',
-    name: userCode ? `Admin : ${userName}` : 'Profile', // Conditional rendering
+    name: userCode ? `Admin : ${userName}` : 'Profile',
     to: '/admin/profile',   // TODO:  make route,index (including: profile edit, profile view, profile delete)
     className: "profile"
   },

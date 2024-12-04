@@ -44,11 +44,11 @@ const Dashboard = () => {
 
   return (
     <>
-      <CRow>
+      {/* <CRow>
         <CCol xs="12">
           <h2>Dashboard</h2>
         </CCol>
-      </CRow>
+      </CRow> */}
       <CRow>
         <CCol md="6">
           <SaleChart saleData={saleData} />
