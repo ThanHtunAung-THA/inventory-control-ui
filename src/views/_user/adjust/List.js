@@ -12,6 +12,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus,faCirclePlus,faPlusCircle } from '@fortawesome/free-solid-svg-icons'; // Import the plus icon
 import SuccessError from '../../common/SuccessError';
 import Loading from "../../common/Loading";
+import UnderConstruction from "../../common/UnderConstruction";
+
 
 const List = () => {
     const history = useHistory();
@@ -180,10 +182,14 @@ const handleEdit = async  (sale) => {
   return (
     <>
         <SuccessError success={success} error={error} />
-        {loading && <Loading start={true} />}
+        {/* {loading && <Loading start={true} />} */}
 
-        <CCard>
-            <CCardHeader>
+        <CCard> 
+            <div>
+                <UnderConstruction />
+            </div>
+
+            {/* <CCardHeader>
                 <CRow>
                     <CCol md="4">
                         <h5>Total Sales: {totalSales}</h5>
@@ -193,7 +199,6 @@ const handleEdit = async  (sale) => {
                     </CCol>
                     <CCol md="4" className="text-right">
                         <CLink href="/admin/sale-new" className="btn link">
-                            {/* <FontAwesomeIcon icon={faCirclePlus} style={{marginRight: 10}}/>  */}
                             <img src={"/image/file-add-svgrepo-com.svg"} alt="Settings" style={{ marginRight: 15, width: 28, height: 28 }} />
                             New Entry
                         </CLink>
@@ -222,8 +227,7 @@ const handleEdit = async  (sale) => {
                     striped
                     responsive
                 />
-            </CCardBody>
-
+            </CCardBody> */}
         </CCard>
     </>
   )

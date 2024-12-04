@@ -66,18 +66,38 @@ const getNavigation = (userCode, userName) => [
   {
     _tag: 'CSidebarNavDropdown',
     name: 'Stock Status',
-    route: '/user/stockstatus',
+    route: '/user/stock',
     className: "stock-svg",
     _children: [
       {
         _tag: 'CSidebarNavItem',
         name: 'Stock Status',
-        to: '/user/stockstatus',
+        to: '/user/stock',
       },
       {
         _tag: 'CSidebarNavItem',
         name: '+ New Stock',
-        to: '/user/convert',
+        // to: 'user/stock-new',
+        to: '',
+      }
+    ],
+  },
+
+  {
+    _tag: 'CSidebarNavDropdown',
+    name: 'Price / Discount',
+    route: '/user/stock',
+    className: "stock-svg",
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Price',
+        to: '/user/price',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Discount',
+        to: '/user/discount',
       }
     ],
   },
@@ -97,6 +117,7 @@ const getNavigation = (userCode, userName) => [
         _tag: 'CSidebarNavItem',
         name: '+ New Sale',
         to: '/user/outstanding-new',
+        to: '',
       }
     ],
   },
@@ -134,7 +155,8 @@ const getNavigation = (userCode, userName) => [
       {
         _tag: 'CSidebarNavItem',
         name: '+ New G-Ledger',
-        to: '/user/gledger-new',
+        // to: '/user/gledger-new',
+        to: '',
       }
     ],
   },
@@ -145,16 +167,10 @@ const getNavigation = (userCode, userName) => [
     to: '#',
     className: "custom-divider"
   },
-
-  {
-    _tag: 'CSidebarNavDivider',
-    name: '',
-    to: '#',
-    className: "custom-divider"
-  },
+  // =======================
   {
     _tag: 'CSidebarNavItem',
-    name: userCode ? `user : ${userName}` : 'Profile', // Conditional rendering
+    name: userCode ? `User : ${userName}` : 'Profile',
     to: '/user/profile',   // TODO:  make route,index (including: profile edit, profile view, profile delete)
     className: "profile"
   },
