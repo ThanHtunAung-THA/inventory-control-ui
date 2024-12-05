@@ -130,14 +130,14 @@ const List = () => {
             name: 'User_Code',
             selector: row => row.user_code,
             sortable: true,
-            width: '110px', // Set the width for this column
+            width: '150px', // Set the width for this column
             
         },
         {
             name: 'Name',
             selector: row => row.name,
             sortable: true,
-            width: '150px', // Set the width for this column
+            width: '200px', // Set the width for this column
             
         },
         {
@@ -160,26 +160,26 @@ const List = () => {
             // width: '110px', // Set the width for this column
             
         },
-        {
-          name: 'Actions',
-          cell: row => (
-              <CDropdown>
-                  <CDropdownToggle color="" size="" className="cdd-custom">
-                      <img src={"/image/setting-setting-svgrepo-com.svg"} alt="Settings" style={{ width: 28, height: 28 }} />
-                  </CDropdownToggle>
-                  <CDropdownMenu>
-                      <CDropdownItem onClick={() => handleEdit(row)} className="d-flex justify-content-between align-items-center">
-                          Edit
-                          <img src={"/image/Edit-Component-inactive.svg"} alt="Edit" style={{ width: 28, height: 28 }} />
-                      </CDropdownItem>
-                      <CDropdownItem onClick={() => handleDelete(row)} className="d-flex justify-content-between align-items-center">
-                          Delete
-                          <img src={"/image/Delete-Component-inactive.svg"} alt="Delete" style={{ width: 28, height: 28 }} />
-                      </CDropdownItem>
-                  </CDropdownMenu>
-              </CDropdown>
-          )
-        }
+        // {
+        //   name: 'Actions',
+        //   cell: row => (
+        //       <CDropdown>
+        //           <CDropdownToggle color="" size="" className="cdd-custom">
+        //               <img src={"/image/setting-setting-svgrepo-com.svg"} alt="Settings" style={{ width: 28, height: 28 }} />
+        //           </CDropdownToggle>
+        //           <CDropdownMenu>
+        //               <CDropdownItem onClick={() => handleEdit(row)} className="d-flex justify-content-between align-items-center">
+        //                   Edit
+        //                   <img src={"/image/Edit-Component-inactive.svg"} alt="Edit" style={{ width: 28, height: 28 }} />
+        //               </CDropdownItem>
+        //               <CDropdownItem onClick={() => handleDelete(row)} className="d-flex justify-content-between align-items-center">
+        //                   Delete
+        //                   <img src={"/image/Delete-Component-inactive.svg"} alt="Delete" style={{ width: 28, height: 28 }} />
+        //               </CDropdownItem>
+        //           </CDropdownMenu>
+        //       </CDropdown>
+        //   )
+        // }
     ];
 
     return (

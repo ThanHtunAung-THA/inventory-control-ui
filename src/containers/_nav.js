@@ -188,7 +188,7 @@ const getNavigation = (userCode, userName) => [
   {
     _tag: 'CSidebarNavItem',
     name: userCode ? `Admin : ${userName}` : 'Profile',
-    to: '/admin/profile',   // TODO:  make route,index (including: profile edit, profile view, profile delete)
+    to: '/admin/profile',
     className: "profile"
   },
   {

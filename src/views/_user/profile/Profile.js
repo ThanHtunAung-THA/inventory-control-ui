@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   CButton,
   CCard,
@@ -10,53 +10,66 @@ import {
   CSelect
 } from '@coreui/react';
 import { useHistory } from 'react-router';
-import { useLocation  } from 'react-router-dom';
-import { nullChk, validateName, validateEmail, validatePwd } from "../../../common/CommonValidation";
-import DatePicker from '../../../common/datepicker/DatePicker';
-import Loading from "../../../common/Loading";
-import SuccessError from "../../../common/SuccessError";
-import ConfirmationWithTable from '../../../common/ConfirmationWithTable';
-import { ApiRequest } from "../../../common/ApiRequest";
+import { nullChk, validateName, validateEmail, validatePwd } from "../../common/CommonValidation";
+import DatePicker from '../../common/datepicker/DatePicker';
+import Loading from "../../common/Loading";
+import SuccessError from "../../common/SuccessError";
+import ConfirmationWithTable from '../../common/ConfirmationWithTable';
 import moment from "moment";
-import '../../../../css/form.css'
+import '../../../css/form.css'
+import axios from "axios";
 
-const Update = () => {  
-  let err = [];
+
+const Profile = () => {
   const history = useHistory();
-  const objBarier = useLocation();
-  const { user } = objBarier.state || {};
-  const [id, setId] = useState(user ? user.id : '');
-  const [userCode, setUserCode] = useState(user ? user.user_code : '');
-  const [userName, setUserName] = useState(user ? user.name : '');
-  const [userEmail, setUserEmail] = useState(user ? user.email : '');
-  const [userPhone, setUserPhone] = useState(user ? user.phone : '');
-  const [userDOB, setUserDOB] = useState(user ? user.date_of_birth : '');
-  const [password, setPassword] = useState(user ? user.password : '');
+  const [profileData, setProfileData] = useState([]);
+  const [userID, setUserID] = useState( localStorage.getItem('user-id') || '');
+  const [userCode, setUserCode] = useState( localStorage.getItem('user-code') || '');
+  const [userName, setUserName] = useState( localStorage.getItem('user-name') || '');
+  const [userEmail, setUserEmail] = useState('');
+  const [userPhone, setUserPhone] = useState('');
+  const [userDOB, setUserDOB] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [editMode, setEditMode] = useState(false); //for update status
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState([]);
   const [success, setSuccess] = useState([]);
 
   useEffect(() => {
-    let flag = localStorage.getItem(`LoginProcess`)
-    if (flag == "true") {
-      console.log("Login process success")
+    const isLoggedIn = localStorage.getItem("LoginProcess");
+    if (isLoggedIn !== "true") {
+      history.push("/user-login");
     } else {
-      history.push(`/user-login`);
+      fetchData();
     }
-    setLoading(true);
-    setTimeout( () => {
-        setLoading(false);
-    }, 500); // 1000 milliseconds = 1 seconds
   }, []);
 
-
+  const fetchData = async () => {
+    try {
+        setLoading(true);
+        const profileResponse = await axios.get(`http://localhost:8000/api/user/get/${userID}`);
+        const data = profileResponse.data.data;
+  
+        // Set the state variables with the fetched data
+        setProfileData(data || '');
+        setUserEmail(data.email || '');
+        setUserPhone(data.phone || '');
+        setUserDOB(data.date_of_birth || '');
+        setPassword(data.password || ''); // Note: Be cautious with handling passwords
+  
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+      setTimeout( () => {
+        setLoading(false);
+    }, 1000); // 1000 milliseconds = 1 seconds
+  };
   const handleInputChange = (setter) => (e) => {
     setError([]);
     setSuccess([]);
     setter(e.target.value);
   };
-  
   const userNameChange = handleInputChange(setUserName);
   const userEmailChange = handleInputChange(setUserEmail);
   const userPhoneChange = handleInputChange(setUserPhone);
@@ -82,6 +95,17 @@ const Update = () => {
     setSuccess([]);
     setShowPassword(!showPassword);
   };
+
+  // === Edit process ===
+  const handleEdit = () => {
+    setError([]);
+    setSuccess([]);
+    setLoading(true);
+    setTimeout( () => {
+      setLoading(false);
+      setEditMode(true);
+    }, 500); // 1000 milliseconds = 1 seconds
+  }
 
   // === submit process ===
   const handleSubmit = async (e) => {
@@ -132,47 +156,51 @@ const Update = () => {
     const isConfirmed = await ConfirmationWithTable( msgTitle, msgBody, msgBtn1, msgBtn2 );
 
     if (isConfirmed) {
-      setError([]);
-      setLoading(true);
-      let saveData = {
-        method: "post",
-        url: `user/edit/${id}`,
-        params: {
-          name: userName,
-          date_of_birth: moment(userDOB).format("YYYY-MM-DD"),
-          email: userEmail,
-          phone: userPhone,
-          password: password,
-          
-        },
-    };
-      let response = await ApiRequest(saveData);
-      if (response.flag === false) {
-        setError(response.message);
-        setSuccess([]);
-      } else {
-        if (response.data.status === "OK") {
-          setSuccess([response.data.message]);
-          setError([]);
-        } else {
-          setError([response.data.message]);
+        setError([]);
+        setLoading(true);
+        let saveData = {
+          // method: "post",
+          // url: `user/edit/${userID}`,
+            name: userName,
+            date_of_birth: moment(userDOB).format("YYYY-MM-DD"),
+            email: userEmail,
+            phone: userPhone,
+            password: password,
+        };
+        // let response = await ApiRequest(saveData);
+        let response = await axios.post(`http://localhost:8000/api/user/edit/${userID}`, saveData);
+
+        if (response.flag === false) {
+          setError(response.message);
           setSuccess([]);
+        } else {
+          if (response.data.status === "OK") {
+            setSuccess([response.data.message]);
+            setError([]);
+          } else {
+            setError([response.data.message]);
+            setSuccess([]);
+          }
         }
+        setLoading(false);
       }
-      setLoading(false);
     }
-  }
-};
+  };
+  
+  const handleCancel = () => {
+    setError([]);
+    setSuccess([]);
+    setEditMode(false); // Directly set editMode to false
+  };
 
-
-return (
-  <>
+  return (
+    <>
     <CRow>
       <CCol xs="12">
         <SuccessError success={success} error={error} />
         <CCard>
           <CCardHeader>
-            <h4 className='m-0'>User Edit form <span className='float-right'>UserID - {id} / UserCode - {userCode}</span></h4>
+            <h4 className='m-0'>User Profile Detail<span className='float-right'>UserID - {userID} / UserCode - {userCode}</span></h4>
           </CCardHeader>
           <CCardBody>
             <CRow>
@@ -185,7 +213,8 @@ return (
                       type="text" 
                       value={userName} 
                       onChange={userNameChange} 
-                      placeholder="Enter User Name" 
+                      placeholder="Enter User Name"
+                      disabled={!editMode}
                     />
                   </CCol>
                 </CRow>
@@ -194,34 +223,37 @@ return (
                   <CCol lg="8">
                     <DatePicker 
                       value={userDOB } 
-                      change={userDOBChange} 
+                      change={userDOBChange}
+                      disabled={!editMode} 
                     />
                   </CCol>
                 </CRow>
                 <CRow style={{ marginTop: "10px" }}>
-                  <CCol lg="4"><p>User Phone</p></CCol>
+                  <CCol lg="4"><p>Phone</p></CCol>
                   <CCol lg="8">
                     <CInput 
                       type="text" 
                       value={userPhone} 
                       onChange={userPhoneChange} 
                       placeholder="Enter User Phone number"
+                      disabled={!editMode}
                     />
                   </CCol>
                 </CRow>
                 <CRow style={{ marginTop: "10px" }}>
-                  <CCol lg="4"><p>User Email</p></CCol>
+                  <CCol lg="4"><p>Email</p></CCol>
                   <CCol lg="8">
                     <CInput 
                       type="email" 
                       value={userEmail} 
                       onChange={userEmailChange} 
                       placeholder="Enter User Email"
+                      disabled={!editMode}
                     />
                   </CCol>
                 </CRow>
                 <CRow style={{ marginTop: "10px" }}>
-                  <CCol lg="4"><p>User Password</p></CCol>
+                  <CCol lg="4"><p>Password</p></CCol>
                   <CCol lg="8">
                     <CInput 
                       id='password'
@@ -229,6 +261,7 @@ return (
                       value={password} 
                       onChange={passwordChange} 
                       placeholder="Enter User Password" 
+                      disabled={!editMode}
                     />
                   </CCol>
                 </CRow>
@@ -253,9 +286,21 @@ return (
               <CCol lg="4"></CCol>
             </CRow>
             <CRow style={{ justifyContent: "center", marginTop: "30px" }}>
-              <CButton className="form-btn" onClick={handleSubmit}>
-                Save
-              </CButton>
+              { editMode == false && (
+                <CButton className="form-btn" onClick={handleEdit}>
+                  Edit Profile
+                </CButton>
+              )}
+              { editMode == true && (
+                <div>
+                  <CButton className="form-btn" onClick={handleSubmit}>
+                    Save Profile
+                  </CButton>              
+                  <CButton className="form-btn ml-2" onClick={handleCancel}>
+                    Cancel
+                  </CButton>   
+                </div>           
+              )}
             </CRow>
           </CCardBody>
         </CCard>
@@ -266,4 +311,4 @@ return (
   );
 };
 
-export default Update
+export default Profile;

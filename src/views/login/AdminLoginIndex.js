@@ -51,13 +51,14 @@ const AdminLoginIndex = () => {
         };
         setLoading(true);
         let response = await ApiRequest(saveData);
-        console.log("response",response);
+        // console.log("response",response);
         if (response.flag === false) {
           setError(response.message);
           setSuccess([]);
         } else {
           if (response.data.status == "OK") {
             localStorage.setItem(`LoginProcess`, "true");
+            localStorage.setItem(`user-id`, response.data.userid);
             localStorage.setItem(`user-code`, response.data.usercode);
             localStorage.setItem(`user-name`, response.data.username);
             setTimeout(() => {

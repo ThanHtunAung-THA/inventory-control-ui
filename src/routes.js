@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AdminDashboard = React.lazy(() => import('./views/_admin/Dashboard'));
+const AdminDashboard = React.lazy(() => import('./views/_admin/dashboard/Dashboard'));
 
 const AdminSaleList = React.lazy(() => import('./views/_admin/sale/List'));
 const AdminSaleAdd = React.lazy(() => import('./views/_admin/sale/Create'));
@@ -28,10 +28,11 @@ const UserList  = React.lazy(() => import('./views/_admin/settings/users/List'))
 const UserListAdd = React.lazy(() => import('./views/_admin/settings/users/Create'));
 const UserListEdit = React.lazy(() => import('./views/_admin/settings/users/Update'));
 
-// const UnderConstruction1 = React.lazy(() => import('./views/_admin/UnderConstruction'));
+const AdminProfile  = React.lazy(() => import('./views/_admin/profile/Profile'));
 
 // ================= ### =================
-const UserDashboard = React.lazy(() => import('./views/_user/Dashboard'));
+
+const UserDashboard = React.lazy(() => import('./views/_user/dashboard/Dashboard'));
 
 const UserSaleList = React.lazy(() => import('./views/_user/sale/List'));
 const UserSaleAdd = React.lazy(() => import('./views/_user/sale/Create'));
@@ -51,9 +52,11 @@ const UserCashList = React.lazy(() => import('./views/_user/cash/List'));
 const UserBankList = React.lazy(() => import('./views/_user/bank/List'));
 const UserGledgerList = React.lazy(() => import('./views/_user/gledger/List'));
 
+const UserProfile  = React.lazy(() => import('./views/_user/profile/Profile'));
+
 // ================= ### =================
-const EmployeeRegistration = React.lazy(() => import('./views/employee-management/employee-registration/EmployeeRegistrationIndex'));
-const EmployeeList = React.lazy(() => import('./views/employee-management/employee-list/EmployeeListIndex'));
+// const EmployeeRegistration = React.lazy(() => import('./views/employee-management/employee-registration/EmployeeRegistrationIndex'));
+// const EmployeeList = React.lazy(() => import('./views/employee-management/employee-list/EmployeeListIndex'));
 
 // const UnderConstruction = React.lazy(() => import('./views/UnderConstruction'));
 
@@ -84,11 +87,12 @@ const routes = [
   { path: '/admin/admin-list', name: 'Admins Management', component: AdminList },
   { path: '/admin/admin-new', name: 'Add New Admin Account', component: AdminListAdd },
   { path: '/admin/admin-edit/:id', name: 'Edit Admin Account', component: AdminListEdit },
-
+  
   { path: '/admin/user-list', name: 'Users Management', component: UserList },
   { path: '/admin/user-new', name: 'Add New User Account', component: UserListAdd },
   { path: '/admin/user-edit/:id', name: 'Edit User Account', component: UserListEdit },
-
+  
+  { path: '/admin/profile', name: 'Admin Profile', component: AdminProfile },
   
   // ================= User Routes =================
   { path: '/user/dashboard', name: 'Dashboard', component: UserDashboard },
@@ -111,12 +115,13 @@ const routes = [
   { path: '/user/bank', name: 'Bank Lists', component: UserBankList },
   { path: '/user/gledger', name: 'Gledger Lists', component: UserGledgerList },
 
+  { path: '/user/profile', name: 'User Profile', component: UserProfile },
 
   // ================= Common Routes =================
 
-  { path: '/employee-management', name: 'Employee Management',exact: true },
-  { path: '/admin/employee-register', name: 'Employee Registration', component: EmployeeRegistration },
-  { path: '/admin/employee-list', name: 'Employee List', component: EmployeeList },
+  // { path: '/employee-management', name: 'Employee Management',exact: true },
+  // { path: '/admin/employee-register', name: 'Employee Registration', component: EmployeeRegistration },
+  // { path: '/admin/employee-list', name: 'Employee List', component: EmployeeList },
 
 ];
 
