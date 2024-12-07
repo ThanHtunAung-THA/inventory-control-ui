@@ -29,12 +29,11 @@ const IndexPage = (props) => {
       <div className="image-content">
         <CImg
           alt="Iven Inventory Management"
-          height="400"
+          height="500"
           src="/image/Inven.jpg"
           width="500"
-          className="styled-image"
-          style={{ borderRadius: '50%' }}
-
+          className="styled-image img-fluid"  
+          style={{borderRadius:'10px'}}
         />
       </div>
     </div>

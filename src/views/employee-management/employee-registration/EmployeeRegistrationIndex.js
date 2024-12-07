@@ -15,6 +15,7 @@ import Loading from "../../common/Loading";
 import SuccessError from "../../common/SuccessError"; 
 import { ApiRequest } from "../../common/ApiRequest";
 import moment from "moment";
+
 const EmployeeRegistrationIndex = () => {
   const history = useHistory();
   const [genderData, setGenderData] = useState([

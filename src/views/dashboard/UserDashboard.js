@@ -17,7 +17,7 @@ import { useHistory } from 'react-router';
 
 
 
-const Dashboard = () => {
+const UserDashboard = () => {
 
   const history = useHistory();
   const [data, setData] = useState( [
@@ -146,7 +146,7 @@ const Dashboard = () => {
   useEffect(() => {
     let flag = localStorage.getItem(`LoginProcess`)
     if(flag != "true"){
-      history.push(`/Login`);
+      history.push(`/user-Login`);
     }
 }, );
 
@@ -206,4 +206,4 @@ const delCLick =(name,g)=>{
   )
 }
 
-export default Dashboard
+export default UserDashboard
