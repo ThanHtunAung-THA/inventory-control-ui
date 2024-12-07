@@ -165,7 +165,7 @@ const handleEdit = async  (sale) => {
                             Edit
                             <img src={"/image/Edit-Component-inactive.svg"} alt="Settings" style={{width: 28, height: 28 }} />
                         </CDropdownItem>
-                        <CDropdownItem onClick={ () => handleDelete(row)} className="d-flex justify-content-between align-items-center">
+                        <CDropdownItem onClick={ () => handleDelete(row)} className="d-flex justify-content-between align-items-center" header>
                             Delete
                             <img src={"/image/Delete-Component-inactive.svg"} alt="Settings" style={{ width: 28, height: 28 }} />
                         </CDropdownItem>
