@@ -10,14 +10,14 @@ import {
   CSelect
 } from '@coreui/react';
 import { useHistory } from 'react-router';
+import moment from "moment";
+import Loading from "../../common/Loading";
 import { nullChk, validateName, validateEmail, validatePwd } from "../../common/CommonValidation";
 import DatePicker from '../../common/datepicker/DatePicker';
-import Loading from "../../common/Loading";
 import SuccessError from "../../common/SuccessError";
 import ConfirmationWithTable from '../../common/ConfirmationWithTable';
-import moment from "moment";
+import { fetchProfileData, updateProfileData } from '../../common/CustomApiRequest';
 import '../../../css/form.css'
-import axios from "axios";
 
 
 const Profile = () => {
@@ -28,7 +28,7 @@ const Profile = () => {
   const [userName, setUserName] = useState( localStorage.getItem('user-name') || '');
   const [userEmail, setUserEmail] = useState('');
   const [userPhone, setUserPhone] = useState('');
-  const [userDOB, setUserDOB] = useState('');
+  const [userDOB, setUserDOB] = useState(null);
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [editMode, setEditMode] = useState(false); //for update status
@@ -38,33 +38,36 @@ const Profile = () => {
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem("LoginProcess");
+    
     if (isLoggedIn !== "true") {
       history.push("/admin-login");
     } else {
+      const fetchData = async () => {
+        try {
+            setLoading(true);
+            const profileResponse = await fetchProfileData(userID);
+            const data = profileResponse.data.data;
+      
+            setProfileData(data ? data : '');
+            setUserEmail(data.email ? data.email : '');
+            setUserPhone(data.phone ? data.phone : '');
+            // setUserDOB(data ? data.date_of_birth : '');
+            setUserDOB(data.date_of_birth ? new Date(data.date_of_birth) : null); // Ensure a valid date or null
+
+            setPassword(data.password ? data.password : '');
+      
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+          setTimeout( () => {
+            setLoading(false);
+        }, 1000); // 1000 milliseconds = 1 seconds
+      };
+    
       fetchData();
     }
   }, []);
 
-  const fetchData = async () => {
-    try {
-        setLoading(true);
-        const profileResponse = await axios.get(`http://localhost:8000/api/admin/get/${userID}`);
-        const data = profileResponse.data.data;
-  
-        // Set the state variables with the fetched data
-        setProfileData(data || '');
-        setUserEmail(data.email || '');
-        setUserPhone(data.phone || '');
-        setUserDOB(data.date_of_birth || '');
-        setPassword(data.password || ''); // Note: Be cautious with handling passwords
-  
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-      setTimeout( () => {
-        setLoading(false);
-    }, 1000); // 1000 milliseconds = 1 seconds
-  };
   const handleInputChange = (setter) => (e) => {
     setError([]);
     setSuccess([]);
@@ -159,17 +162,14 @@ const Profile = () => {
         setError([]);
         setLoading(true);
         let saveData = {
-          // method: "post",
-          // url: `user/edit/${userID}`,
             name: userName,
             date_of_birth: moment(userDOB).format("YYYY-MM-DD"),
             email: userEmail,
             phone: userPhone,
             password: password,
         };
-        // let response = await ApiRequest(saveData);
-        let response = await axios.post(`http://localhost:8000/api/admin/edit/${userID}`, saveData);
-
+        // let response = await axios.post(`http://localhost:8000/api/admin/edit/${userID}`, saveData);
+        let response = await updateProfileData(userID, saveData);
         if (response.flag === false) {
           setError(response.message);
           setSuccess([]);

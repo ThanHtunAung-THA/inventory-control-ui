@@ -6,8 +6,9 @@ import {
 } from '@coreui/react';
 import { useHistory } from 'react-router';
 import Swal from "sweetalert2";
-import ConfirmationWithTable from '../../../common/ConfirmationWithTable';
 import axios from 'axios';
+import ConfirmationWithTable from '../../../common/ConfirmationWithTable';
+import { fetchAllUserData } from '../../../common/CustomApiRequest';
 import SuccessError from '../../../common/SuccessError';
 import Loading from "../../../common/Loading";
 import "../../../../css/datatable.css"
@@ -28,10 +29,10 @@ const List = () => {
     const fetchUsers = async () => {
       try {
           setLoading(true);
-          const response = await axios.get('http://localhost:8000/api/user/get'); // Adjust API endpoint as needed
-          console.log(response.data.data); // Check the structure of the response
+          const response = await fetchAllUserData();
+          console.log(response.data.data);
           setUsers(response.data.data);
-          setFilteredUsers(response.data.data); // Initially, filtered data is the same as all data
+          setFilteredUsers(response.data.data);
       } catch (error) {
           console.error('Error fetching users:', error);
       } finally {
