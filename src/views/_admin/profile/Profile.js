@@ -45,14 +45,14 @@ const Profile = () => {
       const fetchData = async () => {
         try {
             setLoading(true);
-            const profileResponse = await fetchProfileData(userID);
+            const profileResponse = await fetchProfileData( 'admin', userID );
             const data = profileResponse.data.data;
       
             setProfileData(data ? data : '');
             setUserEmail(data.email ? data.email : '');
             setUserPhone(data.phone ? data.phone : '');
             // setUserDOB(data ? data.date_of_birth : '');
-            setUserDOB(data.date_of_birth ? new Date(data.date_of_birth) : null); // Ensure a valid date or null
+            setUserDOB(data.date_of_birth ? data.date_of_birth : null); // Ensure a valid date or null
 
             setPassword(data.password ? data.password : '');
       
@@ -169,7 +169,7 @@ const Profile = () => {
             password: password,
         };
         // let response = await axios.post(`http://localhost:8000/api/admin/edit/${userID}`, saveData);
-        let response = await updateProfileData(userID, saveData);
+        let response = await updateProfileData( 'admin', userID, saveData );
         if (response.flag === false) {
           setError(response.message);
           setSuccess([]);

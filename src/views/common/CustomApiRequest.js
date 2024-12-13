@@ -9,10 +9,10 @@ export const fetchAllUserData = async () => {
 
 // ==========================
 
-export const fetchProfileData = async (userID) => {
-  return await axios.get(`http://localhost:8000/api/admin/get/${userID}`);
+export const fetchProfileData = async ( type, userID ) => {
+  return await axios.get(`http://localhost:8000/api/${type}/get/${userID}`);
 };
 
-export const updateProfileData = async (userID, data) => {
-  return await axios.post(`http://localhost:8000/api/admin/edit/${userID}`, data);
+export const updateProfileData = async ( type, userID, data ) => {
+  return await axios.post(`http://localhost:8000/api/${type}/edit/${userID}`, data);
 };
