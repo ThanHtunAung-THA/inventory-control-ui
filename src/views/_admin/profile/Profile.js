@@ -7,7 +7,6 @@ import {
   CCol,
   CInput,
   CRow,
-  CSelect
 } from '@coreui/react';
 import { useHistory } from 'react-router';
 import moment from "moment";
@@ -31,7 +30,7 @@ const Profile = () => {
   const [userDOB, setUserDOB] = useState(null);
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [editMode, setEditMode] = useState(false); //for update status
+  const [editMode, setEditMode] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState([]);
   const [success, setSuccess] = useState([]);
@@ -168,7 +167,6 @@ const Profile = () => {
             phone: userPhone,
             password: password,
         };
-        // let response = await axios.post(`http://localhost:8000/api/admin/edit/${userID}`, saveData);
         let response = await updateProfileData( 'admin', userID, saveData );
         if (response.flag === false) {
           setError(response.message);
@@ -190,7 +188,7 @@ const Profile = () => {
   const handleCancel = () => {
     setError([]);
     setSuccess([]);
-    setEditMode(false); // Directly set editMode to false
+    setEditMode(false);
   };
 
   return (
