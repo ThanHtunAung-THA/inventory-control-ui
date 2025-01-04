@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 import ConfirmationWithTable from '../../common/ConfirmationWithTable';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus,faCirclePlus,faPlusCircle } from '@fortawesome/free-solid-svg-icons'; // Import the plus icon
+import { faPlus,faCirclePlus,faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import SuccessError from '../../common/SuccessError';
 import Loading from "../../common/Loading";
 import UnderConstruction from "../../common/UnderConstruction";
@@ -28,24 +28,23 @@ const List = () => {
           fetchSales();
       }, []);
     
-    const [loading, setLoading] = useState(false); // For Loading
+    const [loading, setLoading] = useState(false);
     const [sales, setSales] = useState([]);
-    const [filteredSales, setFilteredSales] = useState([]); // For filtered data
-    const [searchTerm, setSearchTerm] = useState(''); // For search input
+    const [filteredSales, setFilteredSales] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
     const [totalSales, setTotalSales] = useState(0);
     const [totalProfit, setTotalProfit] = useState(0);
     const [success, setSuccess] = useState([]);
     const [error, setError] = useState([]);
 
-  // Fetch sales data from API
-  const fetchSales = async () => {
+    // Fetch sales data from API
+    const fetchSales = async () => {
         try {
             setLoading(true);
-            const response = await axios.get('http://localhost:8000/api/sale/get'); // Adjust the API endpoint as necessary
+            const response = await axios.get('http://localhost:8000/api/sale/get');
             setSales(response.data.data);
-            setFilteredSales(response.data.data); // Initially, filtered data is the same as all data
+            setFilteredSales(response.data.data);
 
-            // Calculate total sales and total profit
             const salesTotal = response.data.data.reduce((acc, sale) => acc + sale.total, 0);
             const profitTotal = response.data.data.reduce((acc, sale) => acc + (sale.total - sale.paid), 0);
             setTotalSales(salesTotal);
@@ -54,78 +53,77 @@ const List = () => {
             console.error('Error fetching sales:', error);
         }
         setTimeout( () => {
-        setLoading(false);
-    }, 1500); // 1000 milliseconds = 1 seconds
-  };
+            setLoading(false);
+        }, 1500); // 1000 milliseconds = 1 seconds
+    };
 
-//   Handle edit sale
-const handleEdit = async  (sale) => {
-
-    const msgTitle = 'Edit Confirmation';
-    const msgBody = [ 
-        { label: 'ID', value: sale.id }, 
-        { label: 'User  Code', value: sale.user_code }, 
-        { label: 'Item Code', value: sale.item_code }, 
-        { label: 'Date', value: sale.date }, 
-        { label: 'Total', value: sale.total } 
-    ];
-    const msgBtn1 = 'Proceed to edit';
-    const msgBtn2 = 'Cancel';
-    
-    const isConfirmed = await ConfirmationWithTable( msgTitle, msgBody, msgBtn1, msgBtn2 );
-
-    if (isConfirmed) {
-        history.push({
-            pathname: `/admin/sale-edit/${sale.id}`,
-            state: { sale }
-        });
-    }
-};
-
-  // Handle delete sale
-  const handleDelete = async (sale) => {
-    const msgTitle = 'Delete Confirmation';
-    const msgBody = [ 
-        { label: 'ID', value: sale.id }, 
-        { label: 'User  Code', value: sale.user_code }, 
-        { label: 'Item Code', value: sale.item_code }, 
-        { label: 'Date', value: sale.date }, 
-        { label: 'Total', value: sale.total } 
-    ];
-    const msgBtn1 = 'Proceed to Delete';
-    const msgBtn2 = 'Cancel';
-    
-    const isConfirmed = await ConfirmationWithTable( msgTitle, msgBody, msgBtn1, msgBtn2 );
-
-    if (isConfirmed) {
-        try {
-            setLoading(true);
-
-            setTimeout( () => {
-                setLoading(false);
+    //   Handle edit sale
+    const handleEdit = async  (sale) => {
+        const msgTitle = 'Edit Confirmation';
+        const msgBody = [ 
+            { label: 'ID', value: sale.id }, 
+            { label: 'User  Code', value: sale.user_code }, 
+            { label: 'Item Code', value: sale.item_code }, 
+            { label: 'Date', value: sale.date }, 
+            { label: 'Total', value: sale.total } 
+        ];
+        const msgBtn1 = 'Proceed to edit';
+        const msgBtn2 = 'Cancel';
         
-            }, 1000); // 1000 milliseconds = 1 seconds
-        
-        
-            await axios.delete(`/api/sale/remove/${sale.id}`);
-            
-            fetchSales();
+        const isConfirmed = await ConfirmationWithTable( msgTitle, msgBody, msgBtn1, msgBtn2 );
 
-            Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success"
-              });
-                    
-        } catch (error) {
-            Swal.fire({
-            title: "Error!",
-            text: "Your file has not been deleted.",
-            icon: "warning"
+        if (isConfirmed) {
+            history.push({
+                pathname: `/admin/sale-edit/${sale.id}`,
+                state: { sale }
             });
         }
-    }
-  };
+    };
+
+    // Handle delete sale
+    const handleDelete = async (sale) => {
+        const msgTitle = 'Delete Confirmation';
+        const msgBody = [ 
+            { label: 'ID', value: sale.id }, 
+            { label: 'User  Code', value: sale.user_code }, 
+            { label: 'Item Code', value: sale.item_code }, 
+            { label: 'Date', value: sale.date }, 
+            { label: 'Total', value: sale.total } 
+        ];
+        const msgBtn1 = 'Proceed to Delete';
+        const msgBtn2 = 'Cancel';
+        
+        const isConfirmed = await ConfirmationWithTable( msgTitle, msgBody, msgBtn1, msgBtn2 );
+
+        if (isConfirmed) {
+            try {
+                setLoading(true);
+
+                setTimeout( () => {
+                    setLoading(false);
+            
+                }, 1000); // 1000 milliseconds = 1 seconds
+            
+            
+                await axios.delete(`/api/sale/remove/${sale.id}`);
+                
+                fetchSales();
+
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+                        
+            } catch (error) {
+                Swal.fire({
+                title: "Error!",
+                text: "Your file has not been deleted.",
+                icon: "warning"
+                });
+            }
+        }
+    };
 
     // Handle search input change
     const handleSearchChange = (e) => {
@@ -144,40 +142,38 @@ const handleEdit = async  (sale) => {
         setFilteredSales(filteredData);
     };
 
-  const columns = [
-      { name: 'Date', selector: row => row.date, sortable: true },
-      { name: 'User_Code', selector: row => row.user_code, sortable: true },
-      { name: 'Item_Code', selector: row => row.item_code, sortable: true },
-      { name: 'Customer', selector: row => row.customer, sortable: false },
-      { name: 'Location', selector: row => row.location },
-      { name: 'Quantity', selector: row => row.quantity, sortable: true },
-      { name: 'Total', selector: row => row.total, sortable: true },
-      { name: 'Balance', selector: row => row.balance, sortable: false },
-      {
+    const columns = [
+        { name: 'Date', selector: row => row.date, sortable: true },
+        { name: 'User_Code', selector: row => row.user_code, sortable: true },
+        { name: 'Item_Code', selector: row => row.item_code, sortable: true },
+        { name: 'Customer', selector: row => row.customer, sortable: false },
+        { name: 'Location', selector: row => row.location },
+        { name: 'Quantity', selector: row => row.quantity, sortable: true },
+        { name: 'Total', selector: row => row.total, sortable: true },
+        { name: 'Balance', selector: row => row.balance, sortable: false },
+        {
           name: 'Actions',
           cell: row => (
-              <>
-                <CDropdown>
-                    <CDropdownToggle color="" size="" className="cdd-custom">
-                        <img src={"/image/setting-setting-svgrepo-com.svg"} alt="Settings" style={{ width: 28, height: 28 }} />
-                    </CDropdownToggle>
-                    <CDropdownMenu>
-                        <CDropdownItem onClick={ () => handleEdit(row)} className="d-flex justify-content-between align-items-center">
-                            Edit
-                            <img src={"/image/Edit-Component-inactive.svg"} alt="Settings" style={{width: 28, height: 28 }} />
-                        </CDropdownItem>
-                        <CDropdownItem onClick={ () => handleDelete(row)} className="d-flex justify-content-between align-items-center">
-                            Delete
-                            <img src={"/image/Delete-Component-inactive.svg"} alt="Settings" style={{ width: 28, height: 28 }} />
-                        </CDropdownItem>
-                    </CDropdownMenu>
-                </CDropdown>
-
-
-             </>
-          )
-      }
-  ];
+          <>
+              <CDropdown>
+                  <CDropdownToggle color="" size="" className="cdd-custom">
+                      <img src={"/image/setting-setting-svgrepo-com.svg"} alt="Settings" style={{ width: 28, height: 28 }} />
+                  </CDropdownToggle>
+                  <CDropdownMenu>
+                      <CDropdownItem onClick={ () => handleEdit(row)} className="d-flex justify-content-between align-items-center">
+                          Edit
+                          <img src={"/image/Edit-Component-inactive.svg"} alt="Settings" style={{width: 28, height: 28 }} />
+                      </CDropdownItem>
+                      <CDropdownItem onClick={ () => handleDelete(row)} className="d-flex justify-content-between align-items-center">
+                          Delete
+                          <img src={"/image/Delete-Component-inactive.svg"} alt="Settings" style={{ width: 28, height: 28 }} />
+                      </CDropdownItem>
+                  </CDropdownMenu>
+              </CDropdown>
+          </>
+        )
+        }
+    ];
 
   return (
     <>

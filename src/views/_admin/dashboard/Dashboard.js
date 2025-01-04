@@ -45,6 +45,7 @@ const Dashboard = () => {
 
       // const stockResponse = await axios.get("http://localhost:8000/api/stock/get"); // Fetch stock data
       // setStockData(stockResponse.data.data);
+      // TODO: adding other charts data fetching here 
     } catch (error) {
       console.error("Error fetching data:", error);
     }
